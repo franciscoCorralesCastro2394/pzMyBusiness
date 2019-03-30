@@ -1,2 +1,2 @@
-# pzMyBusiness
-Proyecto final de programación Licenciatura I ciclo del 2019 
+# t1-2019
+Taller 1 2019, Sistema de Registro de Estudiantes en Angular 7
