@@ -8,6 +8,7 @@ import { PrivateComponent } from './components/private/private.component'
 import { AuthGuard } from '../app/guards/auth.guard';
 import { ContactenosComponent } from '../app/components/contactenos/contactenos.component';
 import { ServiciosComponent } from '../app/components/servicios/servicios.component';
+import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuario.component';
 
 
 
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'noticias-list', component: NoticiasListComponent },
   { path: 'noticias-edit/:id', component: NoticiasUpsertComponent },
   { path: 'noticias-insert', component: NoticiasUpsertComponent },
+  { path: 'user-info', component: InfoUsuarioComponent },
   //{ path: 'private', component: PrivateComponent, canActivate:[AuthGuard], children:[
 
   //] },

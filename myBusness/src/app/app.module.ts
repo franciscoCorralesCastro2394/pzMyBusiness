@@ -21,6 +21,7 @@ import {AuthGuard} from '../app/guards/auth.guard';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactenosComponent } from './components/contactenos/contactenos.component';
 import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
+import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
     AcercaDeComponent,
     ServiciosComponent,
     ContactenosComponent,
-    DomSecurityPipe,  
+    DomSecurityPipe,
+    InfoUsuarioComponent,  
   ],
   imports: [
     BrowserModule,
