@@ -28,9 +28,6 @@ export class NoticiasUpsertComponent implements OnInit {
     }else{
       this.iniciarNoticia();
     }
-    
-    
-
   }
 
   ngOnInit() {

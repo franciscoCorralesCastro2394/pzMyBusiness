@@ -18,7 +18,9 @@ import { PrivateComponent } from './components/private/private.component';
 import { LoginComponent } from './components/login/login.component';
 import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
 import {AuthGuard} from '../app/guards/auth.guard';
-import { PipesComponent } from './components/pipes/pipes.component';
+import { ServiciosComponent } from './components/servicios/servicios.component';
+import { ContactenosComponent } from './components/contactenos/contactenos.component';
+import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { PipesComponent } from './components/pipes/pipes.component';
     PrivateComponent,
     LoginComponent,
     AcercaDeComponent,
-    PipesComponent,  
+    ServiciosComponent,
+    ContactenosComponent,
+    DomSecurityPipe,  
   ],
   imports: [
     BrowserModule,

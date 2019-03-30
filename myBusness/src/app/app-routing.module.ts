@@ -6,7 +6,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AcercaDeComponent }  from './components/acerca-de/acerca-de.component';
 import { PrivateComponent } from './components/private/private.component'
 import { AuthGuard } from '../app/guards/auth.guard';
-import {PipesComponent} from '../app/components/pipes/pipes.component';
+import { ContactenosComponent } from '../app/components/contactenos/contactenos.component';
+import { ServiciosComponent } from '../app/components/servicios/servicios.component';
 
 
 
@@ -15,7 +16,8 @@ import {PipesComponent} from '../app/components/pipes/pipes.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'acerca-de', component: AcercaDeComponent },
-  { path: 'pipes', component: PipesComponent },
+  { path: 'contactenos', component: ContactenosComponent },
+  { path: 'servicios', component: ServiciosComponent },
   { path: 'noticias-list', component: NoticiasListComponent },
   { path: 'noticias-edit/:id', component: NoticiasUpsertComponent },
   { path: 'noticias-insert', component: NoticiasUpsertComponent },
