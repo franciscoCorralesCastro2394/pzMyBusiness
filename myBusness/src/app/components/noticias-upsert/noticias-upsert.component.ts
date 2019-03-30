@@ -24,7 +24,7 @@ export class NoticiasUpsertComponent implements OnInit {
     let listaNoticias:any[] = this.dataStorageService.getObjectValue("noticias");
     this.IdNot = listaNoticias.length + 1;
    if(this.noticiaId){
-     // this.cargarNoticia(this.noticiaId);
+     this.cargarNoticia(this.noticiaId);
     }else{
       this.iniciarNoticia();
     }
