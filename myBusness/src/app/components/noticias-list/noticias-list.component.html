@@ -2,9 +2,9 @@
     <div *ngFor="let noti of noticias; let i=index">
         <slide>
             <img [src]="noti.Imagen" alt="first slide" style="display: block; width: 100%;">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption d-md-block">
                 <h2>{{noti.Titulo}}</h2>
-                <h2>{{noti.Descripcion}}</h2>
+                <h4>{{noti.Descripcion}}</h4>
                 <button (click)="editarNoticia(noti)" type="button" class="btn btn-outline-info">
                 Editar Noticia
                 <i class="fa fa-cut"></i>
