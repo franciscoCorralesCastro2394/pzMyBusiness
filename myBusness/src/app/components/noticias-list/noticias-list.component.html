@@ -3,8 +3,12 @@
         <slide>
             <img [src]="noti.Imagen" alt="first slide" style="display: block; width: 100%;">
             <div class="carousel-caption d-md-block">
-                <h2>{{noti.Titulo}}</h2>
-                <h4>{{noti.Descripcion}}</h4>
+                <h3>{{noti.Titulo}}</h3>
+                <div class="container">
+                    <p>
+                        {{noti.Descripcion}}
+                    </p>
+                </div>
                 <button (click)="editarNoticia(noti)" type="button" class="btn btn-outline-info">
                 Editar Noticia
                 <i class="fa fa-cut"></i>
