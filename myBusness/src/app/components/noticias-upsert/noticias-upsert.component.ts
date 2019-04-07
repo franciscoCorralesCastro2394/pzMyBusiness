@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {DataStorageService} from '../../services/data-storage.service';
 import {Noticia} from '../../clases/noticia';
-
+import {Usuario} from '../../clases/Usuario';
 
 @Component({
   selector: 'app-noticias-upsert',
@@ -53,6 +53,19 @@ export class NoticiasUpsertComponent implements OnInit {
     noticias.push(noti);
 
     //this.dataStorageService.setObjectValue('noticias',noticias);
+
+
+    let users:any [] = [];
+    let user:Usuario = new Usuario;
+
+    user.ConfirmPassword= "123";
+    user.Email= "chiko";
+    user.FirstName= "twtwetewrer";
+    user.LastName= "werwerwer";
+    user.Phone= 43536;
+    user.pass= "123";
+    users.push(user);
+   // this.dataStorageService.setObjectValue('users',users);
     
 
   }

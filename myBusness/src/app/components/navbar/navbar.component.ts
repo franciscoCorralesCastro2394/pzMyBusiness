@@ -16,9 +16,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-   IngresarLogin(){
-     console.log(this.router.navigate);
-     this.router.navigate(['login']);
+   Ingresar(selector:number){
+     if(selector == 0){
+      this.router.navigate(['/login/0']);
+     }else{
+      this.router.navigate(['/login/1']);
+     }
+    
    } 
 
 }

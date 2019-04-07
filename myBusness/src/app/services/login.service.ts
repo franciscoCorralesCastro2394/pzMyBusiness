@@ -17,7 +17,7 @@ export class LoginService {
   }
 
   isLogged(){
-    return false;
+    return true;
   }
 
 

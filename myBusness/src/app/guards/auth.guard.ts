@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/login']);
       alert("No estás logueado");
       return false;
-    }
+    }  
     return true;
   }
 }

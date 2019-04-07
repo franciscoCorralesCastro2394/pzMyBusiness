@@ -15,17 +15,17 @@ import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuari
 
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  
   { path: 'acerca-de', component: AcercaDeComponent },
   { path: 'contactenos', component: ContactenosComponent },
   { path: 'servicios', component: ServiciosComponent },
   { path: 'noticias-list', component: NoticiasListComponent },
   { path: 'noticias-edit/:id', component: NoticiasUpsertComponent },
   { path: 'noticias-insert', component: NoticiasUpsertComponent },
-  { path: 'user-info', component: InfoUsuarioComponent },
-  //{ path: 'private', component: PrivateComponent, canActivate:[AuthGuard], children:[
-
-  //] },
+  { path: 'login/:selector', component: LoginComponent},
+  { path: 'user-info', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[
+   
+  ]},
   { path: '**', component: NoticiasListComponent }
 ];
 
