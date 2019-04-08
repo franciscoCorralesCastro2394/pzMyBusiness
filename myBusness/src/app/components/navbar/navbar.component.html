@@ -12,9 +12,6 @@
             <!-- <li class="nav-item">
                 <a class="nav-link" [routerLink]="['login']">Login</a>
             </li> -->
-            <!-- <li class="nav-item">
-                <a class="nav-link" [routerLink]="['noticias-insert']">Agregar noticias</a>
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['acerca-de']">Acerca de...</a>
             </li>
@@ -24,9 +21,13 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['servicios']">Servicios</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['noticias-insert']">Agregar noticias</a>
+            </li>
         </ul>
 
         <button class="btn green my-2 my-sm-0" (click)="Ingresar(0)" type="button">Ingresar</button>
         <button class="btn green my-2 my-sm-0" (click)="Ingresar(1)" type="button">Registro</button>
+        <button class="btn green my-2 my-sm-0" (click)="LoginOff()" type="button">Cerrar Sesión</button>
     </div>
 </nav>

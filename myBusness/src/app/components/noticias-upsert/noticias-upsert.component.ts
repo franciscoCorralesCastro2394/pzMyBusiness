@@ -64,8 +64,11 @@ export class NoticiasUpsertComponent implements OnInit {
     user.LastName= "werwerwer";
     user.Phone= 43536;
     user.pass= "123";
+    user.Admin = true;
+    user.Imagen = "/assets/img/adult-beach-beard-736716.jpg"
     users.push(user);
-   // this.dataStorageService.setObjectValue('users',users);
+   //this.dataStorageService.setObjectValue('users',users);
+   //console.log(users);
     
 
    let sitios:any [] = [];
@@ -86,8 +89,38 @@ export class NoticiasUpsertComponent implements OnInit {
    sitios.push(sitio);
 
    
-  this.dataStorageService.setObjectValue('sitios',sitios);
-  console.log(sitios);
+  //this.dataStorageService.setObjectValue('sitios',sitios);
+  //console.log(sitios);
+
+  let resenas:any [] = [];
+  let resena:any = {
+    nombre:"Turismo y geografía: lugares y patrimonio natural-cultural",
+    descripcion:"La reflexión teórica está presente principalmente en dos textos la presentación, a cargo del profesor Bertoncello, y en el capítulo titulado “El paisaje: la razón y la emoción”, donde Perla Zusman hace una reflexión desde el paisaje y la historia. A ellos hay que añadir el capítulo décimo –y último– elaborado por Carla Lois, Claudia Troncoso y Analía Almirón, dedicado al análisis de la producción cartográfica desarrollada por la Secretaría de Turismo de Argentina, una perspectiva original en la forma de abordar el tema del turismo desde la geografía",
+    from:"Costa Rica" 
+  };
+
+  resenas.push(resena);
+
+   resena = {
+    nombre:"Turismo y cultura",
+    descripcion:"La reflexión teórica está presente principalmente en dos textos: en la presentación, a cargo del profesor Bertoncello, y en el capítulo titulado “El paisaje: la razón y la emoción”, donde Perla Zusman hace una  reflexión desde el paisaje y la historia. A ellos hay que añadir el capítulo décimo –y último– elaborado por Carla Lois, Claudia Troncoso y Analía Almirón, dedicado al análisis de la producción cartográfica desarrollada por la Secretaría de Turismo de Argentina, una perspectiva original en la forma de abordar el tema del turismo desde la geografía",
+    from:"Costa Rica" 
+  };
+
+  resenas.push(resena);
+
+  resena = {
+    nombre:"La Argentina, un destino para los aventureros",
+    descripcion:"Desde la Cordillera hasta la costa atlántica, y desde La Quiaca hasta Ushuaia, hay miles de rincones con volcanes, montañas, sierras, cerros, valles, lagunas, arroyos, mares y ríos donde descubrir atractivos naturales inexplorados que despiertan con más o menos esfuerzo la adrenalina y la ambición de continuar. Los deportes de turismo aventura invitan a vivi",
+    from:"Argentina" 
+  };
+
+  resenas.push(resena);
+
+  //this.dataStorageService.setObjectValue('resenas',resenas);
+  //console.log(resenas);
+
+
   }
 
 

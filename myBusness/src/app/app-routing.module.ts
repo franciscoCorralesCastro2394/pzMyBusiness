@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AcercaDeComponent }  from './components/acerca-de/acerca-de.component';
 import { PrivateComponent } from './components/private/private.component'
 import { AuthGuard } from '../app/guards/auth.guard';
+import { AuthAdminGuard } from '../app/guards/auth-admin.guard';
 import { ContactenosComponent } from '../app/components/contactenos/contactenos.component';
 import { ServiciosComponent } from '../app/components/servicios/servicios.component';
 import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuario.component';
@@ -20,8 +21,8 @@ const routes: Routes = [
   { path: 'contactenos', component: ContactenosComponent },
   { path: 'servicios', component: ServiciosComponent },
   { path: 'noticias-list', component: NoticiasListComponent },
-  { path: 'noticias-edit/:id', component: NoticiasUpsertComponent },
-  { path: 'noticias-insert', component: NoticiasUpsertComponent },
+  { path: 'noticias-edit/:id', component: NoticiasUpsertComponent, canActivate:[AuthAdminGuard]},
+  { path: 'noticias-insert', component: NoticiasUpsertComponent, canActivate:[AuthAdminGuard] },
   { path: 'login/:selector', component: LoginComponent},
   { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[
    

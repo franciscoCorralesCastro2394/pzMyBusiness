@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       if (user.Email === this.formGroupLogin.value.Identificacion && 
           user.pass === this.formGroupLogin.value.Pass) {
           contro = true;
-          let userLogin:any = {email:this.formGroupLogin.value.Identificacion,pass: this.formGroupLogin.value.Pass,ative:true}
+          let userLogin:any = {userL:user, ative:true};
           console.log(userLogin);
           this.dataStorageService.setObjectValue("userLogin",userLogin);
       }

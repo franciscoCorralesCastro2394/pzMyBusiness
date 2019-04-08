@@ -11,8 +11,10 @@ export class InfoUsuarioComponent implements OnInit {
   userId:string;
   users:any[] = [];
   sitios:any[] = [];
+  resenas:any[] = [];
   userLogin:any;
   nombre:string;
+  img:string;
   constructor(private activatedRoute:ActivatedRoute,
               private dataStorageService:DataStorageService) {
     this.userId = this.activatedRoute.snapshot.params['user'];
@@ -24,6 +26,8 @@ export class InfoUsuarioComponent implements OnInit {
     this.sitios = this.dataStorageService.getObjectValue("sitios");
     console.log(this.sitios);
 
+    this.resenas = this.dataStorageService.getObjectValue("resenas");
+
    }
   ngOnInit() {
   }
@@ -34,6 +38,7 @@ export class InfoUsuarioComponent implements OnInit {
       if (user.Email === this.userId) {
         this.userLogin = user;
         this.nombre = this.userLogin.FirstName + '  ' + this.userLogin.LastName;
+        this.img = this.userLogin.Imagen;
         console.log(this.userLogin);
       }
     });

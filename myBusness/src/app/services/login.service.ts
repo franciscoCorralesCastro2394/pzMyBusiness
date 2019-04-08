@@ -21,7 +21,24 @@ export class LoginService {
   }
 
 
+  isAdmin(){
+    this.userLogin = this.dataStorageService.getObjectValue("userLogin");
+    console.log(this.userLogin);
+    if(this.userLogin.userL.Admin && this.userLogin.ative){
+      return true;
+    }else{
+      return false;
+    }
+    }
 
 
-  
-}
+    Loginoff(){
+      this.userLogin = this.dataStorageService.getObjectValue("userLogin");
+      console.log(this.userLogin);
+      this.userLogin.ative = false;
+      this.dataStorageService.setObjectValue("userLogin",this.userLogin);
+      alert("Sesion finalizada");
+      }
+
+
+      }
