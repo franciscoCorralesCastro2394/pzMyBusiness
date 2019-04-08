@@ -6,27 +6,46 @@
         <div class="image_outer_container">
             <div class="green_icon"></div>
             <div class="image_inner_container">
-                <img src="/assets/img/beautiful-beauty-blurred-background-1239291.jpg">
+                <img [src]="userLogin.Imagen">
             </div>
         </div>
     </div>
 </div>
 
 
+
 <section id="team" class="pb-5">
     <div class="container">
-        <h5 class="section-title h1">OUR TEAM</h5>
+        <h5 class="section-title h1"> {{nombre}} </h5>
         <div class="row">
             <!-- Team member -->
             <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="h1">
+                    Descripción
+                </h3>
+                <p class="text-justify">
+                    {{userLogin.Descripcion}}
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1"> Sitios Seguidos </h5>
+        <div class="row">
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of sitios">
                 <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                     <div class="mainflip">
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="assets/img/beautiful-brunette-cute-774909.jpg" alt="card image"></p>
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                    <p><img class=" img-fluid" [src]="sitio.img" alt="card image"></p>
+                                    <h4 class="card-title">{{sitio.nombre}}</h4>
+                                    <p class="card-text">{{sitio.descripcion}}</p>
                                     <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
@@ -34,8 +53,8 @@
                         <div class="backside">
                             <div class="card">
                                 <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">Sunlimetech</h4>
-                                    <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                    <h4 class="card-title">{{sitio.nombre}}</h4>
+                                    <p class="card-text">{{sitio.descripcion}}</p>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
                                             <a class="social-icon text-xs-center" target="_blank" href="#">

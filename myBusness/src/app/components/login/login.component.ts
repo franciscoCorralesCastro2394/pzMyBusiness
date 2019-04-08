@@ -15,7 +15,10 @@ export class LoginComponent implements OnInit {
   formGroupRegister: FormGroup;
   selector:number = 0;
   users:any[] = [];
-  constructor(private formBuilder:FormBuilder,  private router:Router,private activatedRoute:ActivatedRoute,private dataStorageService:DataStorageService) { 
+  constructor(private formBuilder:FormBuilder,  
+              private router:Router,
+              private activatedRoute:ActivatedRoute,
+              private dataStorageService:DataStorageService) { 
     
     this.selector = this.activatedRoute.snapshot.params['selector'];
     console.log(this.selector);
@@ -35,19 +38,17 @@ export class LoginComponent implements OnInit {
       if (user.Email === this.formGroupLogin.value.Identificacion && 
           user.pass === this.formGroupLogin.value.Pass) {
           contro = true;
+          let userLogin:any = {email:this.formGroupLogin.value.Identificacion,pass: this.formGroupLogin.value.Pass,ative:true}
+          console.log(userLogin);
+          this.dataStorageService.setObjectValue("userLogin",userLogin);
       }
     });
-
-
     if(contro){
-      this.router.navigate(['/user-info']);
+      this.router.navigate(['/user-info/' + this.formGroupLogin.value.Identificacion ]);
     }else{
       alert("Usuario no existe"); 
     }
-   
    }
-
-
 
   iniciarLogin = () => {
     this.formGroupLogin = this.formBuilder.group({
@@ -63,10 +64,11 @@ export class LoginComponent implements OnInit {
       Email: ['', [Validators.required]],
       Phone: ['', [Validators.required]],
       pass: ['', [Validators.required]],
-      ConfirmPassword: ['', [Validators.required]]
+      ConfirmPassword: ['', [Validators.required]],
+      Imagen: ['', [Validators.required]],
+      Descripcion: ['', [Validators.required]]
     });
   }
-
 
   registrar = () => {
 

@@ -15,12 +15,14 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, private loginService: LoginService) { }
  
   canActivate() {
-    if (!this.loginService.isLogged()) {
-      this.router.navigate(['/login']);
-      alert("No estás logueado");
-      return false;
-    }  
-    return true;
+    if (this.loginService.isLogged()) {
+      return true;    
+    }else{
+      alert("No estás logueado"); 
+      this.router.navigate(['/login/0']);
+    }   
+   console.log(false);
+    return false;
   }
 }
 

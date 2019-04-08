@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'noticias-edit/:id', component: NoticiasUpsertComponent },
   { path: 'noticias-insert', component: NoticiasUpsertComponent },
   { path: 'login/:selector', component: LoginComponent},
-  { path: 'user-info', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[
+  { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[
    
   ]},
   { path: '**', component: NoticiasListComponent }

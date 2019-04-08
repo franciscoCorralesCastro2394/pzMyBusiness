@@ -68,6 +68,26 @@ export class NoticiasUpsertComponent implements OnInit {
    // this.dataStorageService.setObjectValue('users',users);
     
 
+   let sitios:any [] = [];
+   let sitio:any = {nombre:"Talamanca",
+   descripcion:"Talamanca es el cantón número 4 y el más extenso de los seis que componen la provincia de Limón, Costa Rica. Es el segundo de mayor superficie en el país, después del de San Carlos. Su área de 2.809,93 km² es incluso superior que la provincia de Heredia",
+   img:"assets/img/talamanca.jpg"};
+   sitios.push(sitio);
+
+
+   sitio = {nombre:"Turrialbaa",
+   descripcion:"Turrialba es la ciudad cabecera del cantón y distrito del mismo nombre, en la provincia de Cartago, Costa Rica",
+   img:"/assets/img/turrialba.jpg"};
+   sitios.push(sitio);
+
+   sitio = {nombre:"Nicaragua",
+   descripcion:"Nicaragua es un país de América Central ubicado entre el océano Pacífico y el mar Caribe, conocido por su espectacular territorio con lagos, volcanes y playas. El extenso lago Managua y el icónico estratovolcán Momotombo se ubican al norte de la capital, Managua",
+   img:"/assets/img/Nicaragua.jpg"};
+   sitios.push(sitio);
+
+   
+  this.dataStorageService.setObjectValue('sitios',sitios);
+  console.log(sitios);
   }
 
 
