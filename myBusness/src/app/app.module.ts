@@ -22,6 +22,7 @@ import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactenosComponent } from './components/contactenos/contactenos.component';
 import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
 import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.com
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     CarouselModule.forRoot(),
     AngularFontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [ DatePipe,DataStorageService,AuthGuard],
   bootstrap: [AppComponent]

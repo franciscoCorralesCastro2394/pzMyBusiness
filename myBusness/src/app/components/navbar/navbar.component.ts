@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
 
   LoginOff(){
       this.login.Loginoff();
+        this.router.navigate(['noticias-list']);
   }
 
 
