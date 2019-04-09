@@ -22,6 +22,7 @@ import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactenosComponent } from './components/contactenos/contactenos.component';
 import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
 import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.component';
+import { SitiosListComponent } from './components/sitios-list/sitios-list.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.com
     ServiciosComponent,
     ContactenosComponent,
     DomSecurityPipe,
-    InfoUsuarioComponent,  
+    InfoUsuarioComponent,
+    SitiosListComponent, 
   ],
   imports: [
     BrowserModule,

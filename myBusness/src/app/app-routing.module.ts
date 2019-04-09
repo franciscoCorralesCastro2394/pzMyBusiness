@@ -10,8 +10,7 @@ import { AuthAdminGuard } from '../app/guards/auth-admin.guard';
 import { ContactenosComponent } from '../app/components/contactenos/contactenos.component';
 import { ServiciosComponent } from '../app/components/servicios/servicios.component';
 import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuario.component';
-
-
+import { SitiosListComponent } from '../app/components/sitios-list/sitios-list.component';
 
 
 
@@ -27,6 +26,7 @@ const routes: Routes = [
   { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[
    
   ]},
+  {path: 'sitios-list', component: SitiosListComponent},
   { path: '**', component: NoticiasListComponent }
 ];
 

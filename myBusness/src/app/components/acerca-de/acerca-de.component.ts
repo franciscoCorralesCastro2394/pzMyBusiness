@@ -14,7 +14,7 @@ export class AcercaDeComponent implements OnInit {
 
   ngOnInit() {
 
-    let noticias:any [] = [];
+    /*let noticias:any [] = [];
     let noti:Noticia = new Noticia;
     noti.Id = 1;
     noti.Descripcion = 'proyecto cultural sostenible Nauyaka';
@@ -52,8 +52,8 @@ export class AcercaDeComponent implements OnInit {
     users.push(user);
    this.dataStorageService.setObjectValue('users',users);
    console.log(users);
-    
-
+  
+  // sitios informacion //
    let sitios:any [] = [];
    let sitio:any = {nombre:"Talamanca",
    descripcion:"Talamanca es el cantón número 4 y el más extenso de los seis que componen la provincia de Limón, Costa Rica. Es el segundo de mayor superficie en el país, después del de San Carlos. Su área de 2.809,93 km² es incluso superior que la provincia de Heredia",
@@ -62,7 +62,17 @@ export class AcercaDeComponent implements OnInit {
 
 
    sitio = {nombre:"Turrialbaa",
-   descripcion:"Turrialba es la ciudad cabecera del cantón y distrito del mismo nombre, en la provincia de Cartago, Costa Rica",
+   descripcion:"Turrialba es la ciudad cabecera del cantón y distrito del mismo nombre, en la provincia de Cartago, Costa Rica. Se encuentra ubicada en el valle que conforma el río Turrialba, uno de los mayores afluentes del río Reventazón, a una altitud de 646 m y a unos 44 km al este de la ciudad de Cartago y a 67 km de San José, capital de la República. Debido a su asentamiento en una llanura aluvial con materiales sedimentarios poco consolidados, el distrito en general ha sido afectado por inundaciones históricas de sus ríos, en particular causadas por el Turrialba, el Aquiares y el Azul.",
+   img:"/assets/img/turrialba.jpg"};
+   sitios.push(sitio);
+
+   sitio = {nombre:"Bocas del toro",
+   descripcion:"Bocas del Toro es una provincia de Panamá que abarca una cadena de islas frente a la costa del Caribe, junto con una sección de territorio continental cercano con un bosque tropical biodiverso. En Isla Colón, la isla principal, se encuentra la capital, Pueblo de Bocas, un núcleo central con restaurantes, tiendas y vida nocturna. Las playas populares incluyen Boca del Drago. También en Isla Colón está la playa Estrella, llamada así por las numerosas estrellas de mar de su lecho oceánico.",
+   img:"/assets/img/turrialba.jpg"};
+   sitios.push(sitio);
+
+   sitio = {nombre:"Volcán Arenal",
+   descripcion:"El volcán Arenal de Costa Rica está situado en el distrito de La Fortuna, cantón de San Carlos, en la provincia de Alajuela. Tiene una altura de 1.670 msnm. El volcán se encuentra dentro de el Parque nacional Volcán Arenal. Inició su último y actual período de actividad en el año 1968, el día 29 de julio a las 7:30.",
    img:"/assets/img/turrialba.jpg"};
    sitios.push(sitio);
 
@@ -71,10 +81,23 @@ export class AcercaDeComponent implements OnInit {
    img:"/assets/img/Nicaragua.jpg"};
    sitios.push(sitio);
 
+   sitio = {nombre:"Volcán Irazú",
+   descripcion:"El volcán Irazú es un estratovolcán activo ubicado en Costa Rica, en la Cordillera Volcánica Central, en el interior del parque nacional que lleva su nombre, a unos 32 km al norte de la ciudad de Cartago. Su cima, a una altitud de 3.432 msnm, se encuentra ubicada en el distrito de Santa Rosa, en el Cantón de Oreamuno, Provincia de Cartago. La cumbre del volcán tiene varios cráteres, uno de los cuales contiene un lago verde de profundidad variable. Es el volcán activo más alto de Costa Rica. Es fácil visitarlo desde San José, a través de un camino directo hasta los cráteres de la cumbre y un servicio diario de autobús a la cumbre. Es un punto turístico muy popular.",
+   img:"/assets/img/turrialba.jpg"};
+   sitios.push(sitio);
+
+   sitio = {nombre:"Puntarenas",
+   descripcion:"Puntarenas es provincia número 6 de Costa Rica, ubicada en su zona occidental y abarcando la mayor parte de la costa Pacífica del país. Limita con las provincias de Guanacaste, Alajuela, San José, Limón y con Panamá. Posee una superficie de 11.266 km², lo que la convierte en la provincia más extensa de Costa Rica.",
+   img:"/assets/img/turrialba.jpg"};
+   sitios.push(sitio);
+
+   sitios.push(sitio);
+
    
   this.dataStorageService.setObjectValue('sitios',sitios);
   console.log(sitios);
-
+   // sitios informacion  fin//
+  
   let resenas:any [] = [];
   let resena:any = {
     nombre:"Turismo y geografía: lugares y patrimonio natural-cultural",
@@ -99,9 +122,9 @@ export class AcercaDeComponent implements OnInit {
   };
 
   resenas.push(resena);
-
+  
   this.dataStorageService.setObjectValue('resenas',resenas);
-  console.log(resenas);
+  console.log(resenas);*/
   }
-
+  
 }
