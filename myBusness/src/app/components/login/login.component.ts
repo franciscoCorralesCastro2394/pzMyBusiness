@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
       pass: ['', [Validators.required]],
       ConfirmPassword: ['', [Validators.required]],
       Imagen: ['', [Validators.required]],
-      Descripcion: ['', [Validators.required]]
+      Descripcion: ['', [Validators.required]],
+      Admin:[]
     });
   }
 
@@ -77,14 +78,16 @@ export class LoginComponent implements OnInit {
     
       const listaUsers = this.dataStorageService.getObjectValue("users");
      
- 
+      console.log(this.formGroupRegister.value);
       listaUsers.push(this.formGroupRegister.value);
 
-
+      if(!this.formGroupRegister.value.Admin){
+        this.formGroupRegister.value.Admin = false;
+      }
       this.dataStorageService.setObjectValue("users", listaUsers);
 
       alert("Información guardada");
-      this.router.navigate(['/login/0']);
+      this.router.navigate(['/noticias-list']);
     } else {
       alert("Debe completar la información correctamente");
     }
