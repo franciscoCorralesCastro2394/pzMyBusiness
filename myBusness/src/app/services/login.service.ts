@@ -35,9 +35,14 @@ export class LoginService {
     Loginoff(){
       this.userLogin = this.dataStorageService.getObjectValue("userLogin");
       console.log(this.userLogin);
-      this.userLogin.ative = false;
-      this.dataStorageService.setObjectValue("userLogin",this.userLogin);
-      alert("Sesion finalizada");
+      if(this.userLogin.ative){
+        this.userLogin.ative = false;
+        this.dataStorageService.setObjectValue("userLogin",this.userLogin);
+        alert("Sesion finalizada");
+      }else{
+        alert('No existe una sesión activa');
+      }
+      
       }
 
 

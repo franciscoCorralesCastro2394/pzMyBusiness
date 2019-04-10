@@ -1,53 +1,52 @@
-<p>
-    noticias-insert works!
-</p>
+<br>
+<br>
+<div class="container">
+    <h2 class="section-title">Ingresar Noticia</h2>
+    <form [formGroup]="formGroup" id="formGroup" class="row">
+        <div class="form-group col-6">
+            <label for="titulo">Id de la Noticia</label>
+            <input class="form-control" formControlName="Id" id="Id" type="text" readonly>
 
-
-<h2>Información de noticias</h2>
-
-<form [formGroup]="formGroup" id="formGroup" class="row">
-    <div class="form-group col-6">
-        <label for="titulo">Id de la Noticia</label>
-        <input class="form-control" formControlName="Id" id="Id" type="text" readonly>
-
-    </div>
-    <div class="form-group col-12">
-        <label for="titulo">Título</label>
-        <input type="text" class="form-control" formControlName="Titulo" id="Titulo" placeholder="Escriba el título">
-        <div *ngIf="formGroup.controls['Titulo'].dirty">
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Titulo'].errors?.required">
-                El título es requerido
+        </div>
+        <div class="form-group col-12">
+            <label for="titulo">Título</label>
+            <input type="text" class="form-control" formControlName="Titulo" id="Titulo" placeholder="Escriba el título">
+            <div *ngIf="formGroup.controls['Titulo'].dirty">
+                <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Titulo'].errors?.required">
+                    El título es requerido
+                </div>
             </div>
         </div>
-    </div>
-    <div class="form-group col-12">
-        <label for="titulo">Imagen</label>
-        <input type="text" class="form-control" formControlName="Imagen" id="Imagen" placeholder="Escriba la url de la imagen">
-        <div *ngIf="formGroup.controls['Imagen'].dirty">
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Imagen'].errors?.required">
-                La url de la imagen es requerida
+        <div class="form-group col-12">
+            <label for="titulo">Imagen</label>
+            <input type="text" class="form-control" formControlName="Imagen" id="Imagen" placeholder="Escriba la url de la imagen">
+            <div *ngIf="formGroup.controls['Imagen'].dirty">
+                <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Imagen'].errors?.required">
+                    La url de la imagen es requerida
+                </div>
             </div>
         </div>
-    </div>
-    <div class="form-group col-12">
-        <label for="titulo">Descripción</label>
-        <input type="text" class="form-control" formControlName="Descripcion" id="Descripcion" placeholder="Escriba la descripción">
-        <div *ngIf="formGroup.controls['Descripcion'].dirty">
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Descripcion'].errors?.required">
-                La descripción es requerida
-            </div>
-            <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Descripcion'].errors?.minlength">
-                La descripción debe ser de almenos 15 caracteres
+        <div class="form-group col-12">
+            <label for="titulo">Descripción</label>
+            <input type="text" class="form-control" formControlName="Descripcion" id="Descripcion" placeholder="Escriba la descripción">
+            <div *ngIf="formGroup.controls['Descripcion'].dirty">
+                <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Descripcion'].errors?.required">
+                    La descripción es requerida
+                </div>
+                <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Descripcion'].errors?.minlength">
+                    La descripción debe ser de almenos 15 caracteres
+                </div>
             </div>
         </div>
-    </div>
-    <div class="form-group col-6">
-        <label for="titulo">Fecha Creación</label>
-        <input type="datetime" class="form-control" formControlName="FechaCreacion" id="FechaCreacion" readonly>
-    </div>
-    <div class="form-group col-6">
-        <label for="titulo">Última modificación</label>
-        <input type="datetime" class="form-control" formControlName="UltimaModificacion" id="UltimaModificacion" readonly>
-    </div>
-</form>
-<button type="submit" class="btn btn-primary float-right m-b-5" [ngClass]="{'disabled':!formGroup.valid}" (click)="guardarData()">Guardar</button>
+        <div class="form-group col-6">
+            <label for="titulo">Fecha Creación</label>
+            <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker formControlName="FechaCreacion" id="FechaCreacion">
+        </div>
+        <div class="form-group col-6">
+            <label for="titulo">Fecha Creación</label>
+            <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker formControlName="UltimaModificacion" id="UltimaModificacion">
+        </div>
+
+        <button type="submit" class="btn green float-right m-b-5" [ngClass]="{'disabled':!formGroup.valid}" (click)="guardarData()">Guardar</button>
+    </form>
+</div>

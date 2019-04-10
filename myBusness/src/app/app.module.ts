@@ -25,7 +25,7 @@ import { InfoUsuarioComponent } from './components/info-usuario/info-usuario.com
 import { SitiosListComponent } from './components/sitios-list/sitios-list.component';
 import { SitioComponent } from './components/sitio/sitio.component';
 import { BuscarSitiosComponent } from './components/buscar-sitios/buscar-sitios.component';
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,8 @@ import { BuscarSitiosComponent } from './components/buscar-sitios/buscar-sitios.
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     CarouselModule.forRoot(),
     AngularFontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot()
   ],
   providers: [ DatePipe,DataStorageService,AuthGuard],
   bootstrap: [AppComponent]

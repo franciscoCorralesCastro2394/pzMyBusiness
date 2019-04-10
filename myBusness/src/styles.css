@@ -37,3 +37,10 @@ body {
     color: #fff;
     background-color: #1f6617;
 }
+
+.section-title {
+    text-align: center;
+    color: #1f6617;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}

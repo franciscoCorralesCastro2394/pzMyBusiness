@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Noticia} from '../../clases/noticia';
 import {Usuario} from '../../clases/Usuario';
 import {DataStorageService} from '../../services/data-storage.service';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-acerca-de',
@@ -14,7 +15,7 @@ export class AcercaDeComponent implements OnInit {
 
   ngOnInit() {
 
-    /*let noticias:any [] = [];
+    let noticias:any [] = [];
     let noti:Noticia = new Noticia;
     noti.Id = 1;
     noti.Descripcion = 'proyecto cultural sostenible Nauyaka';
@@ -52,10 +53,10 @@ export class AcercaDeComponent implements OnInit {
     users.push(user);
    this.dataStorageService.setObjectValue('users',users);
    console.log(users);
-   */
+   
   // sitios informacion //
   
-   /*let sitios:any [] = [];
+   let sitios:any [] = [];
    let sitio:any = {id:1,
    nombre:"Talamanca",
    descripcion:"Talamanca es el cantón número 4 y el más extenso de los seis que componen la provincia de Limón, Costa Rica. Es el segundo de mayor superficie en el país, después del de San Carlos. Su área de 2.809,93 km² es incluso superior que la provincia de Heredia",
@@ -137,35 +138,35 @@ export class AcercaDeComponent implements OnInit {
    estrellas:"5"};
    sitiosValoraciones.push(sitioValoracion);
 
-   let sitioValoracion:any = {id:2,
+   sitioValoracion = {id:2,
    nombre:"Fransisco Corrales Castro",
    descripcion:"Buen lugar, buena administración, recomiendo visitarlo.",
    img:"assets/img/talamanca.jpg",
    estrellas:"4"};
    sitiosValoraciones.push(sitioValoracion);
 
-   let sitioValoracion:any = {id:3,
+   sitioValoracion = {id:3,
    nombre:"Kenneth Quesada Chacón",
    descripcion:"Buen lugar, buena administración, recomiendo visitarlo.",
    img:"assets/img/talamanca.jpg",
    estrellas:"5"};
    sitiosValoraciones.push(sitioValoracion);
 
-   let sitioValoracion:any = {id:4,
+   sitioValoracion = {id:4,
    nombre:"Fransisco Corrales Castro",
    descripcion:"Buen lugar, buena administración, recomiendo visitarlo.",
    img:"assets/img/talamanca.jpg",
    estrellas:"4"};
    sitiosValoraciones.push(sitioValoracion);
 
-   let sitioValoracion:any = {id:3,
+   sitioValoracion = {id:3,
    nombre:"Kenneth Quesada Chacón",
    descripcion:"Buen lugar, buena administración, recomiendo visitarlo.",
    img:"assets/img/talamanca.jpg",
    estrellas:"5"};
    sitiosValoraciones.push(sitioValoracion);
 
-   let sitioValoracion:any = {id:4,
+   sitioValoracion = {id:4,
    nombre:"Fransisco Corrales Castro",
    descripcion:"Buen lugar, buena administración, recomiendo visitarlo.",
    img:"assets/img/talamanca.jpg",
@@ -205,7 +206,7 @@ export class AcercaDeComponent implements OnInit {
   resenas.push(resena);
   
   this.dataStorageService.setObjectValue('resenas',resenas);
-  console.log(resenas);*/
+  console.log(resenas); 
   }
   
 }

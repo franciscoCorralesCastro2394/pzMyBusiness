@@ -132,3 +132,11 @@ h3 {
     margin-bottom: -15%;
     color: #495057;
 }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    float: right;
+}
