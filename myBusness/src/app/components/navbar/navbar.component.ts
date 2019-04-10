@@ -21,13 +21,13 @@ export class NavbarComponent implements OnInit {
 
   LoginOff(){
       this.login.Loginoff();
-        this.router.navigate(['noticias-list']);
+        this.router.navigate(['/noticias-list']);
   }
 
 
    Ingresar(selector:number){
      if(selector == 0){
-      this.router.navigate(['/login/0']);
+      this.router.navigate(['/loginIngresar/0']);
      }else{
       this.router.navigate(['/login/1']);
      }

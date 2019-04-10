@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'noticias-insert', component: NoticiasUpsertComponent, canActivate:[AuthAdminGuard] },
   { path: 'edit-sitio/:id', component: EditSitioComponent, canActivate:[AuthEditGuard] },
   { path: 'login/:selector', component: LoginComponent},
+  { path: 'loginIngresar/:selector', component: LoginComponent},
   { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[]},
   {path: 'sitios-list', component: SitiosListComponent},
   {path: 'sitio/:id', component: SitioComponent},
