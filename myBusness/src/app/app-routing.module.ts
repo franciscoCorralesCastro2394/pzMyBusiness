@@ -11,6 +11,8 @@ import { ContactenosComponent } from '../app/components/contactenos/contactenos.
 import { ServiciosComponent } from '../app/components/servicios/servicios.component';
 import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuario.component';
 import { SitiosListComponent } from '../app/components/sitios-list/sitios-list.component';
+import { SitioComponent } from '../app/components/sitio/sitio.component';
+import { BuscarSitiosComponent } from '../app/components/buscar-sitios/buscar-sitios.component';
 
 
 
@@ -27,6 +29,8 @@ const routes: Routes = [
    
   ]},
   {path: 'sitios-list', component: SitiosListComponent},
+  {path: 'sitio/:id', component: SitioComponent},
+  {path: 'buscar/:id', component: BuscarSitiosComponent},
   { path: '**', component: NoticiasListComponent }
 ];
 

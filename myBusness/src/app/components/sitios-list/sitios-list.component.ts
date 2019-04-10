@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {DataStorageService} from '../../services/data-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sitios-list',
@@ -9,7 +10,7 @@ import {DataStorageService} from '../../services/data-storage.service';
 })
 export class SitiosListComponent implements OnInit {
   sitios:any[] = [];
-  constructor(private dataStorageService:DataStorageService) {
+  constructor(private dataStorageService:DataStorageService, private router:Router) {
   	this.sitios = this.dataStorageService.getObjectValue("sitios");
     
     //console.log(this.sitios);
@@ -18,5 +19,9 @@ export class SitiosListComponent implements OnInit {
   ngOnInit() {
   }
   
+  buscarSitio(termino:string){
+   this.router.navigate(['/buscar',termino]);
+ 
+  }
 
 }

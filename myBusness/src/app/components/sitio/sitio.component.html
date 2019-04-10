@@ -1,0 +1,86 @@
+<div class="container-fluid">
+	<div class="clear"><br><br></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<h1 class="text-center">{{sitio.nombre}}</h1>
+				<p>{{sitio.descripcion}}</p>
+				<p><strong>Horario: </strong>{{sitio.horario}}</p>
+			</div>
+			<div class="col-md-8">
+				<img class="img-fluid" [src]="sitio.img" alt="card image">	
+			</div>
+			<div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let imgsitio of imgsSitio">
+				<div class="clear"><br><br><img class="img-fluid" [src]="imgsitio" alt="card image"></div>
+				
+			</div>
+
+		</div>
+	</div>
+	<div class="container">
+		<div class="clear"><br><br></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="embed-container">
+					<iframe [src]="sitio.videoYB | domSecurity" width="560" height="315" frameborder="0" 	allowtransparency="true" allow="encrypted-media"></iframe>
+				</div>
+			</div>	
+		</div>
+		<div class="clear"><br><br></div>
+	</div>
+	<!-- Reseñas -->
+<section  class="pb-5 team">
+    <div class="container">
+        <h5 class="section-title h1"> Reseñas </h5>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let resena of resenas">
+                <div class="block-text rel zmin">
+                    <a title="" href="#">{{resena.nombre}}</a>
+                    <div class="mark">My rating:
+                        <span class="rating-input">
+            			<span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        </span>
+                    </div>
+                    <p class="text-justify">{{resena.descripcion}}</p>
+                    <ins class="ab zmin sprite block"></ins>
+                </div>
+                <div class="person-text rel">
+                    <p> from {{resena.from | uppercase}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- valoraciones -->
+<section class="pb-5 team">
+    <div class="container">
+        <h5 class="section-title h1"> Valoraciones </h5>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let val of sitiosValoraciones">
+                <div class="block-text rel zmin imgC">
+                    <div class="mark">Evaluación:
+                        <span class="rating-input">
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span>
+                        </span>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                        	<img class="img-fluid" [src]="val.img" alt="card image" >
+                            <h4 class="card-title">{{val.nombre}}</h4>
+                            <p>{{val.descripcion}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+	
+</div>

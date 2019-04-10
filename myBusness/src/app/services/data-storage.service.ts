@@ -9,6 +9,20 @@ export class DataStorageService {
 
   constructor() { }
 
+  buscarSitio(termino:String){
+     let sitiosArr:any[] = this.getObjectValue('sitios');
+     let sitiosArrBusqueda:any[];
+    //termino = termino.toLowerCase();
+      
+        for(let i = 0; i< sitiosArr.length; i++){
+          let sitio = sitiosArr[i];
+          let nombre = sitio.nombre;
+          if(nombre.indexOf( termino ) >= 0 ){
+            sitiosArrBusqueda.push( sitio );
+          }
+        }
+    return sitiosArrBusqueda;
+  }
   setObjectValue= (key:string, objectValue:any)=>{
     if (window.localStorage) {
       console.log(objectValue);
