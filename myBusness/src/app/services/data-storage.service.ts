@@ -11,14 +11,15 @@ export class DataStorageService {
 
   buscarSitio(termino:String){
      let sitiosArr:any[] = this.getObjectValue('sitios');
-     let sitiosArrBusqueda:any[];
-    //termino = termino.toLowerCase();
-      
+     let sitiosArrBusqueda:any[] = [];
+     termino = termino.toLowerCase();
+      console.log(sitiosArr);
         for(let i = 0; i< sitiosArr.length; i++){
           let sitio = sitiosArr[i];
-          let nombre = sitio.nombre;
-          if(nombre.indexOf( termino ) >= 0 ){
-            sitiosArrBusqueda.push( sitio );
+          let nombre = sitio.nombre.toLowerCase();
+          let desc = sitio.descripcion.toLowerCase();
+          if(nombre.indexOf( termino ) >= 0 ||  desc.indexOf( termino ) >= 0  ){
+            sitiosArrBusqueda.push(sitio);
           }
         }
     return sitiosArrBusqueda;

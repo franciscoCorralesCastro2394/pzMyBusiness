@@ -32,6 +32,16 @@ export class LoginService {
     }
 
 
+    isEditor(){
+      this.userLogin = this.dataStorageService.getObjectValue("userLogin");
+      console.log(this.userLogin);
+      if(this.userLogin.userL.Editor && this.userLogin.ative){
+        return true;
+      }else{
+        return false;
+      }
+      }
+
     Loginoff(){
       this.userLogin = this.dataStorageService.getObjectValue("userLogin");
       console.log(this.userLogin);

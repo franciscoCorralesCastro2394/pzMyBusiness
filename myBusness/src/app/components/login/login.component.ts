@@ -67,7 +67,8 @@ export class LoginComponent implements OnInit {
       ConfirmPassword: ['', [Validators.required]],
       Imagen: ['', [Validators.required]],
       Descripcion: ['', [Validators.required]],
-      Admin:[]
+      Admin:[],
+      Editor:[]
     });
   }
 
@@ -83,6 +84,9 @@ export class LoginComponent implements OnInit {
 
       if(!this.formGroupRegister.value.Admin){
         this.formGroupRegister.value.Admin = false;
+      }
+      if(!this.formGroupRegister.value.Editor){
+        this.formGroupRegister.value.Editor = false;
       }
       this.dataStorageService.setObjectValue("users", listaUsers);
 

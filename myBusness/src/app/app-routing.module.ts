@@ -7,12 +7,14 @@ import { AcercaDeComponent }  from './components/acerca-de/acerca-de.component';
 import { PrivateComponent } from './components/private/private.component'
 import { AuthGuard } from '../app/guards/auth.guard';
 import { AuthAdminGuard } from '../app/guards/auth-admin.guard';
+import { AuthEditGuard } from '../app/guards/auth-edit.guard';
 import { ContactenosComponent } from '../app/components/contactenos/contactenos.component';
 import { ServiciosComponent } from '../app/components/servicios/servicios.component';
 import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuario.component';
 import { SitiosListComponent } from '../app/components/sitios-list/sitios-list.component';
 import { SitioComponent } from '../app/components/sitio/sitio.component';
 import { BuscarSitiosComponent } from '../app/components/buscar-sitios/buscar-sitios.component';
+import { EditSitioComponent } from '../app/components/edit-sitio/edit-sitio.component'
 
 
 
@@ -24,10 +26,9 @@ const routes: Routes = [
   { path: 'noticias-list', component: NoticiasListComponent },
   { path: 'noticias-edit/:id', component: NoticiasUpsertComponent, canActivate:[AuthAdminGuard]},
   { path: 'noticias-insert', component: NoticiasUpsertComponent, canActivate:[AuthAdminGuard] },
+  { path: 'edit-sitio/:id', component: EditSitioComponent, canActivate:[AuthEditGuard] },
   { path: 'login/:selector', component: LoginComponent},
-  { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[
-   
-  ]},
+  { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[]},
   {path: 'sitios-list', component: SitiosListComponent},
   {path: 'sitio/:id', component: SitioComponent},
   {path: 'buscar/:id', component: BuscarSitiosComponent},

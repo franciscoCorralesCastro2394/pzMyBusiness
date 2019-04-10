@@ -26,6 +26,7 @@ import { SitiosListComponent } from './components/sitios-list/sitios-list.compon
 import { SitioComponent } from './components/sitio/sitio.component';
 import { BuscarSitiosComponent } from './components/buscar-sitios/buscar-sitios.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { EditSitioComponent } from './components/edit-sitio/edit-sitio.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     InfoUsuarioComponent,
     SitiosListComponent,
     SitioComponent,
-    BuscarSitiosComponent, 
+    BuscarSitiosComponent,
+    EditSitioComponent, 
   ],
   imports: [
     BrowserModule,

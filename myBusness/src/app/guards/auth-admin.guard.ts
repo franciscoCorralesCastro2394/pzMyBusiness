@@ -18,7 +18,7 @@ export class AuthAdminGuard implements CanActivate {
     if (this.loginService.isAdmin()) {
       return true;    
     }else{
-      alert("No estás logueado"); 
+      alert("Este usuario no es un Editor"); 
       this.router.navigate(['/login/0']);
     }   
    console.log(false);

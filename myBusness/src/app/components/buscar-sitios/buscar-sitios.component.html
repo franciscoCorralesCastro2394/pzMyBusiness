@@ -1,3 +1,29 @@
-<p *ngFor="let sitio of sitios">
-  buscar-sitios works!
-</p>
+<section id="team" class="pb-5">
+    <div class="container">
+        <br>
+        <h5 class="section-title h1">Resultados de Sitios Buscados </h5>
+
+        <div class="row">
+            <!-- Team member -->
+
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of sitios">
+                <br>
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class="img-fluid" [src]="sitio.img" alt="card image"></p>
+                                    <h4 class="card-title">{{sitio.nombre}}</h4>
+                                    <p class="card-text">{{sitio.descripcion.substr(0,100)}}...</p>
+                                    <a href="sitio/{{sitio.id}}" class="btn green btn-sm"><i class="fa fa-plus"> Leer mas</i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

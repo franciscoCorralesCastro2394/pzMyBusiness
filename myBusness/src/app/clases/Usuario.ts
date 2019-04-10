@@ -7,4 +7,5 @@ Phone:number;
 pass:string;
 Admin:boolean;
 Imagen:string;
+Editor:boolean;
 }

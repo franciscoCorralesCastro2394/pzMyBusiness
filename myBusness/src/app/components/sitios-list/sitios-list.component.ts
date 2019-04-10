@@ -20,8 +20,14 @@ export class SitiosListComponent implements OnInit {
   }
   
   buscarSitio(termino:string){
-   this.router.navigate(['/buscar',termino]);
- 
+    console.log(termino); 
+    this.router.navigate(['/buscar',termino]);
+  }
+
+
+  editarSitio(sitio:any){
+     console.log(sitio);
+     this.router.navigate(['/edit-sitio',sitio.id]);
   }
 
 }
