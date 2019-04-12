@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import {DataStorageService} from '../services/data-storage.service';
 import {Router} from '@angular/router';
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class LoginService {
   userLogin:any;
   constructor(private dataStorageService:DataStorageService,
-              private router:Router,) { }
+              private router:Router,
+              private _http: HttpClient) { }
 
   isLogged(){
   this.userLogin = this.dataStorageService.getObjectValue("userLogin");
@@ -20,7 +24,6 @@ export class LoginService {
   }
   }
 
-
   isAdmin(){
     this.userLogin = this.dataStorageService.getObjectValue("userLogin");
     console.log(this.userLogin);
@@ -30,7 +33,6 @@ export class LoginService {
       return false;
     }
     }
-
 
     isEditor(){
       this.userLogin = this.dataStorageService.getObjectValue("userLogin");
@@ -54,6 +56,8 @@ export class LoginService {
       }
       
       }
+
+  
 
 
       }

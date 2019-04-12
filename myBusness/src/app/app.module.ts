@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+ 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -27,6 +28,8 @@ import { SitioComponent } from './components/sitio/sitio.component';
 import { BuscarSitiosComponent } from './components/buscar-sitios/buscar-sitios.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { EditSitioComponent } from './components/edit-sitio/edit-sitio.component';
+import { HttpModule } from '@angular/http'
+ 
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { EditSitioComponent } from './components/edit-sitio/edit-sitio.component
     CarouselModule.forRoot(),
     AngularFontAwesomeModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    HttpModule
   ],
   providers: [ DatePipe,DataStorageService,AuthGuard],
   bootstrap: [AppComponent]
