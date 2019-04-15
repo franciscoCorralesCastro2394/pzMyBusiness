@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class SitioSeguidoComponent implements OnInit {
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     this.sitios = this.dataStorageService.getObjectValue("sitios");
+    console.log(this.sitios);
     this.sitios.forEach((sit) => {
       if(this.sitioId === sit.id){
         this.sitio = sit;
@@ -31,7 +33,13 @@ export class SitioSeguidoComponent implements OnInit {
 
   Calificar(){
 
+   }
 
-  }
+
+   calificacion(cal:number){
+     console.log(cal);
+   }
+
+  
 
 }
