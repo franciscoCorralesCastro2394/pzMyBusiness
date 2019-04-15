@@ -28,7 +28,14 @@ import { SitioComponent } from './components/sitio/sitio.component';
 import { BuscarSitiosComponent } from './components/buscar-sitios/buscar-sitios.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { EditSitioComponent } from './components/edit-sitio/edit-sitio.component';
-import { HttpModule } from '@angular/http'
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from "@angular/common/http";
+import { AngularFireModule } from '@angular/fire'; 
+import { AngularFirestoreModule } from '@angular/fire/firestore'; 
+ 
+
+
+
  
 
 @NgModule({
@@ -58,7 +65,10 @@ import { HttpModule } from '@angular/http'
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
-    HttpModule
+    //HttpModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.fireBase),
+    AngularFirestoreModule
   ],
   providers: [ DatePipe,DataStorageService,AuthGuard],
   bootstrap: [AppComponent]

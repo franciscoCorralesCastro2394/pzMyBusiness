@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve",
+        "start": "ng serve --proxy-config proxi.conf.json",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
@@ -15,7 +15,9 @@
         "@angular/common": "~7.2.9",
         "@angular/compiler": "~7.2.9",
         "@angular/core": "~7.2.9",
+        "@angular/fire": "^5.1.2",
         "@angular/forms": "~7.2.9",
+        "@angular/http": "^7.1.1",
         "@angular/platform-browser": "~7.2.9",
         "@angular/platform-browser-dynamic": "~7.2.9",
         "@angular/pwa": "^0.12.4",
@@ -24,14 +26,15 @@
         "angular-font-awesome": "^3.1.2",
         "bootstrap": "^4.3.1",
         "core-js": "^2.5.4",
+        "firebase": "^5.9.4",
         "font-awesome": "^4.7.0",
         "jquery": "^3.3.1",
         "ngx-bootstrap": "^3.2.0",
         "popper.js": "^1.14.7",
         "rxjs": "~6.4.0",
+        "rxjs-compat": "^6.4.0",
         "tslib": "^1.9.0",
-        "zone.js": "~0.8.26",
-        "@angular/http": "^7.1.1"
+        "zone.js": "~0.8.26"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.13.0",

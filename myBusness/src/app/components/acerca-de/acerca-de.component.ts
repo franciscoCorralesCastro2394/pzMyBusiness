@@ -66,7 +66,7 @@ export class AcercaDeComponent implements OnInit {
 
     
   //  this.dataStorageService.setObjectValue('users',users);
-  //  console.log(users);
+  //   console.log(users);
    
   // // sitios informacion //
   
