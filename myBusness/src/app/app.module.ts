@@ -31,7 +31,8 @@ import { EditSitioComponent } from './components/edit-sitio/edit-sitio.component
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from "@angular/common/http";
 import { AngularFireModule } from '@angular/fire'; 
-import { AngularFirestoreModule } from '@angular/fire/firestore'; 
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SitioSeguidoComponent } from './components/sitio-seguido/sitio-seguido.component'; 
  
 
 
@@ -55,7 +56,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     SitiosListComponent,
     SitioComponent,
     BuscarSitiosComponent,
-    EditSitioComponent, 
+    EditSitioComponent,
+    SitioSeguidoComponent, 
   ],
   imports: [
     BrowserModule,

@@ -14,14 +14,15 @@ import {Router} from '@angular/router';
 })
 export class SitioComponent implements OnInit {
   sitioId:string;
-  sitios:any[] = [];
+  sitios:any[] = []; 
   imgsSitio:any[] = [];
   resenas:any[] = [];
   sitiosValoraciones:any[] = [];
   sitio:any;
   urlYB: SafeResourceUrl;
   urlYoutube:string="https://www.youtube.com/embed/N0fVdcOg94I";
-  constructor(private dataStorageService:DataStorageService,  private activatedRoute:ActivatedRoute, private sanitizer: DomSanitizer) {
+  constructor(private dataStorageService:DataStorageService,  
+              private activatedRoute:ActivatedRoute) {
   	this.sitioId = this.activatedRoute.snapshot.params['id'];
   	this.sitios = this.dataStorageService.getObjectValue("sitios");
   	this.cargarSitio();

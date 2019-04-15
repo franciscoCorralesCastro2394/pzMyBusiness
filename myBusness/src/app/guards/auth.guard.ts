@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/r
 import { Observable } from 'rxjs';
 import {LoginService} from '../services/login.service';
 import {Router,CanActivate} from '@angular/router';
-
+import swal from 'sweetalert';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     if (this.loginService.isLogged()) {
       return true;    
     }else{
-      alert("No estás logueado"); 
+      swal("Usuario no existe", "Intente de nuevo", "error");
       this.router.navigate(['/login/0']);
     }   
    console.log(false);

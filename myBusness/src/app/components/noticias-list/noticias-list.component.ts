@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage.service';
 import {Router} from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-noticias-list',
@@ -32,6 +33,8 @@ export class NoticiasListComponent implements OnInit {
     console.log("pruebas");
 
   }
+
+  
 
 
 }

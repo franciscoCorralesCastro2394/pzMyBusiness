@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {DataStorageService} from '../services/data-storage.service';
 import {Router} from '@angular/router';
-import { HttpClient } from "@angular/common/http";
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,7 @@ import { HttpClient } from "@angular/common/http";
 export class LoginService {
   userLogin:any;
   constructor(private dataStorageService:DataStorageService,
-              private router:Router,
-              private _http: HttpClient) { }
+              private router:Router) { }
 
   isLogged(){
   this.userLogin = this.dataStorageService.getObjectValue("userLogin");
@@ -50,9 +49,10 @@ export class LoginService {
       if(this.userLogin.ative){
         this.userLogin.ative = false;
         this.dataStorageService.setObjectValue("userLogin",this.userLogin);
-        alert("Sesion finalizada");
+        swal("Sesión Terminada", "Gracias por visita", "info");
       }else{
-        alert('No existe una sesión activa');
+        swal("Error", "No existe una sesión activa", "error");
+        
       }
       
       }

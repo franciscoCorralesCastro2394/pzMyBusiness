@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import swal from 'sweetalert';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class NavbarComponent implements OnInit {
 
   LoginOff(){
       this.login.Loginoff();
-        this.router.navigate(['/noticias-list']);
+      this.router.navigate(['/noticias-list']);
   }
 
 

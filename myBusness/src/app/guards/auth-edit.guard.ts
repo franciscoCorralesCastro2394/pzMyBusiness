@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/r
 import { Observable } from 'rxjs';
 import {LoginService} from '../services/login.service';
 import {Router,CanActivate} from '@angular/router';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ import {Router,CanActivate} from '@angular/router';
       if (this.loginService.isEditor()) {
         return true;    
       }else{
-        alert("No estás logueado"); 
+        swal("Usuario no es Editor", "Intente de nuevo como Editor", "error");
         this.router.navigate(['/login/0']);
       }   
      console.log(false);

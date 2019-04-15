@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/r
 import { Observable } from 'rxjs';
 import {LoginService} from '../services/login.service';
 import {Router,CanActivate} from '@angular/router';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthAdminGuard implements CanActivate {
     if (this.loginService.isAdmin()) {
       return true;    
     }else{
-      alert("Este usuario no es un Editor"); 
+      swal("Usuario no es Administarador", "Intente de nuevo como Administrador", "error");
       this.router.navigate(['/login/0']);
     }   
    console.log(false);

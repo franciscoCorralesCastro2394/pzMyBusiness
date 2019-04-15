@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="clear"><br><br></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h1 class="text-center section-title h1">{{sitio.nombre}}</h1>
+                <p class="text-justify">{{sitio.descripcion}}</p>
+                <p><strong>Horario: </strong>{{sitio.horario}}</p>
+            </div>
+            <div class="col-md-8">
+                <img class="img-fluid" [src]="sitio.img" alt="card image">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info" (click)="Calificar()"></button>
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+</div>

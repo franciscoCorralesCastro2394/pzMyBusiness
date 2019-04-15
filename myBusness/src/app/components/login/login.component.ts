@@ -7,6 +7,11 @@ import { DataStorageService } from '../../services/data-storage.service';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import { DocumentReference } from '@angular/fire/firestore';
+import swal from 'sweetalert';
+//import * as React from "react";
+
+
+
 
 @Component({
   selector: 'app-login',
@@ -38,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.users = this.dataStorageService.getObjectValue("users");
     console.log(this.users);
     let control:boolean = false;
-    this.users.forEach((user, index) => {
+    this.users.forEach((user, index) => { 
       if (user.Email === this.formGroupLogin.value.Identificacion && 
           user.pass === this.formGroupLogin.value.Pass) {
           control = true;
@@ -50,7 +55,7 @@ export class LoginComponent implements OnInit {
     if(control){
       this.router.navigate(['/user-info/' + this.formGroupLogin.value.Identificacion ]);
     }else{
-      alert("Usuario no existe"); 
+      swal("Usuario no existe", "Intente de nuevo", "error");
     }
    }
 

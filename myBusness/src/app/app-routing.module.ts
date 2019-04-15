@@ -14,7 +14,8 @@ import { InfoUsuarioComponent } from '../app/components/info-usuario/info-usuari
 import { SitiosListComponent } from '../app/components/sitios-list/sitios-list.component';
 import { SitioComponent } from '../app/components/sitio/sitio.component';
 import { BuscarSitiosComponent } from '../app/components/buscar-sitios/buscar-sitios.component';
-import { EditSitioComponent } from '../app/components/edit-sitio/edit-sitio.component'
+import { EditSitioComponent } from '../app/components/edit-sitio/edit-sitio.component';
+import { SitioSeguidoComponent } from '../app/components/sitio-seguido/sitio-seguido.component'; 
 
 
 
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path: 'sitios-list', component: SitiosListComponent},
   {path: 'sitio/:id', component: SitioComponent},
   {path: 'buscar/:id', component: BuscarSitiosComponent},
-  { path: '**', component: NoticiasListComponent }
+  {path: 'sitio-seguido/:id', component:SitioSeguidoComponent, canActivate:[AuthGuard]},
+  { path: '**', component: NoticiasListComponent}
 ];
 
 
