@@ -142,6 +142,7 @@ export class SitioSeguidoComponent implements OnInit {
       };
       this.calificaciones.push(this.calificacionSitioSeguido);
       this.dataStorageService.setObjectValue("calificaciones",this.calificaciones);
+      swal("Sitio calificado con exito", "Exito", "info");
      }
    }
 
