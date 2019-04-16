@@ -44,3 +44,8 @@ body {
     margin-bottom: 50px;
     text-transform: uppercase;
 }
+
+.btnSelec {
+    background-color: #1f6617;
+    margin: 0px;
+}

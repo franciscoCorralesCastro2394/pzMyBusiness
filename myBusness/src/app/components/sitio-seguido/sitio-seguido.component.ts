@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces'
+import swal from 'sweetalert';
+import { calificacion } from '../../interfaces/calificacion.interfaces';
 
 
 @Component({
@@ -13,6 +16,21 @@ export class SitioSeguidoComponent implements OnInit {
   sitios:any[] = [];
   sitioId:number = 0;
   sitio:any; 
+  sitiosSeguidos:any[] = []; 
+  calificaciones:any[] = []; 
+  sitioSeguido:sitioSeguido;
+  calificacionSitioSeguido:calificacion;
+  userLoginNow:any; 
+  btnSelected:string = "";
+  calificacionSitio:number = 0; 
+
+  botonesCal:object = {
+    btn1: false,
+    btn2: false,
+    btn3: false,
+    btn4: false,
+    btn5: false
+  };
 
   constructor(private dataStorageService:DataStorageService, 
               private router:Router,
@@ -20,9 +38,27 @@ export class SitioSeguidoComponent implements OnInit {
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     this.sitios = this.dataStorageService.getObjectValue("sitios");
+    this.sitiosSeguidos = this.dataStorageService.getObjectValue("sitiosSeguidos");
     
+
+    this.userLoginNow = this.dataStorageService.getObjectValue("userLogin");
+    console.log(this.userLoginNow);
+
+    this.sitioSeguido = {
+      id : this.sitiosSeguidos.length + 1,
+      idSitio : +this.sitioId,
+      idUsuario : this.userLoginNow.userL.Email,  
+      key$ : ""
+    }; 
+
+    this.sitiosSeguidos.push(this.sitioSeguido);
+
+    this.dataStorageService.setObjectValue("sitiosSeguidos",this.sitiosSeguidos);
+
+
+
     this.sitios.forEach((sit) => {
-      if(this.sitioId === sit.id){
+      if(this.sitioId == sit.id){
         this.sitio = sit;
       }
     });
@@ -32,13 +68,81 @@ export class SitioSeguidoComponent implements OnInit {
   ngOnInit() {
   }
 
-  Calificar(){
+  calificar(btn:number){   
+      console.log(btn);
+            if(btn == 1){
+                  this.botonesCal = {
+                    btn1: true,
+                    btn2: false,
+                    btn3: false,
+                    btn4: false,
+                    btn5: false
+                  };
+                  this.calificacionSitio = 1;
+                }
 
-   }
+            if(btn == 2){
+                  this.botonesCal = {
+                  btn1: false,
+                  btn2: true,
+                  btn3: false,
+                  btn4: false,
+                  btn5: false
+                };
+                this.calificacionSitio = 2;
+              }
+
+            if(btn == 3){
+                this.botonesCal = {
+                btn1: false,
+                btn2: false,
+                btn3: true,
+                btn4: false,
+                btn5: false
+              };
+              this.calificacionSitio = 3;
+            }
+
+            if(btn == 4){
+              this.botonesCal = {
+              btn1: false,
+              btn2: false,
+              btn3: false,
+              btn4: true,
+              btn5: false
+            };
+            this.calificacionSitio = 4;
+            }
+
+            if(btn == 5){
+              this.botonesCal = {
+              btn1: false,
+              btn2: false,
+              btn3: false,
+              btn4: false,
+              btn5: true
+            };
+            this.calificacionSitio = 5;
+            } 
+}
 
 
-   calificacion(cal:number){
-     console.log(cal);
+   calificacion(){
+     debugger
+     if(this.calificacionSitio == 0){
+      swal("No se ha hecho la evaluación", "Intente de nuevo", "error");
+     }else{
+      this.calificaciones = this.dataStorageService.getObjectValue("calificaciones");
+      this.calificacionSitioSeguido = {
+       id : this.calificaciones.length + 1,
+       idUsuario :this.userLoginNow.userL.Email, 
+       idSitio : this.sitioId,
+       key$ : "",
+       numCalificacion : this.calificacionSitio 
+      };
+      this.calificaciones.push(this.calificacionSitioSeguido);
+      this.dataStorageService.setObjectValue("calificaciones",this.calificaciones);
+     }
    }
 
   

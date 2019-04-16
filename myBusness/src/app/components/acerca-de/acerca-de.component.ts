@@ -221,6 +221,51 @@ export class AcercaDeComponent implements OnInit {
   
   // this.dataStorageService.setObjectValue('resenas',resenas);
   // console.log(resenas); 
+
+  
+  // let sitiosSeguidos:any[] = [];
+  // let sitioSeguido = {
+  //   id:1,
+  //   idSitio:1,
+  //   idUsuario: "chiko",
+  //   key$:""  
+  // };
+
+  // sitiosSeguidos.push(sitioSeguido);
+
+  // sitioSeguido = {
+  //   id:2,
+  //   idSitio:2,
+  //   idUsuario: "chiko",
+  //   key$:""  
+  // };
+  // sitiosSeguidos.push(sitioSeguido);
+ 
+
+   //this.dataStorageService.setObjectValue('sitiosSeguidos', sitiosSeguidos);
+   //console.log(sitiosSeguidos); 
+
+// let calificaciones:any[] = [];
+// let cal = {
+//     id:1,
+//     idSitio:1,
+//     idUsuario:"chiko",
+//     key$:""
+//     };
+    
+//     calificaciones.push(cal);
+
+//     cal = {
+//       id:2,
+//       idSitio:2,
+//       idUsuario:"chiko",
+//       key$:""
+//       };
+
+//       calificaciones.push(cal);
+
+//    this.dataStorageService.setObjectValue('calificaciones', calificaciones);
+//    console.log(calificaciones);
   }
   
 }

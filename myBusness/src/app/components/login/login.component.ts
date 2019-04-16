@@ -8,7 +8,6 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import { DocumentReference } from '@angular/fire/firestore';
 import swal from 'sweetalert';
-//import * as React from "react";
 
 
 
