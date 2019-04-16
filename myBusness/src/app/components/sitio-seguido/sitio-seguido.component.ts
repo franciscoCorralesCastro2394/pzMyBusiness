@@ -20,12 +20,13 @@ export class SitioSeguidoComponent implements OnInit {
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     this.sitios = this.dataStorageService.getObjectValue("sitios");
-    console.log(this.sitios);
+    
     this.sitios.forEach((sit) => {
       if(this.sitioId === sit.id){
         this.sitio = sit;
       }
     });
+    console.log(this.sitio);
   }
 
   ngOnInit() {
