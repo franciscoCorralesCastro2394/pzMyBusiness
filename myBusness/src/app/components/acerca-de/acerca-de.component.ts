@@ -264,8 +264,34 @@ export class AcercaDeComponent implements OnInit {
 
 //       calificaciones.push(cal);
 
-//    this.dataStorageService.setObjectValue('calificaciones', calificaciones);
-//    console.log(calificaciones);
+
+
+// let comentario:any[] = [];
+// let com = {
+//   id : 1,
+//   idSitio : 1,
+//   idUsuario : "chiko",
+//   comentario : "ñubrhvpñwuirvg`pWUREHV`PSDBVÀwruivbhsidbvasyvdcAHDLVCLADHVCIPyudf",
+//   sentimeinto : "Alegria",
+//   key$ : ""
+// };
+
+// comentario.push(com);
+
+// com = {
+//   id : 2,
+//   idSitio : 2,
+//   idUsuario : "chiko",
+//   comentario : "ñubrhvpñwuirvg`pWUREHV`PSDBVÀwruivbhsidbvasyvdcAHDLVCLADHVCIPyudf",
+//   sentimeinto : "Alegria",
+//   key$ : ""
+// };
+
+// comentario.push(com);
+//    this.dataStorageService.setObjectValue('comentarios', comentario);
+//   console.log(comentario);
+
+
   }
   
 }

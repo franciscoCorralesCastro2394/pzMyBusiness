@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces'
 import swal from 'sweetalert';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -18,12 +20,14 @@ export class SitioSeguidoComponent implements OnInit {
   sitio:any; 
   sitiosSeguidos:any[] = []; 
   calificaciones:any[] = []; 
+  comentarios:any[] = [];
   sitioSeguido:sitioSeguido;
   calificacionSitioSeguido:calificacion;
   userLoginNow:any; 
+  comentario:any;
   btnSelected:string = "";
   calificacionSitio:number = 0; 
-
+  formGroupComentario:FormGroup;
   botonesCal:object = {
     btn1: false,
     btn2: false,
@@ -34,6 +38,7 @@ export class SitioSeguidoComponent implements OnInit {
 
   constructor(private dataStorageService:DataStorageService, 
               private router:Router,
+              private formBuilder:FormBuilder,
               private activatedRoute:ActivatedRoute) { 
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
@@ -63,9 +68,12 @@ export class SitioSeguidoComponent implements OnInit {
       }
     });
     console.log(this.sitio);
+
+   
   }
 
   ngOnInit() {
+    this.iniciarComentario();
   }
 
   calificar(btn:number){   
@@ -127,25 +135,44 @@ export class SitioSeguidoComponent implements OnInit {
 }
 
 
-   calificacion(){
+iniciarComentario = () => {
+  this.formGroupComentario = this.formBuilder.group({
+    Sentimiento: ['', [Validators.required]],
+    Comentario: ['', [Validators.required]]
+  });
+}
+
+calificacion(){
      debugger
      if(this.calificacionSitio == 0){
-      swal("No se ha hecho la evaluación", "Intente de nuevo", "error");
+        swal("No se ha hecho la evaluación", "Intente de nuevo", "error");
      }else{
-      this.calificaciones = this.dataStorageService.getObjectValue("calificaciones");
-      this.calificacionSitioSeguido = {
-       id : this.calificaciones.length + 1,
-       idUsuario :this.userLoginNow.userL.Email, 
-       idSitio : this.sitioId,
-       key$ : "",
-       numCalificacion : this.calificacionSitio 
-      };
-      this.calificaciones.push(this.calificacionSitioSeguido);
-      this.dataStorageService.setObjectValue("calificaciones",this.calificaciones);
-      swal("Sitio calificado con exito", "Exito", "info");
+          this.calificaciones = this.dataStorageService.getObjectValue("calificaciones");
+          this.calificacionSitioSeguido = {
+          id : this.calificaciones.length + 1,
+          idUsuario :this.userLoginNow.userL.Email, 
+          idSitio : this.sitioId,
+          key$ : "",
+          numCalificacion : this.calificacionSitio 
+          };
+          this.calificaciones.push(this.calificacionSitioSeguido);
+          this.dataStorageService.setObjectValue("calificaciones",this.calificaciones);
+          swal("Sitio calificado con exito", "Exito", "info");
      }
-   }
+}
 
-  
-
+agregarComentario(){
+  this.comentarios = this.dataStorageService.getObjectValue("comentarios");
+  this.comentario = {
+  id : this.comentarios.length + 1,
+  idSitio : this.sitioId,
+  idUsuario : this.userLoginNow.userL.Email,
+  comentario : this.formGroupComentario.value.Comentario,
+  sentimeinto : this.formGroupComentario.value.Sentimiento,
+  key$ : ""
+  };
+  this.comentarios.push(this.comentario);
+  this.dataStorageService.setObjectValue("comentarios",this.comentarios);
+  swal("Sitio calificado con exito", "Exito", "info");
+}
 }
