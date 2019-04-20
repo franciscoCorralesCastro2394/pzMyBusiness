@@ -12,9 +12,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let imgsitio of imgsSitio">
                 <div class="clear"><br><br><img class="img-fluid" [src]="imgsitio" alt="card image"></div>
-
             </div>
-
         </div>
     </div>
     <div class="container">
@@ -37,25 +35,66 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let resena of resenas">
                     <div class="block-text rel zmin">
-                        <a title="" href="#">{{resena.nombre}}</a>
-                        <div class="mark">My rating:
+                        <a title="" href="#">{{resena.nombreSitio}}</a>
+                        <div class="mark">My rating: {{resena.sentimineto}}
                             <span class="rating-input">
-            			<span class=""><i class="fa fa-star-o"></i></span>
+            			    <span class=""><i class="fa fa-star-o"></i></span>
                             <span class=""><i class="fa fa-star-o"></i></span>
                             <span class=""><i class="fa fa-star-o"></i></span>
                             <span class=""><i class="fa fa-star-o"></i></span>
                             </span>
                         </div>
-                        <p class="text-justify">{{resena.descripcion}}</p>
+                        <p class="text-justify">{{resena.comentario}}</p>
                         <ins class="ab zmin sprite block"></ins>
                     </div>
                     <div class="person-text rel">
-                        <p> from {{resena.from | uppercase}}</p>
+                        <p> from {{resena.idUsuario | uppercase}}</p>
                     </div>
+                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ResponderModal">
+                            Responder
+                            <i class="far fa-comments"></i>
+                </button>
+                    <button type="button" class="btn btn-outline-warning">
+                        Sensurar
+                        <i class="fas fa-comment-slash"></i>
+            </button>
                 </div>
             </div>
         </div>
     </section>
+
+
+    <!-- Modal responder comentario -->
+    <div class="modal fade" id="ResponderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Comentario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="formGroupComentario" id="formGroupComentario" class="row">
+                        <div class="form-group col-12">
+                            <label for="Respuesta">Respuesta</label>
+                            <textarea class="form-control" rows="5" formControlName="Respuesta" id="Respuesta"></textarea>
+                            <div *ngIf="formGroupComentario.controls['Respuesta'].dirty">
+                                <div class="form-control-feedback text-danger" *ngIf="formGroupComentario.controls['Respuesta'].errors?.required">
+                                    El Respuesta es requerido
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" [ngClass]="{'disabled':!formGroupComentario.valid}">Send message</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- valoraciones -->
     <section class="pb-5 team">
@@ -64,7 +103,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let val of sitiosValoraciones">
                     <div class="block-text rel zmin imgC">
-                        <div class="mark">Evaluación:
+                        <div class="mark">Evaluación: {{ val.numCalificacion }}
                             <span class="rating-input">
                         <span class=""><i class="fa fa-star-o"></i></span>
                             <span class=""><i class="fa fa-star-o"></i></span>
@@ -75,8 +114,7 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <img class="img-fluid" [src]="val.img" alt="card image">
-                                <h4 class="card-title">{{val.nombre}}</h4>
-                                <p>{{val.descripcion}}</p>
+                                <h4 class="card-title">{{val.idUsuario}}</h4>
                             </div>
                         </div>
                     </div>

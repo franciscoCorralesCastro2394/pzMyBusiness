@@ -55,7 +55,7 @@ export class InfoUsuarioComponent implements OnInit {
       this.resenas[i].nombreSitio = this.nombreSitio(this.resenas[i].idSitio);
     }
 
-    debugger
+    
     this.calificaciones = this.dataStorageService.getObjectValue("calificaciones");
     this.calificaciones.filter(x => x.idUsuario == this.userId);
     for(let i=0; i < this.calificaciones.length; i++){
