@@ -5,6 +5,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {DataStorageService} from '../../services/data-storage.service';
 import {Noticia} from '../../clases/noticia';
 import {Usuario} from '../../clases/Usuario';
+import swal from 'sweetalert';
+import {Router} from '@angular/router';
+
+
 
 @Component({
   selector: 'app-noticias-upsert',
@@ -16,7 +20,11 @@ export class NoticiasUpsertComponent implements OnInit {
   formGroup: FormGroup;
   IdNot: number = 0; 
 
-  constructor(private activatedRoute:ActivatedRoute, private formBuilder:FormBuilder, private dataStorageService:DataStorageService) { 
+  constructor(private activatedRoute:ActivatedRoute, 
+              private formBuilder:FormBuilder, 
+              private dataStorageService:DataStorageService,
+              private router:Router
+              ) { 
 
     this.noticiaId = this.activatedRoute.snapshot.params['id'];
     console.log(this.noticiaId);
@@ -67,7 +75,7 @@ export class NoticiasUpsertComponent implements OnInit {
 
 
   guardarData = () => {
-
+      debugger
     console.log(this.formGroup);
     if (this.formGroup.valid) {
       let noticiaIndex = -1;
@@ -87,9 +95,10 @@ export class NoticiasUpsertComponent implements OnInit {
 
       this.dataStorageService.setObjectValue("noticias", listaNoticias);
 
-      alert("Información guardada");
+      swal("Exito", "Información guardada con exito", "success");
+      this.router.navigate(['/noticias-list']);
     } else {
-      alert("Debe completar la información correctamente");
+      swal("Debe completar la información correctamente", "Intente de nuevo", "error");
     }
   }
 

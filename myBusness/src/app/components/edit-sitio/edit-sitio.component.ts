@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {DataStorageService} from '../../services/data-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import swal from 'sweetalert';
+import {Router} from '@angular/router';
+
 
 
 @Component({
@@ -13,15 +16,35 @@ export class EditSitioComponent implements OnInit {
   sitioId:number;
   formGroupSitioEdit:FormGroup;
   IdSitio:number;
-
-
-  constructor(private activatedRoute:ActivatedRoute, private formBuilder:FormBuilder, private dataStorageService:DataStorageService) {
-    this.iniciarNoticia();
+  sitios:any[] = [];
+  idSit:number = 0; 
+  users:any[] = [];
+  editores:any[] = [];
+  
+  constructor(private activatedRoute:ActivatedRoute, 
+              private formBuilder:FormBuilder, 
+              private dataStorageService:DataStorageService,
+              private router:Router
+      ) {
+   debugger
     this.sitioId = this.activatedRoute.snapshot.params['id'];
+    this.sitios = this.dataStorageService.getObjectValue("sitios");
+    this.users = this.dataStorageService.getObjectValue("users");
+
+    this.users.forEach( user => {
+           if(user.Editor){
+             this.editores.push(user);
+           }
+    });
+
+
+    this.idSit = this.sitios.length + 1;
     console.log(this.sitioId);
 
     if(this.sitioId){
       this.cargarNoticia(this.sitioId);   
+    }else{
+      this.iniciarNoticia();
     }
    }
    
@@ -33,12 +56,13 @@ export class EditSitioComponent implements OnInit {
 
   iniciarNoticia = () => {
     this.formGroupSitioEdit = this.formBuilder.group({
-      id: [this.IdSitio, [Validators.required],],
+      id: [this.idSit, [Validators.required],],
       nombre: ['', [Validators.required]],
       img: ['', [Validators.required]],
       descripcion: ['', [Validators.required, Validators.minLength(15)]],
       horario: ['',Validators.required],
       videoYB: ['',Validators.required],
+      Editor: ['',Validators.required],
     });
   }
 
@@ -55,19 +79,20 @@ export class EditSitioComponent implements OnInit {
           descripcion: [sitio.descripcion, [Validators.required, Validators.minLength(15)]],
           horario: [sitio.horario],
           videoYB: [sitio.videoYB],
+          Editor: [sitio.videoYB],
         });
       }
     });
   } 
 
   guardarData = () => {
-
+     debugger
     console.log(this.formGroupSitioEdit);
     if (this.formGroupSitioEdit.valid) {
       let sitioIndex = -1;
       const listaSitios = this.dataStorageService.getObjectValue("sitios");
-      listaSitios.forEach((noticia, index) => {
-        if (noticia.Id == this.formGroupSitioEdit.value.Id) {
+      listaSitios.forEach((sitio, index) => {
+        if (sitio.Id == this.formGroupSitioEdit.value.id) {
           sitioIndex = index;
         }
       });
@@ -81,9 +106,10 @@ export class EditSitioComponent implements OnInit {
 
       this.dataStorageService.setObjectValue("sitios", listaSitios);
 
-      alert("Información guardada");
+      swal("Exito", "Información guardada con exito", "success");
+      this.router.navigate(['/sitios-list']);
     } else {
-      alert("Debe completar la información correctamente");
+      swal("Debe completar la información correctamente", "Intente de nuevo", "error");
     }
   }
 

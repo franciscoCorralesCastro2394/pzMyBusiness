@@ -29,6 +29,10 @@ export class SitiosListComponent implements OnInit {
   }
 
 
+  nuevoSitio(){
+    this.router.navigate(['/sitio-insert']);
+  }
+
   editarSitio(sitio:any){
      console.log(sitio);
      this.router.navigate(['/edit-sitio',sitio.id]);

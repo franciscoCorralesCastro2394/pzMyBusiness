@@ -3,5 +3,7 @@ export interface calificacion{
     idSitio:number,
     idUsuario:string,
     numCalificacion:number,
-    key$?:string;
+    key$?:string,
+    img?:string,
+    nombreSitio?:string
     } 

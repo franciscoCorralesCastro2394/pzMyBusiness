@@ -41,7 +41,7 @@
         <h5 class="section-title h1"> Sitios Seguidos </h5>
         <div class="row">
             <!-- Team member -->
-            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of sitios">
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of sitiosS">
                 <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                     <div class="mainflip">
                         <div class="frontside">
@@ -98,20 +98,22 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let resena of resenas">
                 <div class="block-text rel zmin">
-                    <a title="" href="#">{{resena.nombre}}</a>
-                    <div class="mark">My rating:
+                    <a title="" href="#">{{resena.nombreSitio}}</a>
+                    <div class="mark">Sentimineto : {{ resena.sentimeinto }}
                         <span class="rating-input">
-            <span class=""><i class="fa fa-star-o"></i></span>
+                        <!-- <span class=""><i class="fa fa-star-o"></i></span>
                         <span class=""><i class="fa fa-star-o"></i></span>
                         <span class=""><i class="fa fa-star-o"></i></span>
-                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span class=""><i class="fa fa-star-o"></i></span> -->
                         </span>
                     </div>
-                    <p class="text-justify">{{resena.descripcion}}</p>
+                    <div class="container">
+                        <p class="">{{resena.comentario}}</p>
+                    </div>
                     <ins class="ab zmin sprite block"></ins>
                 </div>
                 <div class="person-text rel">
-                    <p> from {{resena.from | uppercase}}</p>
+                    <p> from {{resena.idUsuario | uppercase}}</p>
                 </div>
             </div>
         </div>
@@ -123,20 +125,21 @@
     <div class="container">
         <h5 class="section-title h1"> Valoraciones </h5>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let val of sitios">
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let val of calificaciones">
                 <div class="block-text rel zmin imgC">
                     <div class="mark">Evaluación:
                         <span class="rating-input">
-                        <span class=""><i class="fa fa-star-o"></i></span>
-                        <span class=""><i class="fa fa-star-o"></i></span>
-                        <span class=""><i class="fa fa-star-o"></i></span>
-                        <span class=""><i class="fa fa-star-o"></i></span>
+                        <span *ngIf="val.numCalificacion == 1" ><i class="fa fa-star-o"></i></span>
+                        <span *ngIf="2 >= val.numCalificacion"><i class="fa fa-star-o"></i></span>
+                        <span *ngIf="3 >= val.numCalificacion"><i class="fa fa-star-o"></i></span>
+                        <span *ngIf="4 >= val.numCalificacion"><i class="fa fa-star-o"></i></span>
+                        <span *ngIf="5 >= val.numCalificacion"><i class="fa fa-star-o"></i></span>
                         </span>
                     </div>
                     <div class="card">
                         <div class="card-body text-center">
                             <p><img class="img-fluid" [src]="val.img" alt="card image"></p>
-                            <h4 class="card-title">{{val.nombre}}</h4>
+                            <h4 class="card-title">{{val.nombreSitio}}</h4>
                         </div>
                     </div>
                 </div>

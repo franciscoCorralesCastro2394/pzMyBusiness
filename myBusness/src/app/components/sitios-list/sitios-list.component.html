@@ -2,8 +2,17 @@
     <div class="container">
         <br>
         <h5 class="section-title h1">Sitios Turisticos</h5>
-        <input class="mr-sm-2" type="text" placeholder="Buscar Sitio" (keyup.enter)="buscarSitio(buscarTexto.value)" #buscarTexto>
-        <button (click)="buscarSitio(buscarTexto.value)" class="btn green my-2 my-sm-0" type="button">Buscar</button>
+
+        <div class="row">
+            <div class="col-md-10">
+                <input class="mr-sm-2" type="text" placeholder="Buscar Sitio" (keyup.enter)="buscarSitio(buscarTexto.value)" #buscarTexto>
+                <button (click)="buscarSitio(buscarTexto.value)" class="btn green my-2 my-sm-0" type="button">Buscar</button>
+            </div>
+            <div class="col-md-2">
+                <button (click)="nuevoSitio()" class="btn green my-2 my-sm-0" type="button">Ingresar Sitio</button>
+            </div>
+        </div>
+
         <div class="row">
             <!-- Team member -->
             <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of sitios">

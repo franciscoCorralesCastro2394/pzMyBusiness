@@ -31,11 +31,14 @@ const routes: Routes = [
   { path: 'login/:selector', component: LoginComponent},
   { path: 'loginIngresar/:selector', component: LoginComponent},
   { path: 'user-info/:user', component: InfoUsuarioComponent, canActivate:[AuthGuard], children:[]},
-  {path: 'sitios-list', component: SitiosListComponent},
-  {path: 'sitio/:id', component: SitioComponent},
-  {path: 'buscar/:id', component: BuscarSitiosComponent},
-  {path: 'sitio-seguido/:id', component:SitioSeguidoComponent, canActivate:[AuthGuard]},
-  { path: '**', component: NoticiasListComponent}
+
+  
+  { path: 'sitios-list', component: SitiosListComponent},
+  { path: 'sitio/:id', component: SitioComponent},
+  { path: 'buscar/:id', component: BuscarSitiosComponent},
+  { path: 'sitio-seguido/:id', component:SitioSeguidoComponent, canActivate:[AuthGuard]},
+  { path: 'sitio-insert', component:EditSitioComponent,canActivate:[AuthEditGuard]},
+  { path: '**', component: NoticiasListComponent }
 ];
 
 
