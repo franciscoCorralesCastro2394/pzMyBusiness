@@ -111,10 +111,41 @@
                         <p class="">{{resena.comentario}}</p>
                     </div>
                     <ins class="ab zmin sprite block"></ins>
+
+                    <div class="container">
+
+                        <br>
+                        <div class="panel-body">
+
+                            <ul class="media-list">
+                                <br>
+                                <li class="media" *ngFor="let res of resena.respuestas">
+                                    <div class="media-left">
+                                        <!-- <img src="http://placehold.it/60x60" class="img-circle"> -->
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            Por {{res.idUsuario}}
+                                            <br>
+                                            <small>
+                                                            Comentado en :  {{resena.nombreSitio}}
+                                                </small>
+                                        </h4>
+                                        <p>
+                                            {{res.respuesta}}
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
                 </div>
                 <div class="person-text rel">
                     <p> from {{resena.idUsuario | uppercase}}</p>
                 </div>
+
             </div>
         </div>
     </div>

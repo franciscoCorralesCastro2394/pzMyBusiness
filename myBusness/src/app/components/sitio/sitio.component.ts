@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {DataStorageService} from '../../services/data-storage.service';
+import { ActivatedRoute} from '@angular/router';
+import { DataStorageService} from '../../services/data-storage.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { comentario } from '../../interfaces/comentario.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router} from '@angular/router';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
+import { LoginService } from '../../services/login.service';
+import { Respuesta } from '../../interfaces/respuesta.interface';
+import swal from 'sweetalert';
 
 
 
@@ -25,16 +28,50 @@ export class SitioComponent implements OnInit {
   urlYB: SafeResourceUrl;
   urlYoutube:string="https://www.youtube.com/embed/N0fVdcOg94I";
   formGroupComentario:FormGroup;
+  userAdmin:boolean = false;
+  idResena:any;
+  respuestas:Respuesta[] = [];
 
   constructor(private dataStorageService:DataStorageService,  
               private activatedRoute:ActivatedRoute,
               private formBuilder:FormBuilder,
-              ) {
-  	this.sitioId = this.activatedRoute.snapshot.params['id'];
+              private loginService:LoginService) {
+    this.sitioId = this.activatedRoute.snapshot.params['id'];
     
+    this.respuestas = this.dataStorageService.getObjectValue("respuestas");
+    if(!this.respuestas){
+      this.respuestas = [];
+    }
+
     this.sitios = this.dataStorageService.getObjectValue("sitios");
-  	this.cargarSitio();
-    debugger
+    this.cargarSitio();
+    
+    this.getResenas();
+
+  	this.imgsSitio = this.sitio.imgs;
+    console.log(this.imgsSitio);
+    
+    this.getValoraciones();
+
+    this.iniciarResponder();
+
+    
+    this.userAdmin = this.loginService.isAdmin();
+
+    
+
+
+
+
+  }
+
+  ngOnInit() {
+
+  }
+  
+
+   getResenas(){
+     
     this.resenas = this.dataStorageService.getObjectValue("comentarios");
     this.resenas = this.resenas.filter(x => x.idSitio == +this.sitioId);
 
@@ -42,27 +79,29 @@ export class SitioComponent implements OnInit {
     {
       this.resenas[i].nombreSitio = this.nombreSitio(+this.resenas[i].idSitio);
     }
-
-
+     
+    this.resenas.forEach(res => {
+         let respRes:Respuesta[] = [];
+         this.respuestas.forEach(resp => {
+           if(+resp.idResena == +res.id && resp.idSitio == +this.sitioId){
+             respRes.push(resp);
+           }
+         }); 
+      res.respuestas = respRes;
+    }); 
     
 
-  	this.imgsSitio = this.sitio.imgs;
-    console.log(this.imgsSitio);
-    
-    debugger
+   }
+
+   getValoraciones(){
     this.sitiosValoraciones = this.dataStorageService.getObjectValue("calificaciones");
     this.sitiosValoraciones = this.sitiosValoraciones.filter(x => +x.idSitio == +this.sitioId);
     for(let i = 0; i < this.sitiosValoraciones.length; i++)
     {
       this.sitiosValoraciones[i].img = this.imgSitio(+this.sitiosValoraciones[i].idSitio);
     }
-    
-    this.iniciarResponder();
-  }
+   }
 
-  ngOnInit() {
-
-  }
   cargarSitio(){
     this.sitios = this.dataStorageService.getObjectValue("sitios");
     this.sitios.forEach((sitio) => {
@@ -104,5 +143,46 @@ export class SitioComponent implements OnInit {
 
     return img;
   }
+
+ 
+  saveRespueta(){
+    
+    console.log(this.idResena); 
+    let user:any = this.dataStorageService.getObjectValue("userLogin");
+    let res:Respuesta = {
+      idResena : this.idResena,
+      idSitio : +this.sitioId,
+      idUsuario : user.userL.Email,
+      respuesta : this.formGroupComentario.value.Respuesta,
+      key$ : ""      
+    };
+
+    this.respuestas.push(res);
+    this.dataStorageService.setObjectValue("respuestas",this.respuestas);
+    swal("Comentario Guardado", "Exito", "success");
+
+
+
+  }
+   
+
+  sensurarcomentario(id:any){
+   debugger
+   console.log(id);
+    
+   this.resenas.forEach( res => {
+      if(res.id == id){
+        res.sensuardo = true;
+        swal("Comentario sensurado", "Exito", "success");
+      }
+   });
+   this.dataStorageService.setObjectValue("comentarios",this.resenas);
+
+
+
+
+  }
+  
+
 
 }

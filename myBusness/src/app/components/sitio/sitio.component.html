@@ -29,35 +29,71 @@
         <div class="clear"><br><br></div>
     </div>
     <!-- Reseñas -->
+
+
     <section class="pb-5 team">
         <div class="container">
             <h5 class="section-title h1"> Reseñas </h5>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let resena of resenas">
-                    <div class="block-text rel zmin">
-                        <a title="" href="#">{{resena.nombreSitio}}</a>
-                        <div class="mark">My rating: {{resena.sentimineto}}
-                            <span class="rating-input">
+                    <div *ngIf="!resena.sensuardo">
+                        <div class="block-text rel zmin">
+                            <a title="" href="#">{{resena.nombreSitio}}</a>
+                            <div class="mark">My rating: {{resena.sentimineto}}
+                                <span class="rating-input">
             			    <span class=""><i class="fa fa-star-o"></i></span>
-                            <span class=""><i class="fa fa-star-o"></i></span>
-                            <span class=""><i class="fa fa-star-o"></i></span>
-                            <span class=""><i class="fa fa-star-o"></i></span>
-                            </span>
+                                <span class=""><i class="fa fa-star-o"></i></span>
+                                <span class=""><i class="fa fa-star-o"></i></span>
+                                <span class=""><i class="fa fa-star-o"></i></span>
+                                </span>
+                            </div>
+                            <p class="text-justify">{{resena.comentario}}</p>
+                            <ins class="ab zmin sprite block"></ins>
+
+                            <div class="container">
+
+                                <br>
+                                <div class="panel-body">
+
+                                    <ul class="media-list">
+                                        <br>
+                                        <li class="media" *ngFor="let res of resena.respuestas">
+                                            <div class="media-left">
+                                                <!-- <img src="http://placehold.it/60x60" class="img-circle"> -->
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">
+                                                    Por {{res.idUsuario}}
+                                                    <br>
+                                                    <small>
+                                                            Comentado en :  {{resena.nombreSitio}}
+                                                </small>
+                                                </h4>
+                                                <p>
+                                                    {{res.respuesta}}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
                         </div>
-                        <p class="text-justify">{{resena.comentario}}</p>
-                        <ins class="ab zmin sprite block"></ins>
-                    </div>
-                    <div class="person-text rel">
-                        <p> from {{resena.idUsuario | uppercase}}</p>
-                    </div>
-                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ResponderModal">
+                        <div class="person-text rel">
+                            <p> from {{resena.idUsuario | uppercase}}</p>
+                        </div>
+                        <button (click)="idResena = resena.id" *ngIf="userAdmin" type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ResponderModal">
                             Responder
                             <i class="far fa-comments"></i>
-                </button>
-                    <button type="button" class="btn btn-outline-warning">
+                    </button>
+                        <button (click)="sensurarcomentario(resena.id)" *ngIf="userAdmin" type="button" class="btn btn-outline-warning">
                         Sensurar
                         <i class="fas fa-comment-slash"></i>
-            </button>
+                    </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -87,7 +123,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" data-dismiss="modal" [ngClass]="{'disabled':!formGroupComentario.valid}">Send message</button>
+                            <button type="submit" (click)="saveRespueta()" class="btn btn-primary" [ngClass]="{'disabled':!formGroupComentario.valid}" data-dismiss="modal">Send message</button>
                         </div>
                     </form>
                 </div>

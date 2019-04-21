@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class UsuariosService {
  
    usurioURL:string = '/firebase_conxion'; 
-   private UsuarioCollectionName = 'todos';
+   private UsuarioCollectionName = 'usuarios';
   constructor(private db: AngularFirestore ) {
 
    }

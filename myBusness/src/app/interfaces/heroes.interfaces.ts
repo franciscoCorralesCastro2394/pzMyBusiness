@@ -9,4 +9,5 @@ Admin:boolean;
 Imagen:string;
 Editor:boolean;
 key$?:string;
+id?:string;
 } 

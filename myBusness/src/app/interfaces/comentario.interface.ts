@@ -5,5 +5,7 @@ idUsuario:string,
 comentario:string,
 sentimeinto:string,
 key$?:string,
-nombreSitio?:string
+nombreSitio?:string,
+respuestas?:any,
+sensuardo?:boolean
 };
