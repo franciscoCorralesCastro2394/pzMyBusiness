@@ -8,6 +8,7 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import { DocumentReference } from '@angular/fire/firestore';
 import swal from 'sweetalert';
+import { AuthService } from '../../services/serviceAuth/auth.service';
 
 
 @Component({
@@ -25,8 +26,9 @@ export class LoginComponent implements OnInit {
               private activatedRoute:ActivatedRoute,
               private dataStorageService:DataStorageService,
               private usuariosService:UsuariosService,
-              private userS:UsuariosService) { 
-    
+              private userS:UsuariosService,
+              private auth:AuthService) { 
+    this.auth.handleAuthentication();
     this.selector = this.activatedRoute.snapshot.params['selector'];
     console.log(this.selector);
     this.iniciarLogin();
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
    this.users = this.dataStorageService.loadUsuarios();    
+
   }
   loginSeguro(){
 
@@ -132,7 +135,19 @@ if(this.formGroupRegister.valid){
 
   successfulSaveUser(res: DocumentReference,user:Usuario) {
     console.log(res.id);
+
   }
+
+
+  loginAuth(){
+    this.auth.login();
+  }
+
+  salir(){
+    this.auth.logout();
+  }
+
+
 
 
 }

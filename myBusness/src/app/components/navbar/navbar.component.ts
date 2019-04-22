@@ -3,6 +3,7 @@ import { DataStorageService } from '../../services/data-storage.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import swal from 'sweetalert';
+import { AuthService } from '../../services/serviceAuth/auth.service';
 
 
 @Component({
@@ -14,13 +15,15 @@ export class NavbarComponent implements OnInit {
 
   constructor(private dataStorage:DataStorageService,
               private router:Router,
-              private login:LoginService ) { }
+              private login:LoginService,
+              private auth:AuthService ) { }
 
   ngOnInit() {
   }
 
 
   LoginOff(){
+      this.auth.logout();
       this.login.Loginoff();
       this.router.navigate(['/noticias-list']);
   }
