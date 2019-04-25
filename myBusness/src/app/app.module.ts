@@ -15,10 +15,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NoticiasUpsertComponent } from './components/noticias-upsert/noticias-upsert.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PrivateComponent } from './components/private/private.component';
 import { LoginComponent } from './components/login/login.component';
 import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
-import {AuthGuard} from '../app/guards/auth.guard';
+import { AuthGuard} from '../app/guards/auth.guard';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactenosComponent } from './components/contactenos/contactenos.component';
 import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
@@ -28,7 +27,6 @@ import { SitioComponent } from './components/sitio/sitio.component';
 import { BuscarSitiosComponent } from './components/buscar-sitios/buscar-sitios.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { EditSitioComponent } from './components/edit-sitio/edit-sitio.component';
-import { HttpModule } from '@angular/http';
 import { HttpClientModule } from "@angular/common/http";
 import { AngularFireModule } from '@angular/fire'; 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -42,7 +40,6 @@ import { AuthService } from '../app/services/serviceAuth/auth.service';
     FooterComponent,
     NoticiasListComponent,
     NoticiasUpsertComponent,
-    PrivateComponent,
     LoginComponent,
     AcercaDeComponent,
     ServiciosComponent,
@@ -63,7 +60,6 @@ import { AuthService } from '../app/services/serviceAuth/auth.service';
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
-    //HttpModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.fireBase),
     AngularFirestoreModule
