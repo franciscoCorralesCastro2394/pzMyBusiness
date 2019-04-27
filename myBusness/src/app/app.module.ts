@@ -31,7 +31,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AngularFireModule } from '@angular/fire'; 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SitioSeguidoComponent } from './components/sitio-seguido/sitio-seguido.component'; 
-import { AuthService } from '../app/services/serviceAuth/auth.service'; 
 
 @NgModule({
   declarations: [
@@ -64,7 +63,7 @@ import { AuthService } from '../app/services/serviceAuth/auth.service';
     AngularFireModule.initializeApp(environment.fireBase),
     AngularFirestoreModule
   ],
-  providers: [ DatePipe,DataStorageService,AuthGuard,AuthService],
+  providers: [ DatePipe,DataStorageService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

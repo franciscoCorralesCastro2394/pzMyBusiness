@@ -8,7 +8,6 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import { DocumentReference } from '@angular/fire/firestore';
 import swal from 'sweetalert';
-import { AuthService } from '../../services/serviceAuth/auth.service';
 
 
 @Component({
@@ -27,8 +26,8 @@ export class LoginComponent implements OnInit {
               private dataStorageService:DataStorageService,
               private usuariosService:UsuariosService,
               private userS:UsuariosService,
-              private auth:AuthService) { 
-    this.auth.handleAuthentication();
+   ) { 
+
     this.selector = this.activatedRoute.snapshot.params['selector'];
     console.log(this.selector);
     this.iniciarLogin();
@@ -139,13 +138,6 @@ if(this.formGroupRegister.valid){
   }
 
 
-  loginAuth(){
-    this.auth.login();
-  }
-
-  salir(){
-    this.auth.logout();
-  }
 
 
 
