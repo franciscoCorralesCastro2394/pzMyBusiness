@@ -72,10 +72,7 @@ export class NoticiasUpsertComponent implements OnInit {
     });
   } 
 
-
-
   guardarData = () => {
-      debugger
     console.log(this.formGroup);
     if (this.formGroup.valid) {
       let noticiaIndex = -1;
