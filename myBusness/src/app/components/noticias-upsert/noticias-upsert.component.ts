@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {DataStorageService} from '../../services/data-storage.service';
-import {Noticia} from '../../clases/noticia';
-import {Usuario} from '../../clases/Usuario';
+import { DataStorageService} from '../../services/data-storage.service';
+import { Noticia} from '../../interfaces/noticia.interface';
+import { Usuario} from '../../clases/Usuario';
 import swal from 'sweetalert';
-import {Router} from '@angular/router';
+import { Router} from '@angular/router';
+import { NoticiaServiceService } from '../../services/noticiasServices/noticia-service.service';
+import { DocumentReference } from '@angular/fire/firestore';
+
 
 
 
@@ -23,7 +26,8 @@ export class NoticiasUpsertComponent implements OnInit {
   constructor(private activatedRoute:ActivatedRoute, 
               private formBuilder:FormBuilder, 
               private dataStorageService:DataStorageService,
-              private router:Router
+              private router:Router,
+              private NoticiaService:NoticiaServiceService
               ) { 
 
     this.noticiaId = this.activatedRoute.snapshot.params['id'];
@@ -45,7 +49,7 @@ export class NoticiasUpsertComponent implements OnInit {
 
   iniciarNoticia = () => {
     this.formGroup = this.formBuilder.group({
-      Id: [this.IdNot, [Validators.required],],
+      Id: ['', [Validators.required],],
       Titulo: ['', [Validators.required]],
       Imagen: ['', [Validators.required]],
       Descripcion: ['', [Validators.required, Validators.minLength(15)]],
@@ -73,31 +77,58 @@ export class NoticiasUpsertComponent implements OnInit {
   } 
 
   guardarData = () => {
-    console.log(this.formGroup);
-    if (this.formGroup.valid) {
-      let noticiaIndex = -1;
-      const listaNoticias = this.dataStorageService.getObjectValue("noticias");
-      listaNoticias.forEach((noticia, index) => {
-        if (noticia.Id == this.formGroup.value.Id) {
-          noticiaIndex = index;
-        }
-      });
+    // console.log(this.formGroup);
+    // if (this.formGroup.valid) {
+    //   let noticiaIndex = -1;
+    //   const listaNoticias = this.dataStorageService.getObjectValue("noticias");
+    //   listaNoticias.forEach((noticia, index) => {
+    //     if (noticia.Id == this.formGroup.value.Id) {
+    //       noticiaIndex = index;
+    //     }
+    //   });
 
-      if (noticiaIndex >= 0) {
-        listaNoticias[noticiaIndex] = this.formGroup.value;
-      } else {
-        listaNoticias.push(this.formGroup.value);
-      }
-      this.formGroup.patchValue({ "UltimaModificacion": new Date() });
+    //   if (noticiaIndex >= 0) {
+    //     listaNoticias[noticiaIndex] = this.formGroup.value;
+    //   } else {
+    //     listaNoticias.push(this.formGroup.value);
+    //   }
+    //   this.formGroup.patchValue({ "UltimaModificacion": new Date() });
 
-      this.dataStorageService.setObjectValue("noticias", listaNoticias);
+    //   this.dataStorageService.setObjectValue("noticias", listaNoticias);
 
-      swal("Exito", "Información guardada con exito", "success");
-      this.router.navigate(['/noticias-list']);
-    } else {
-      swal("Debe completar la información correctamente", "Intente de nuevo", "error");
-    }
+    //   swal("Exito", "Información guardada con exito", "success");
+    //   this.router.navigate(['/noticias-list']);
+    // } else {
+    //   swal("Debe completar la información correctamente", "Intente de nuevo", "error");
+    // }
+
+
+   if (this.formGroup.valid){
+    
+     let noticia:Noticia = {
+       Descripcion : this.formGroup.value.Descripcion,
+       Imagen : this.formGroup.value.Imagen,
+       Titulo : this.formGroup.value.Titulo,
+       fechaCreacion : new Date,
+       ultimaModificacion : new Date,
+       Id : this.formGroup.value.Id
+     } 
+
+
+  debugger
+      this.NoticiaService.saveNoticia(noticia);
+    
+   }
+
+
+
+  
   }
+
+  successfulSaveUser(res: DocumentReference,user:Usuario) {
+    console.log(res.id);
+  }
+
 
 
 }

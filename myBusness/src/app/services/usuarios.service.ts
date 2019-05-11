@@ -4,6 +4,9 @@ import 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 @Injectable({
@@ -11,17 +14,19 @@ import { Observable } from 'rxjs';
 })
 export class UsuariosService {
  
-   usurioURL:string = '/firebase_conxion'; 
+
    private UsuarioCollectionName = 'usuarios';
-  constructor(private db: AngularFirestore ) {
+  constructor(private angularFirestore: AngularFirestore ) {
 
    }
 
-   getTodos(): Observable<firebase.firestore.QuerySnapshot> {
-    return this.db.collection<Usuario>(this.UsuarioCollectionName, ref => ref.orderBy('Email', 'desc')).get();
+   getAllUaurios(): Observable<Usuario[]> {
+    return this.angularFirestore.collection<Usuario>('usuarios').valueChanges();
   }
 
-   saveUsuario(user: Usuario ): Promise<DocumentReference> {
-    return this.db.collection(this.UsuarioCollectionName).add(user);
+
+   saveUsuario(user: Usuario){
+    this.angularFirestore.collection<Usuario>('usuarios').add(user);
   }
+
 }

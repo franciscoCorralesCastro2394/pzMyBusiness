@@ -8,6 +8,8 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import { DocumentReference } from '@angular/fire/firestore';
 import swal from 'sweetalert';
+import { Observable } from 'rxjs';
+
 
 
 @Component({
@@ -19,13 +21,15 @@ export class LoginComponent implements OnInit {
   formGroupLogin: FormGroup;
   formGroupRegister: FormGroup;
   selector:number = 0;
-  users:any[] = [];
+  users$:Observable<any>;
+  users:Usuario[] = []; 
   constructor(private formBuilder:FormBuilder,  
               private router:Router,
               private activatedRoute:ActivatedRoute,
               private dataStorageService:DataStorageService,
               private usuariosService:UsuariosService,
               private userS:UsuariosService,
+
    ) { 
 
     this.selector = this.activatedRoute.snapshot.params['selector'];
@@ -35,13 +39,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.users = this.dataStorageService.loadUsuarios();    
-
+   this.users$ = this.userS.getAllUaurios();    
+   this.users$.subscribe((UserData:Usuario[]) => {
+    this.users = UserData;
+        });
   }
   loginSeguro(){
-
-    //this.users = this.dataStorageService.getObjectValue("users");
-    console.log(this.users);
+    
+    debugger
     let control:boolean = false;
     this.users.forEach((user, index) => { 
       if (user.Email === this.formGroupLogin.value.Identificacion && 
@@ -123,20 +128,11 @@ if(this.formGroupRegister.valid){
       Phone : this.formGroupRegister.value.Phone,
       pass : this.formGroupRegister.value.pass
     }
-
-   
-  
-    this.usuariosService.saveUsuario(usuarioNuevo)
-    .then(res => this.successfulSaveUser(res , usuarioNuevo))
-    .catch(err => console.error(err));
+    this.usuariosService.saveUsuario(usuarioNuevo);
     }
   }
 
-  successfulSaveUser(res: DocumentReference,user:Usuario) {
-    console.log(res.id);
-
-  }
-
+  
 
 
 

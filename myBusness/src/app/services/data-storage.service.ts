@@ -53,31 +53,31 @@ export class DataStorageService {
 
     
 
-loadUsuarios(){
- this.usuarios  = [];
-  this.userS.getTodos().subscribe(response => {
-    response.docs.forEach(value => {
-      const data = value.data();
-      const id = value.id;
-      const user:Usuario  = {
-        id: id,
-        Admin : data.Admin,
-        ConfirmPassword : data.ConfirmPassword,
-        Editor : data.Editor,
-        Email :  data.Email,
-        FirstName : data.FirstName,
-        Imagen : data.Imagen,
-        LastName : data.LastName,
-        Phone: data.Phone,
-        pass: data.pass,
-        key$ : ""
-      };
-      this.usuarios.push(user);
-    });
-  });
+// loadUsuarios(){
+//  this.usuarios  = [];
+//   this.userS.getAllUaurios().subscribe(response => {
+//     response.docs.forEach(value => {
+//       const data = value.data();
+//       const id = value.id;
+//       const user:Usuario  = {
+//         id: id,
+//         Admin : data.Admin,
+//         ConfirmPassword : data.ConfirmPassword,
+//         Editor : data.Editor,
+//         Email :  data.Email,
+//         FirstName : data.FirstName,
+//         Imagen : data.Imagen,
+//         LastName : data.LastName,
+//         Phone: data.Phone,
+//         pass: data.pass,
+//         key$ : ""
+//       };
+//       this.usuarios.push(user);
+//     });
+//   });
 
-  return this.usuarios;
-}
+//   return this.usuarios;
+// }
     
 
 }

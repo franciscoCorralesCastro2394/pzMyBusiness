@@ -6,7 +6,6 @@ Imagen:String;
 Descripcion:String;
 fechaCreacion:Date;
 ultimaModificacion:Date; 
-
 }
 
 
