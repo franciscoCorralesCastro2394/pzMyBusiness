@@ -4,6 +4,9 @@ import { DataStorageService } from '../../services/data-storage.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
 import { LoginService } from '../../services/login.service';
+import { Observable } from 'rxjs';
+import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
+import { Sitio } from '../../interfaces/sitio.interface'; 
 
 @Component({
   selector: 'app-sitios-list',
@@ -12,15 +15,22 @@ import { LoginService } from '../../services/login.service';
 })
 export class SitiosListComponent implements OnInit {
   sitios:any[] = [];
+  sitios$:Observable<any>;
   constructor(private dataStorageService:DataStorageService, 
               private router:Router,
-              private loginService:LoginService) {
-  	this.sitios = this.dataStorageService.getObjectValue("sitios");
+              private loginService:LoginService,
+              private sitioServiceService:SitioServiceService ) {
+  	//this.sitios = this.dataStorageService.getObjectValue("sitios");
     
     //console.log(this.sitios);
    }
 
   ngOnInit() {
+
+    this.sitios$ =  this.sitioServiceService.getAllSitios();
+    this.sitios$.subscribe((UserData:Sitio[]) => {
+      this.sitios = UserData;
+          });
   }
   
   buscarSitio(termino:string){
