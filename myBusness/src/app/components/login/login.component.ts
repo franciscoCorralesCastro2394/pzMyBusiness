@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
               private dataStorageService:DataStorageService,
               private usuariosService:UsuariosService,
               private userS:UsuariosService,
-
    ) { 
 
     this.selector = this.activatedRoute.snapshot.params['selector'];
@@ -39,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    
    this.users$ = this.userS.getAllUaurios();    
    this.users$.subscribe((UserData:Usuario[]) => {
     this.users = UserData;

@@ -29,4 +29,12 @@ export class UsuariosService {
     this.angularFirestore.collection<Usuario>('usuarios').add(user);
   }
 
+  getAllEditores(): Observable<Usuario[]> {
+    return this.angularFirestore.collection<Usuario>('usuarios', ref => ref.where('Editor','==',true)).valueChanges();
+  }
+
+  setSitio(user:Usuario) {
+    this.angularFirestore.collection<Usuario>('usuarios').doc(user.id.toString()).update(user);
+  }
+
 }

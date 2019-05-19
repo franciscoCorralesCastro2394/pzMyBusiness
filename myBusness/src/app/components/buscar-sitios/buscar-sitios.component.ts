@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {DataStorageService} from '../../services/data-storage.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,16 +11,20 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class BuscarSitiosComponent implements OnInit {
 
-  constructor(private data:DataStorageService, private activateRoute: ActivatedRoute) { }
-  sitios:any[] = [];
-  termino:String;
+  constructor(private data:SitioServiceService, private activateRoute: ActivatedRoute) { }
+  sitios$:Observable<any>;
+
+  termino:string;
   ngOnInit() {
   	this.activateRoute.params.subscribe(params => {
       this.termino = params['id'];
       console.log(this.termino);
-      this.sitios = this.data.buscarSitio(this.termino);
-      console.log(this.sitios);
-   })
+   });
+
+
+
+   this.sitios$ = this.data.searchSitio(this.termino);
+   console.log(this.sitios$);
   }
 
 }

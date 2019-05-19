@@ -20,9 +20,6 @@ export class SitiosListComponent implements OnInit {
               private router:Router,
               private loginService:LoginService,
               private sitioServiceService:SitioServiceService ) {
-  	//this.sitios = this.dataStorageService.getObjectValue("sitios");
-    
-    //console.log(this.sitios);
    }
 
   ngOnInit() {

@@ -6,6 +6,8 @@ import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces'
 import swal from 'sweetalert';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SitioSeguidoServiceService } from '../../services/sitioSeguido/sitio-seguido-service.service';
+import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 
 
 
@@ -39,38 +41,43 @@ export class SitioSeguidoComponent implements OnInit {
   constructor(private dataStorageService:DataStorageService, 
               private router:Router,
               private formBuilder:FormBuilder,
-              private activatedRoute:ActivatedRoute) { 
+              private activatedRoute:ActivatedRoute,
+              private sitioSeguidoServiceService:SitioSeguidoServiceService,
+              private sitioServiceService:SitioServiceService) { 
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
-    this.sitios = this.dataStorageService.getObjectValue("sitios");
-    this.sitiosSeguidos = this.dataStorageService.getObjectValue("sitiosSeguidos");
-    
+
+  
 
     this.userLoginNow = this.dataStorageService.getObjectValue("userLogin");
     console.log(this.userLoginNow);
 
-    this.sitioSeguido = {
-      id : this.sitiosSeguidos.length + 1,
-      idSitio : +this.sitioId,
-      idUsuario : this.userLoginNow.userL.Email,  
-      key$ : ""
-    }; 
 
-    this.sitiosSeguidos.push(this.sitioSeguido);
+this.sitioSeguidoServiceService.getAllSitiosSeguidos().subscribe(data => {
+  debugger
+    this.sitiosSeguidos = data;
+      this.sitioSeguido = {
+        id : this.sitiosSeguidos.length + 1,
+        idSitio : +this.sitioId,
+        idUsuario : this.userLoginNow.userL.Email,  
+        key$ : ""
+      }; 
+    this.sitioSeguidoServiceService.saveSitiosSeguisdos(this.sitioSeguido);
+});
+   
 
-    this.dataStorageService.setObjectValue("sitiosSeguidos",this.sitiosSeguidos);
 
-
-
+this.sitioServiceService.getAllSitios().subscribe(data => {
+ this.sitios = data;
     this.sitios.forEach((sit) => {
       if(this.sitioId == sit.id){
         this.sitio = sit;
       }
     });
     console.log(this.sitio);
+});
 
-   
-  }
+}
 
   ngOnInit() {
     this.iniciarComentario();

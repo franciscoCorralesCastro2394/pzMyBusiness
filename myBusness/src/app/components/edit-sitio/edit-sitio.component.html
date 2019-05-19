@@ -66,9 +66,9 @@
         <div class="form-group col-12">
             <label for="Editor">Editor</label>
             <!-- <input type="text" class="form-control" formControlName="Editor" id="Editor" placeholder="Escriba la Editor"> -->
-            <select class="form-control" formControlName="Editor" id="Editor" id="">
+            <select class="form-control" formControlName="Editor" id="Editor" id="" *ngIf="editores$">
                 <option value="">Seleccione un Editor</option>
-                <option *ngFor = "let editor of editores" [value]="editor.Email"> {{editor.Email}}</option>
+                <option *ngFor = "let editor of (editores$ | async)" [value]="editor.Email"> {{editor.Email}}</option>
             </select>
             <div *ngIf="formGroupSitioEdit.controls['Editor'].dirty">
                 <div class="form-control-feedback text-danger" *ngIf="formGroupSitioEdit.controls['Editor'].errors?.required">

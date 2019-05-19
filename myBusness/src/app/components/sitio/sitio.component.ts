@@ -8,6 +8,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router} from '@angular/router';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
 import { LoginService } from '../../services/login.service';
+import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
+import { CalificacionesServiceService } from '../../services/calificacionesService/calificaciones-service.service';
+import { RespuestasServiceService } from '../../services/respuestasService/respuestas-service.service';
 import { Respuesta } from '../../interfaces/respuesta.interface';
 import swal from 'sweetalert';
 
@@ -35,21 +38,29 @@ export class SitioComponent implements OnInit {
   constructor(private dataStorageService:DataStorageService,  
               private activatedRoute:ActivatedRoute,
               private formBuilder:FormBuilder,
-              private loginService:LoginService) {
+              private loginService:LoginService,
+              private sitioServiceService:SitioServiceService,
+              private calificacionesServiceService:CalificacionesServiceService,
+              private respuestasServiceService:RespuestasServiceService) {
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     
     this.respuestas = this.dataStorageService.getObjectValue("respuestas");
     if(!this.respuestas){
       this.respuestas = [];
     }
-
-    this.sitios = this.dataStorageService.getObjectValue("sitios");
-    this.cargarSitio();
     
+    this.sitioServiceService.getAllSitios().subscribe(data => {
+      this.sitios = data;
+      this.cargarSitio();
+      this.imgsSitio = this.sitio.imgs;
+      console.log(this.imgsSitio);
+    });
+    
+
+
     this.getResenas();
 
-  	this.imgsSitio = this.sitio.imgs;
-    console.log(this.imgsSitio);
+  
     
     this.getValoraciones();
 
@@ -57,12 +68,6 @@ export class SitioComponent implements OnInit {
 
     
     this.userAdmin = this.loginService.isAdmin();
-
-    
-
-
-
-
   }
 
   ngOnInit() {
@@ -71,7 +76,7 @@ export class SitioComponent implements OnInit {
   
 
    getResenas(){
-     
+    debugger 
     this.resenas = this.dataStorageService.getObjectValue("comentarios");
     this.resenas = this.resenas.filter(x => x.idSitio == +this.sitioId);
 
@@ -89,23 +94,24 @@ export class SitioComponent implements OnInit {
          }); 
       res.respuestas = respRes;
     }); 
-    
-
    }
 
    getValoraciones(){
-    this.sitiosValoraciones = this.dataStorageService.getObjectValue("calificaciones");
-    this.sitiosValoraciones = this.sitiosValoraciones.filter(x => +x.idSitio == +this.sitioId);
-    for(let i = 0; i < this.sitiosValoraciones.length; i++)
-    {
-      this.sitiosValoraciones[i].img = this.imgSitio(+this.sitiosValoraciones[i].idSitio);
-    }
+     
+    this.calificacionesServiceService.getAllCalificaciones().subscribe(data => {
+      this.sitiosValoraciones = data;
+      this.sitiosValoraciones = this.sitiosValoraciones.filter(x => +x.idSitio == +this.sitioId);
+      for(let i = 0; i < this.sitiosValoraciones.length; i++)
+      {
+        this.sitiosValoraciones[i].img = this.imgSitio(+this.sitiosValoraciones[i].idSitio);
+      }
+    });
+    
+   
    }
 
   cargarSitio(){
-    this.sitios = this.dataStorageService.getObjectValue("sitios");
     this.sitios.forEach((sitio) => {
-      //console.log(sitio.id);
       if (sitio.id == this.sitioId) {
         this.sitio = sitio;
         console.log(this.sitio.nombre);
@@ -156,9 +162,7 @@ export class SitioComponent implements OnInit {
       respuesta : this.formGroupComentario.value.Respuesta,
       key$ : ""      
     };
-
-    this.respuestas.push(res);
-    this.dataStorageService.setObjectValue("respuestas",this.respuestas);
+    this.respuestasServiceService.saveRespuetas(res);
     swal("Comentario Guardado", "Exito", "success");
 
 

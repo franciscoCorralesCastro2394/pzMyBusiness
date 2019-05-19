@@ -21,4 +21,15 @@ export class SitioServiceService {
     this.angularFirestore.collection<Sitio>('sitios').add(sitio);
   }
 
+  setSitio(sitio:Sitio) {//chiko
+    this.angularFirestore.collection<Sitio>('sitios').doc(sitio.id.toString()).update(sitio);
+  }
+
+  
+  searchSitio(term:string){
+    return  this.angularFirestore.collection<Sitio>('sitios', ref => ref.where('nombre','==',term)).valueChanges();
+  }
+
+
+
 }
