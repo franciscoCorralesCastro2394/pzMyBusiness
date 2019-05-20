@@ -5,9 +5,12 @@ import Swal from 'sweetalert2';
 import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces'
 import swal from 'sweetalert';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
+import { comentario } from '../../interfaces/comentario.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SitioSeguidoServiceService } from '../../services/sitioSeguido/sitio-seguido-service.service';
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
+import { CalificacionesServiceService } from '../../services/calificacionesService/calificaciones-service.service';
+import { ComentariosService } from '../../services/comentariosServices/comentarios.service';
 
 
 
@@ -22,14 +25,16 @@ export class SitioSeguidoComponent implements OnInit {
   sitio:any; 
   sitiosSeguidos:any[] = []; 
   calificaciones:any[] = []; 
-  comentarios:any[] = [];
+  comentarios:comentario[] = [];
   sitioSeguido:sitioSeguido;
   calificacionSitioSeguido:calificacion;
   userLoginNow:any; 
-  comentario:any;
+  comentario:comentario;
   btnSelected:string = "";
   calificacionSitio:number = 0; 
   formGroupComentario:FormGroup;
+  calId:number;
+  comId:number;
   botonesCal:object = {
     btn1: false,
     btn2: false,
@@ -39,14 +44,26 @@ export class SitioSeguidoComponent implements OnInit {
   };
 
   constructor(private dataStorageService:DataStorageService, 
-              private router:Router,
               private formBuilder:FormBuilder,
               private activatedRoute:ActivatedRoute,
               private sitioSeguidoServiceService:SitioSeguidoServiceService,
-              private sitioServiceService:SitioServiceService) { 
+              private sitioServiceService:SitioServiceService,
+              private calificacionesServiceService:CalificacionesServiceService,
+              private comentariosService:ComentariosService) { 
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
 
+    this.calificacionesServiceService.getAllCalificaciones().subscribe(data  => {
+     let lista:any[];
+     lista = data;
+     this.calId = +lista.length + 1; 
+    });
+
+    this.comentariosService.getAllComentarios().subscribe(data  => {
+      let lista:any[];
+      lista = data;
+      this.comId = +lista.length + 1; 
+     });
   
 
     this.userLoginNow = this.dataStorageService.getObjectValue("userLogin");
@@ -54,7 +71,7 @@ export class SitioSeguidoComponent implements OnInit {
 
 
 this.sitioSeguidoServiceService.getAllSitiosSeguidos().subscribe(data => {
-  debugger
+  
     this.sitiosSeguidos = data;
       this.sitioSeguido = {
         id : this.sitiosSeguidos.length + 1,
@@ -62,9 +79,9 @@ this.sitioSeguidoServiceService.getAllSitiosSeguidos().subscribe(data => {
         idUsuario : this.userLoginNow.userL.Email,  
         key$ : ""
       }; 
-    this.sitioSeguidoServiceService.saveSitiosSeguisdos(this.sitioSeguido);
+//this.sitioServiceService.saveSitiosSeguisdos(this.sitioSeguido);
 });
-   
+
 
 
 this.sitioServiceService.getAllSitios().subscribe(data => {
@@ -78,6 +95,10 @@ this.sitioServiceService.getAllSitios().subscribe(data => {
 });
 
 }
+
+
+
+
 
   ngOnInit() {
     this.iniciarComentario();
@@ -150,36 +171,38 @@ iniciarComentario = () => {
 }
 
 calificacion(){
-     debugger
+     
      if(this.calificacionSitio == 0){
         swal("No se ha hecho la evaluación", "Intente de nuevo", "error");
      }else{
-          this.calificaciones = this.dataStorageService.getObjectValue("calificaciones");
+        
           this.calificacionSitioSeguido = {
-          id : this.calificaciones.length + 1,
+          id : this.calId,
           idUsuario :this.userLoginNow.userL.Email, 
           idSitio : this.sitioId,
           key$ : "",
           numCalificacion : this.calificacionSitio 
           };
-          this.calificaciones.push(this.calificacionSitioSeguido);
-          this.dataStorageService.setObjectValue("calificaciones",this.calificaciones);
+          this.calificacionesServiceService.saveCalificaciones(this.calificacionSitioSeguido);
           swal("Sitio calificado con exito", "Exito", "info");
      }
 }
 
 agregarComentario(){
-  this.comentarios = this.dataStorageService.getObjectValue("comentarios");
+  debugger
   this.comentario = {
-  id : this.comentarios.length + 1,
+  id : this.comId,
   idSitio : this.sitioId,
   idUsuario : this.userLoginNow.userL.Email,
   comentario : this.formGroupComentario.value.Comentario,
   sentimeinto : this.formGroupComentario.value.Sentimiento,
-  key$ : ""
+  key$ : "",
+  nombreSitio:"" ,
+  respuestas: {},
+  sensuardo:false
   };
-  this.comentarios.push(this.comentario);
-  this.dataStorageService.setObjectValue("comentarios",this.comentarios);
+this.comentariosService.saveComentario(this.comentario);
+
   swal("Sitio calificado con exito", "Exito", "info");
 }
 }

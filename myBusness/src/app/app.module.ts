@@ -31,6 +31,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { AngularFireModule } from '@angular/fire'; 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SitioSeguidoComponent } from './components/sitio-seguido/sitio-seguido.component'; 
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { SitioSeguidoComponent } from './components/sitio-seguido/sitio-seguido.
     BsDatepickerModule.forRoot(),
     HttpClientModule,
     AngularFireModule.initializeApp(environment.fireBase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [ DatePipe,DataStorageService,AuthGuard],
   bootstrap: [AppComponent]

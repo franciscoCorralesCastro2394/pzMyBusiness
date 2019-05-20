@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Sitio } from '../../interfaces/sitio.interface';
+import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces';
 import 'rxjs/Rx';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
@@ -30,6 +31,8 @@ export class SitioServiceService {
     return  this.angularFirestore.collection<Sitio>('sitios', ref => ref.where('nombre','==',term)).valueChanges();
   }
 
-
+  saveSitiosSeguisdos(sSeguido: sitioSeguido){
+    this.angularFirestore.collection<sitioSeguido>('sitiosSeguidos').add(sSeguido);
+  }
 
 }

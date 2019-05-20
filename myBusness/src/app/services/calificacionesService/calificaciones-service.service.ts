@@ -21,4 +21,5 @@ export class CalificacionesServiceService {
    saveCalificaciones(noticia: calificacion){
     this.angularFirestore.collection<calificacion>('calificaciones').add(noticia);
   }
+
 }

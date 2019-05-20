@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { DataStorageService } from '../../services/data-storage.service';
 import { UsuariosService } from '../../services/usuarios.service';
+import { LoginService } from '../../services/loginSeguro/login.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import { DocumentReference } from '@angular/fire/firestore';
 import swal from 'sweetalert';
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
               private router:Router,
               private activatedRoute:ActivatedRoute,
               private dataStorageService:DataStorageService,
-              private usuariosService:UsuariosService,
+              private usuariosService:LoginService,
               private userS:UsuariosService,
    ) { 
 
@@ -44,21 +45,13 @@ export class LoginComponent implements OnInit {
     this.users = UserData;
         });
   }
+
+
   loginSeguro(){
-    
     debugger
-    let control:boolean = false;
-    this.users.forEach((user, index) => { 
-      if (user.Email === this.formGroupLogin.value.Identificacion && 
-          user.pass === this.formGroupLogin.value.Pass) {
-          control = true;
-          let userLogin:any = {userL:user, ative:true};
-          console.log(userLogin);
-          this.dataStorageService.setObjectValue("userLogin",userLogin);
-      }
-    });
-    if(control){
-      this.router.navigate(['/user-info/' + this.formGroupLogin.value.Identificacion ]);
+    if(this.formGroupLogin.valid){
+      this.usuariosService.login(this.formGroupLogin.value.Identificacion,this.formGroupLogin.value.Pass);
+      //this.router.navigate(['/user-info/' + this.formGroupLogin.value.Identificacion]);
     }else{
       swal("Usuario no existe", "Intente de nuevo", "error");
     }
@@ -88,27 +81,6 @@ export class LoginComponent implements OnInit {
 
   registrar = () => {
 
-    // console.log(this.formGroupRegister);
-    // if (this.formGroupRegister.valid) {
-    
-    //   const listaUsers = this.dataStorageService.getObjectValue("users");
-     
-    //   console.log(this.formGroupRegister.value);
-    //   listaUsers.push(this.formGroupRegister.value);
-
-    //   if(!this.formGroupRegister.value.Admin){
-    //     this.formGroupRegister.value.Admin = false;
-    //   }
-    //   if(!this.formGroupRegister.value.Editor){
-    //     this.formGroupRegister.value.Editor = false;
-    //   }
-    //   this.dataStorageService.setObjectValue("users", listaUsers);
-
-    //   alert("Información guardada");
-    //   this.router.navigate(['/noticias-list']);
-    // } else {
-    //   alert("Debe completar la información correctamente");
-    // }
 if(this.formGroupRegister.valid){
 
    if(!this.formGroupRegister.value.Admin){
@@ -128,7 +100,7 @@ if(this.formGroupRegister.valid){
       Phone : this.formGroupRegister.value.Phone,
       pass : this.formGroupRegister.value.pass
     }
-    this.usuariosService.saveUsuario(usuarioNuevo);
+    this.usuariosService.register(usuarioNuevo);
     }
   }
 

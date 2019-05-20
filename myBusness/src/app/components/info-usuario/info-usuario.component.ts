@@ -29,6 +29,8 @@ export class InfoUsuarioComponent implements OnInit {
 
   constructor(private activatedRoute:ActivatedRoute,
               private dataStorageService:DataStorageService) {
+
+                debugger
     this.userId = this.activatedRoute.snapshot.params['user'];
     
     this.users = this.dataStorageService.getObjectValue("users");

@@ -37,4 +37,10 @@ export class UsuariosService {
     this.angularFirestore.collection<Usuario>('usuarios').doc(user.id.toString()).update(user);
   }
 
+
+  getUsuarioByEmail(email: string): Observable<Usuario[]> {
+    return  this.angularFirestore.collection<Usuario>('users', ref => ref.where('email', '==', email)).valueChanges();
+ 
+  }
+
 }
