@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     debugger
     if(this.formGroupLogin.valid){
       this.usuariosService.login(this.formGroupLogin.value.Identificacion,this.formGroupLogin.value.Pass);
-      //this.router.navigate(['/user-info/' + this.formGroupLogin.value.Identificacion]);
+      this.dataStorageService.setObjectValue("UserNow",this.formGroupLogin.value.Identificacion);
     }else{
       swal("Usuario no existe", "Intente de nuevo", "error");
     }

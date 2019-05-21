@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSeguro/login.service';
+import { DataStorageService } from '../../services/data-storage.service';
 import swal from 'sweetalert';
 
 
@@ -13,7 +14,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
               private router:Router,
-              private login:LoginService) { }
+              private login:LoginService,
+              private dataStorageService:DataStorageService) { }
 
   ngOnInit() {
   }
@@ -21,6 +23,7 @@ export class NavbarComponent implements OnInit {
 
   LoginOff(){
       this.login.logout();
+      this.dataStorageService.deleteObjValue("UserNow");
       this.router.navigate(['/noticias-list']);
   }
 

@@ -5,13 +5,14 @@ import Swal from 'sweetalert2';
 import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces'
 import swal from 'sweetalert';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
+import { Usuario } from '../../interfaces/heroes.interfaces';
 import { comentario } from '../../interfaces/comentario.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SitioSeguidoServiceService } from '../../services/sitioSeguido/sitio-seguido-service.service';
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 import { CalificacionesServiceService } from '../../services/calificacionesService/calificaciones-service.service';
 import { ComentariosService } from '../../services/comentariosServices/comentarios.service';
-
+import { LoginService } from '../../services/loginSeguro/login.service';
 
 
 @Component({
@@ -28,13 +29,14 @@ export class SitioSeguidoComponent implements OnInit {
   comentarios:comentario[] = [];
   sitioSeguido:sitioSeguido;
   calificacionSitioSeguido:calificacion;
-  userLoginNow:any; 
+  userLoginNow:Usuario; 
   comentario:comentario;
   btnSelected:string = "";
   calificacionSitio:number = 0; 
   formGroupComentario:FormGroup;
   calId:number;
   comId:number;
+  userNow:string;
   botonesCal:object = {
     btn1: false,
     btn2: false,
@@ -49,10 +51,11 @@ export class SitioSeguidoComponent implements OnInit {
               private sitioSeguidoServiceService:SitioSeguidoServiceService,
               private sitioServiceService:SitioServiceService,
               private calificacionesServiceService:CalificacionesServiceService,
-              private comentariosService:ComentariosService) { 
+              private comentariosService:ComentariosService,
+              private loginService:LoginService) { 
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
-
+  
     this.calificacionesServiceService.getAllCalificaciones().subscribe(data  => {
      let lista:any[];
      lista = data;
@@ -65,21 +68,14 @@ export class SitioSeguidoComponent implements OnInit {
       this.comId = +lista.length + 1; 
      });
   
+    debugger
+    this.userNow = this.dataStorageService.getObjectValue("UserNow");
 
-    this.userLoginNow = this.dataStorageService.getObjectValue("userLogin");
-    console.log(this.userLoginNow);
+
 
 
 this.sitioSeguidoServiceService.getAllSitiosSeguidos().subscribe(data => {
-  
     this.sitiosSeguidos = data;
-      this.sitioSeguido = {
-        id : this.sitiosSeguidos.length + 1,
-        idSitio : +this.sitioId,
-        idUsuario : this.userLoginNow.userL.Email,  
-        key$ : ""
-      }; 
-//this.sitioServiceService.saveSitiosSeguisdos(this.sitioSeguido);
 });
 
 
@@ -91,14 +87,9 @@ this.sitioServiceService.getAllSitios().subscribe(data => {
         this.sitio = sit;
       }
     });
-    console.log(this.sitio);
 });
 
 }
-
-
-
-
 
   ngOnInit() {
     this.iniciarComentario();
@@ -178,7 +169,7 @@ calificacion(){
         
           this.calificacionSitioSeguido = {
           id : this.calId,
-          idUsuario :this.userLoginNow.userL.Email, 
+          idUsuario :this.userLoginNow.Email, 
           idSitio : this.sitioId,
           key$ : "",
           numCalificacion : this.calificacionSitio 
@@ -193,7 +184,7 @@ agregarComentario(){
   this.comentario = {
   id : this.comId,
   idSitio : this.sitioId,
-  idUsuario : this.userLoginNow.userL.Email,
+  idUsuario : this.userLoginNow.Email,
   comentario : this.formGroupComentario.value.Comentario,
   sentimeinto : this.formGroupComentario.value.Sentimiento,
   key$ : "",
@@ -204,5 +195,20 @@ agregarComentario(){
 this.comentariosService.saveComentario(this.comentario);
 
   swal("Sitio calificado con exito", "Exito", "info");
+}
+
+
+
+seguirSitio(){
+  debugger
+  this.sitioSeguido = {
+    id : this.sitiosSeguidos.length + 1,
+    idSitio : +this.sitioId,
+    idUsuario :  this.userNow, //this.userLoginNow.Email,  
+    key$ : ""
+  }; 
+this.sitioServiceService.saveSitiosSeguisdos(this.sitioSeguido);
+swal("Sitio seguido", "Exito", "success");
+
 }
 }

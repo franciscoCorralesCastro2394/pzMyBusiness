@@ -47,9 +47,7 @@ export class SitiosListComponent implements OnInit {
 
   seguirSitio(sitio:any){
 
-    if(this.loginService.isLogged()){
-    swal("Sitio Seguido", "Puedes hacer tus valoraciones", "success");        
-    console.log(sitio);      
+    if(this.loginService.isLogged()){    
       this.router.navigate(['/sitio-seguido/' + sitio.id]);
   }else{
     swal("Error", "Debe ingresar con un usuario valido", "error");        
