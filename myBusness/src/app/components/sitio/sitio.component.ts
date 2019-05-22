@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { DataStorageService} from '../../services/data-storage.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { comentario } from '../../interfaces/comentario.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { Router} from '@angular/router';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../services/loginSeguro/login.service';
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 import { CalificacionesServiceService } from '../../services/calificacionesService/calificaciones-service.service';
+import { ComentariosService } from '../../services/comentariosServices/comentarios.service';
 import { RespuestasServiceService } from '../../services/respuestasService/respuestas-service.service';
 import { Respuesta } from '../../interfaces/respuesta.interface';
 import swal from 'sweetalert';
+import { Usuario } from 'src/app/clases/Usuario';
 
 
 
@@ -34,6 +34,7 @@ export class SitioComponent implements OnInit {
   userAdmin:boolean = false;
   idResena:any;
   respuestas:Respuesta[] = [];
+  userLogin:Usuario;
 
   constructor(private dataStorageService:DataStorageService,  
               private activatedRoute:ActivatedRoute,
@@ -41,13 +42,14 @@ export class SitioComponent implements OnInit {
               private loginService:LoginService,
               private sitioServiceService:SitioServiceService,
               private calificacionesServiceService:CalificacionesServiceService,
-              private respuestasServiceService:RespuestasServiceService) {
+              private respuestasServiceService:RespuestasServiceService,
+              private comentariosService:ComentariosService) {
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     
-    this.respuestas = this.dataStorageService.getObjectValue("respuestas");
-    if(!this.respuestas){
-      this.respuestas = [];
-    }
+
+    this.respuestasServiceService.getAllRespuestas().subscribe(data => {
+      this.respuestas = data;
+    });
     
     this.sitioServiceService.getAllSitios().subscribe(data => {
       this.sitios = data;
@@ -66,34 +68,45 @@ export class SitioComponent implements OnInit {
 
     this.iniciarResponder();
 
-    
-    this.userAdmin = this.loginService.isAdmin();
+   
+   
+   let userId = this.dataStorageService.getObjectValue("UserNow");
+    this.loginService.setCurrentUser(userId); 
   }
 
   ngOnInit() {
-
+    setTimeout(() => {
+      let user:Usuario =  this.loginService.getUsuario();
+      this.userAdmin = user.Admin;
+    }, 2000);
   }
   
 
    getResenas(){
-    debugger 
-    this.resenas = this.dataStorageService.getObjectValue("comentarios");
-    this.resenas = this.resenas.filter(x => x.idSitio == +this.sitioId);
 
-    for(let i = 0; i < this.resenas.length; i++)
-    {
-      this.resenas[i].nombreSitio = this.nombreSitio(+this.resenas[i].idSitio);
-    }
-     
-    this.resenas.forEach(res => {
-         let respRes:Respuesta[] = [];
-         this.respuestas.forEach(resp => {
-           if(+resp.idResena == +res.id && resp.idSitio == +this.sitioId){
-             respRes.push(resp);
-           }
-         }); 
-      res.respuestas = respRes;
-    }); 
+    this.comentariosService.getAllComentarios().subscribe(data =>{
+      this.resenas = data;
+      this.resenas = this.resenas.filter(x => x.idSitio == +this.sitioId);
+
+      for(let i = 0; i < this.resenas.length; i++)
+      {
+        this.resenas[i].nombreSitio = this.nombreSitio(+this.resenas[i].idSitio);
+      }
+       
+      this.respuestasServiceService.getAllRespuestas().subscribe(dataRes => {
+                this.respuestas = dataRes;
+                this.resenas.forEach(res => {
+                  let respRes:Respuesta[] = [];
+                  this.respuestas.forEach(resp => {
+                    if(+resp.idResena == +res.id && resp.idSitio == +this.sitioId){
+                      respRes.push(resp);
+                    }
+                  }); 
+               res.respuestas = respRes;
+             });
+      });
+    });
+    
    }
 
    getValoraciones(){
@@ -164,16 +177,10 @@ export class SitioComponent implements OnInit {
     };
     this.respuestasServiceService.saveRespuetas(res);
     swal("Comentario Guardado", "Exito", "success");
-
-
-
   }
    
 
   sensurarcomentario(id:any){
-   debugger
-   console.log(id);
-    
    this.resenas.forEach( res => {
       if(res.id == id){
         res.sensuardo = true;
@@ -181,10 +188,6 @@ export class SitioComponent implements OnInit {
       }
    });
    this.dataStorageService.setObjectValue("comentarios",this.resenas);
-
-
-
-
   }
   
 

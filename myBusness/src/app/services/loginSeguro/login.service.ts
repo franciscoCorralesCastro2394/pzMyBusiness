@@ -31,7 +31,6 @@ export class LoginService {
 
   getUsuario(): Usuario {
     return this.currentUser;
-
   }
 
   setCurrentUser(email: string) {
@@ -58,9 +57,6 @@ export class LoginService {
     swal("Cierre de sesion", "exito", "success");     
     this.router.navigateByUrl('home');
   }
-
-
-
 
 
 }

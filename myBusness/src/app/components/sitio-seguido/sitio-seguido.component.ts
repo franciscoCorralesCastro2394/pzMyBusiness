@@ -68,8 +68,8 @@ export class SitioSeguidoComponent implements OnInit {
       this.comId = +lista.length + 1; 
      });
   
-    debugger
     this.userNow = this.dataStorageService.getObjectValue("UserNow");
+ 
 
 
 
@@ -169,7 +169,7 @@ calificacion(){
         
           this.calificacionSitioSeguido = {
           id : this.calId,
-          idUsuario :this.userLoginNow.Email, 
+          idUsuario :this.userNow, 
           idSitio : this.sitioId,
           key$ : "",
           numCalificacion : this.calificacionSitio 
@@ -184,7 +184,7 @@ agregarComentario(){
   this.comentario = {
   id : this.comId,
   idSitio : this.sitioId,
-  idUsuario : this.userLoginNow.Email,
+  idUsuario : this.userNow,
   comentario : this.formGroupComentario.value.Comentario,
   sentimeinto : this.formGroupComentario.value.Sentimiento,
   key$ : "",
@@ -194,7 +194,7 @@ agregarComentario(){
   };
 this.comentariosService.saveComentario(this.comentario);
 
-  swal("Sitio calificado con exito", "Exito", "info");
+  swal("Se creo comentario", "Exito", "info");
 }
 
 
@@ -204,7 +204,7 @@ seguirSitio(){
   this.sitioSeguido = {
     id : this.sitiosSeguidos.length + 1,
     idSitio : +this.sitioId,
-    idUsuario :  this.userNow, //this.userLoginNow.Email,  
+    idUsuario :  this.userNow,  
     key$ : ""
   }; 
 this.sitioServiceService.saveSitiosSeguisdos(this.sitioSeguido);

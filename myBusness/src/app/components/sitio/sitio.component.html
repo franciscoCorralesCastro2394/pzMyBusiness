@@ -35,7 +35,7 @@
 
 
     <section class="pb-5 team">
-        <div class="container">
+        <div class="container" *ngIf="resenas && respuestas">
             <h5 class="section-title h1"> Reseñas </h5>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let resena of resenas">
@@ -56,13 +56,12 @@
                             <div class="container">
 
                                 <br>
-                                <div class="panel-body">
+                                <div class="panel-body" *ngIf="respuestas">
 
                                     <ul class="media-list">
                                         <br>
                                         <li class="media" *ngFor="let res of resena.respuestas">
                                             <div class="media-left">
-                                                <!-- <img src="http://placehold.it/60x60" class="img-circle"> -->
                                             </div>
                                             <div class="media-body">
                                                 <h4 class="media-heading">
@@ -136,18 +135,15 @@
     </div>
 
     <!-- valoraciones -->
-    <section class="pb-5 team">
+    <section class="pb-5 team" *ngIf="sitiosValoraciones">
         <div class="container">
             <h5 class="section-title h1"> Valoraciones </h5>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let val of sitiosValoraciones">
                     <div class="block-text rel zmin imgC">
-                        <div class="mark">Evaluación: {{ val.numCalificacion }}
+                        <div class="mark">
                             <span class="rating-input">
-                        <span class=""><i class="fa fa-star-o"></i></span>
-                            <span class=""><i class="fa fa-star-o"></i></span>
-                            <span class=""><i class="fa fa-star-o"></i></span>
-                            <span class=""><i class="fa fa-star-o"></i></span>
+                                Evaluación: {{ val.numCalificacion }}
                             </span>
                         </div>
                         <div class="card">
