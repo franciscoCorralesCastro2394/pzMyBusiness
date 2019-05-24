@@ -64,7 +64,6 @@ export class InfoUsuarioComponent implements OnInit {
 
 
 cargarUsuario(){
-  debugger
     this.usuariosService.getAllUaurios().subscribe(data => {
       this.users = data;
         this.users.forEach((user) => {
@@ -114,7 +113,6 @@ cargarUsuario(){
   }
 
   getSitios(){
-    debugger
     this.sitioServiceService.getAllSitios().subscribe(data => {
       this.sitios = data;
       this.sitioSeguidoServiceService.getAllSitiosSeguidos().subscribe(sitiosS => {
@@ -132,7 +130,7 @@ cargarUsuario(){
   }
 
 
-  nombreSitio(id:number){
+  nombreSitio(id:string){
     let nombre:string = "Nombre no encontrado";
     this.sitios.forEach( sit => {
         if(sit.id == id){

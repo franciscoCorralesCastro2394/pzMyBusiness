@@ -14,12 +14,18 @@ export class NoticiaServiceService {
   constructor(private angularFirestore: AngularFirestore ) { }
 
   getAllNoticias(): Observable<Noticia[]> {
-    return this.angularFirestore.collection<Noticia>('noticias').valueChanges();
+    return this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).valueChanges();
   }
 
 
    saveNoticia(noticia: Noticia){
-    this.angularFirestore.collection<Noticia>('noticias').add(noticia);
+     if( noticia.Id && noticia.Id != '' ){
+       this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).doc(noticia.Id).set(noticia);
+     }else{
+      noticia.Id = this.angularFirestore.createId(); 
+      this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).add(noticia);
+     }
+    
   }
 
 }

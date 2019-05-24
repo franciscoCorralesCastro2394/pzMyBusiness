@@ -38,8 +38,6 @@ export class EditSitioComponent implements OnInit {
       ) {
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     this.obtenerSitiosUsuarios();
-    console.log(this.sitioId);
-
    }
    
 
@@ -51,8 +49,6 @@ export class EditSitioComponent implements OnInit {
   }
 
  obtenerSitiosUsuarios(){
-  debugger
- 
   if(this.sitioId){
     this.sitioServiceService.getAllSitios().subscribe(data => {
       this.sitios = data;
@@ -72,7 +68,7 @@ export class EditSitioComponent implements OnInit {
   iniciarSitio = () => {
 
     this.formGroupSitioEdit = this.formBuilder.group({
-      id: ['', [Validators.required],],
+      id: ['', [],],
       nombre: ['', [Validators.required]],
       img: ['', [Validators.required]],
       descripcion: ['', [Validators.required, Validators.minLength(15)]],
@@ -83,15 +79,12 @@ export class EditSitioComponent implements OnInit {
   }
 
   cargarSitio = (id: number) => {
-    
-    debugger
     console.log(this.sitios);
     const listaSitios = this.sitios;
-   
     listaSitios.forEach(sitio => {
       if (sitio.id == id) {
         this.formGroupSitioEdit =  this.formBuilder.group({
-          id: [id, [Validators.required],],
+          id: [sitio.id, [Validators.required],],
           nombre: [sitio.nombre, [Validators.required]],
           img: [sitio.img, [Validators.required]],
           descripcion: [sitio.descripcion, [Validators.required, Validators.minLength(15)]],
@@ -123,7 +116,7 @@ export class EditSitioComponent implements OnInit {
       }
 
       if(this.sitioId){
-       this.sitioServiceService.setSitio(sitio);   
+       this.sitioServiceService.savSitios(sitio);   
       }else{
         this.sitioServiceService.savSitios(sitio);
       }

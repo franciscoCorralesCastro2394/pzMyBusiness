@@ -1,5 +1,5 @@
 export interface Noticia {
-    Id:Number;
+    Id:string;
     Titulo:String;
     Imagen:String;
     Descripcion:String;

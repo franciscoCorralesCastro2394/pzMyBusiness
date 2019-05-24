@@ -10,15 +10,22 @@ import { Observable } from 'rxjs';
 })
 export class RespuestasServiceService {
 
+  private respColletionName = 'respuestas';
   constructor(private angularFirestore:AngularFirestore){ } 
   
 
   getAllRespuestas(): Observable<Respuesta[]> {
-    return this.angularFirestore.collection<Respuesta>('respuestas').valueChanges();
+    return this.angularFirestore.collection<Respuesta>(this.respColletionName).valueChanges();
   }
 
    saveRespuetas(resp: Respuesta){
-    this.angularFirestore.collection<Respuesta>('respuestas').add(resp);
+     if(resp.idResena && resp.idResena != ''){
+        this.angularFirestore.collection<Respuesta>(this.respColletionName).doc(resp.idResena).set(resp);
+     }else{
+      resp.idResena = this.angularFirestore.createId(); 
+      this.angularFirestore.collection<Respuesta>(this.respColletionName).add(resp);
+     }
+    
   }
 
 

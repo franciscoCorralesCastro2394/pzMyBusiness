@@ -1,5 +1,5 @@
 export interface Sitio {
-    id:number;
+    id:string;
     nombre:string;
     descripcion:string;
     img:string;

@@ -1,6 +1,6 @@
 export interface sitioSeguido{
-    id:number,
-    idSitio:number,
+    id:string,
+    idSitio:string,
     idUsuario:string,
     key$?:string
     } 

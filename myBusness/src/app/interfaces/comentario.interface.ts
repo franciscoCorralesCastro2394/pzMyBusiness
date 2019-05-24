@@ -1,6 +1,6 @@
 export interface comentario {
-id:number,
-idSitio:number,
+id:string,
+idSitio:string,
 idUsuario:string,
 comentario:string,
 sentimeinto:string,

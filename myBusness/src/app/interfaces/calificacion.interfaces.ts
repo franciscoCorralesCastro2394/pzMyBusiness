@@ -1,6 +1,6 @@
 export interface calificacion{
-    id:number,
-    idSitio:number,
+    id:string,
+    idSitio:string,
     idUsuario:string,
     numCalificacion:number,
     key$?:string,

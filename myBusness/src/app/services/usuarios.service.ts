@@ -23,16 +23,20 @@ export class UsuariosService {
 
 
    saveUsuario(user: Usuario){
-    this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).add(user);
+    if(user.id && user.id != ''){
+        this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).doc(user.id).set(user);   
+    }else{
+      user.id = this.angularFirestore.createId();
+      this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).add(user);
+    }
+
   }
 
   getAllEditores(): Observable<Usuario[]> {
     return this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName, ref => ref.where('Editor','==',true)).valueChanges();
   }
 
-  setSitio(user:Usuario) {
-    this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).doc(user.id.toString()).update(user);
-  }
+
 
 
   getUsuarioByEmail(email: string): Observable<Usuario[]> {

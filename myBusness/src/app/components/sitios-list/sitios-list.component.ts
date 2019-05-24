@@ -26,6 +26,7 @@ export class SitiosListComponent implements OnInit {
 
     this.sitios$ =  this.sitioServiceService.getAllSitios();
     this.sitios$.subscribe((UserData:Sitio[]) => {
+      debugger
       this.sitios = UserData;
           });
   }

@@ -1,6 +1,6 @@
 export interface Respuesta{
 respuesta:string,
-idSitio:number,
+idSitio:string,
 idUsuario:string,
 key$?:string,
 idResena:string

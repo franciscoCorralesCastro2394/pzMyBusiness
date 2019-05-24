@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces'
 import swal from 'sweetalert';
 import { calificacion } from '../../interfaces/calificacion.interfaces';
@@ -22,7 +21,7 @@ import { LoginService } from '../../services/loginSeguro/login.service';
 })
 export class SitioSeguidoComponent implements OnInit {
   sitios:any[] = [];
-  sitioId:number = 0;
+  sitioId:string;
   sitio:any; 
   sitiosSeguidos:any[] = []; 
   calificaciones:any[] = []; 
@@ -56,28 +55,13 @@ export class SitioSeguidoComponent implements OnInit {
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
   
-    this.calificacionesServiceService.getAllCalificaciones().subscribe(data  => {
-     let lista:any[];
-     lista = data;
-     this.calId = +lista.length + 1; 
-    });
 
-    this.comentariosService.getAllComentarios().subscribe(data  => {
-      let lista:any[];
-      lista = data;
-      this.comId = +lista.length + 1; 
-     });
-  
     this.userNow = this.dataStorageService.getObjectValue("UserNow");
  
-
-
-
 
 this.sitioSeguidoServiceService.getAllSitiosSeguidos().subscribe(data => {
     this.sitiosSeguidos = data;
 });
-
 
 
 this.sitioServiceService.getAllSitios().subscribe(data => {
@@ -168,7 +152,7 @@ calificacion(){
      }else{
         
           this.calificacionSitioSeguido = {
-          id : this.calId,
+          id : '',
           idUsuario :this.userNow, 
           idSitio : this.sitioId,
           key$ : "",
@@ -180,15 +164,14 @@ calificacion(){
 }
 
 agregarComentario(){
-  debugger
   this.comentario = {
-  id : this.comId,
+  id : '',
   idSitio : this.sitioId,
   idUsuario : this.userNow,
   comentario : this.formGroupComentario.value.Comentario,
   sentimeinto : this.formGroupComentario.value.Sentimiento,
   key$ : "",
-  nombreSitio:"" ,
+  nombreSitio:"",
   respuestas: {},
   sensuardo:false
   };
@@ -200,10 +183,9 @@ this.comentariosService.saveComentario(this.comentario);
 
 
 seguirSitio(){
-  debugger
   this.sitioSeguido = {
-    id : this.sitiosSeguidos.length + 1,
-    idSitio : +this.sitioId,
+    id : '',
+    idSitio : this.sitioId,
     idUsuario :  this.userNow,  
     key$ : ""
   }; 

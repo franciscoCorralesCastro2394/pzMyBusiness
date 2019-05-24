@@ -9,15 +9,21 @@ import { Observable } from 'rxjs';
 })
 export class SitioSeguidoServiceService {
 
+  private sitioColletionName = 'sitiosSeguidos';
   constructor(private angularFirestore: AngularFirestore ) { }
 
 
   getAllSitiosSeguidos(): Observable<sitioSeguido[]> {
-    return this.angularFirestore.collection<sitioSeguido>('sitiosSeguidos').valueChanges();
+    return this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).valueChanges();
   }
 
 
    saveSitiosSeguisdos(sSeguido: sitioSeguido){
-    this.angularFirestore.collection<sitioSeguido>('sitiosSeguidos').add(sSeguido);
+     if(sSeguido.id && sSeguido.id != ''){
+       this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).doc(sSeguido.id).set(sSeguido); 
+     }else{
+      sSeguido.id = this.angularFirestore.createId(); 
+      this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).add(sSeguido);
+     }
   }
 }

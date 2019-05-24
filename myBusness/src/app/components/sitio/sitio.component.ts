@@ -35,6 +35,7 @@ export class SitioComponent implements OnInit {
   idResena:any;
   respuestas:Respuesta[] = [];
   userLogin:Usuario;
+  userId:string;
 
   constructor(private dataStorageService:DataStorageService,  
               private activatedRoute:ActivatedRoute,
@@ -70,8 +71,8 @@ export class SitioComponent implements OnInit {
 
    
    
-   let userId = this.dataStorageService.getObjectValue("UserNow");
-    this.loginService.setCurrentUser(userId); 
+    this.userId = this.dataStorageService.getObjectValue("UserNow");
+    this.loginService.setCurrentUser(this.userId); 
   }
 
   ngOnInit() {
@@ -86,11 +87,11 @@ export class SitioComponent implements OnInit {
 
     this.comentariosService.getAllComentarios().subscribe(data =>{
       this.resenas = data;
-      this.resenas = this.resenas.filter(x => x.idSitio == +this.sitioId);
+      this.resenas = this.resenas.filter(x => x.idSitio == this.sitioId);
 
       for(let i = 0; i < this.resenas.length; i++)
       {
-        this.resenas[i].nombreSitio = this.nombreSitio(+this.resenas[i].idSitio);
+        this.resenas[i].nombreSitio = this.nombreSitio(this.resenas[i].idSitio);
       }
        
       this.respuestasServiceService.getAllRespuestas().subscribe(dataRes => {
@@ -98,7 +99,7 @@ export class SitioComponent implements OnInit {
                 this.resenas.forEach(res => {
                   let respRes:Respuesta[] = [];
                   this.respuestas.forEach(resp => {
-                    if(+resp.idResena == +res.id && resp.idSitio == +this.sitioId){
+                    if(resp.idResena == res.id && resp.idSitio == this.sitioId){
                       respRes.push(resp);
                     }
                   }); 
@@ -113,10 +114,10 @@ export class SitioComponent implements OnInit {
      
     this.calificacionesServiceService.getAllCalificaciones().subscribe(data => {
       this.sitiosValoraciones = data;
-      this.sitiosValoraciones = this.sitiosValoraciones.filter(x => +x.idSitio == +this.sitioId);
+      this.sitiosValoraciones = this.sitiosValoraciones.filter(x => x.idSitio == this.sitioId);
       for(let i = 0; i < this.sitiosValoraciones.length; i++)
       {
-        this.sitiosValoraciones[i].img = this.imgSitio(+this.sitiosValoraciones[i].idSitio);
+        this.sitiosValoraciones[i].img = this.imgSitio(this.sitiosValoraciones[i].idSitio);
       }
     });
     
@@ -127,7 +128,6 @@ export class SitioComponent implements OnInit {
     this.sitios.forEach((sitio) => {
       if (sitio.id == this.sitioId) {
         this.sitio = sitio;
-        console.log(this.sitio.nombre);
       }
     });
   }
@@ -140,7 +140,7 @@ export class SitioComponent implements OnInit {
   }
 
   
-  nombreSitio(id:number){
+  nombreSitio(id:string){
     let nombre:string = "Nombre no encontrado";
     this.sitios.forEach( sit => {
         if(sit.id == id){
@@ -152,7 +152,7 @@ export class SitioComponent implements OnInit {
   }
 
 
-  imgSitio(id:any){
+  imgSitio(id:string){
     let img:string = "assets/img/adventure-clouds-environment-672358.jpg";
     this.sitios.forEach( sit => {
         if(sit.id == id){
@@ -165,17 +165,14 @@ export class SitioComponent implements OnInit {
 
  
   saveRespueta(){
-    
-    console.log(this.idResena); 
-    let user:any = this.dataStorageService.getObjectValue("userLogin");
     let res:Respuesta = {
       idResena : this.idResena,
-      idSitio : +this.sitioId,
-      idUsuario : user.userL.Email,
+      idSitio :   this.sitioId,
+      idUsuario : this.userId,
       respuesta : this.formGroupComentario.value.Respuesta,
       key$ : ""      
     };
-    this.respuestasServiceService.saveRespuetas(res);
+   this.respuestasServiceService.saveRespuetas(res);
     swal("Comentario Guardado", "Exito", "success");
   }
    
@@ -184,10 +181,10 @@ export class SitioComponent implements OnInit {
    this.resenas.forEach( res => {
       if(res.id == id){
         res.sensuardo = true;
+        this.comentariosService.saveComentario(res);
         swal("Comentario sensurado", "Exito", "success");
       }
    });
-   this.dataStorageService.setObjectValue("comentarios",this.resenas);
   }
   
 
