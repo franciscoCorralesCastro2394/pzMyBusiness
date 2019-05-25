@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DataStorageService} from '../../services/data-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { Sitio } from '../../interfaces/sitio.interface';
@@ -10,14 +9,12 @@ import { SitioServiceService } from '../../services/sitiosServices/sitio-service
 import { UsuariosService } from '../../services/usuarios.service';
 import { Usuario } from 'src/app/clases/Usuario';
 
-
-
-
 @Component({
   selector: 'app-edit-sitio',
   templateUrl: './edit-sitio.component.html',
   styleUrls: ['./edit-sitio.component.css']
 })
+
 export class EditSitioComponent implements OnInit {
   sitioId:number;
   formGroupSitioEdit:FormGroup;
@@ -31,7 +28,6 @@ export class EditSitioComponent implements OnInit {
   
   constructor(private activatedRoute:ActivatedRoute, 
               private formBuilder:FormBuilder, 
-              private dataStorageService:DataStorageService,
               private router:Router,
               private sitioServiceService:SitioServiceService,
               private usuariosService:UsuariosService
@@ -66,7 +62,6 @@ export class EditSitioComponent implements OnInit {
 
 
   iniciarSitio = () => {
-
     this.formGroupSitioEdit = this.formBuilder.group({
       id: ['', [],],
       nombre: ['', [Validators.required]],
@@ -97,11 +92,6 @@ export class EditSitioComponent implements OnInit {
   } 
 
   guardarData = () => {
-     
-    debugger
-    console.log(this.sitios);
-    console.log(this.users);
-    
     if (this.formGroupSitioEdit.valid) {
        let imgs = [this.formGroupSitioEdit.value.img]; 
       let sitio:Sitio = {

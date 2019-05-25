@@ -56,21 +56,14 @@ export class SitioComponent implements OnInit {
       this.sitios = data;
       this.cargarSitio();
       this.imgsSitio = this.sitio.imgs;
-      console.log(this.imgsSitio);
     });
     
-
-
     this.getResenas();
 
-  
-    
     this.getValoraciones();
 
     this.iniciarResponder();
 
-   
-   
     this.userId = this.dataStorageService.getObjectValue("UserNow");
     this.loginService.setCurrentUser(this.userId); 
   }
@@ -159,7 +152,6 @@ export class SitioComponent implements OnInit {
           img = sit.img;
         }
     });
-
     return img;
   }
 
@@ -186,7 +178,4 @@ export class SitioComponent implements OnInit {
       }
    });
   }
-  
-
-
 }

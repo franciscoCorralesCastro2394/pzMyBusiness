@@ -11,7 +11,6 @@ import { SitioSeguidoServiceService } from '../../services/sitioSeguido/sitio-se
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 import { CalificacionesServiceService } from '../../services/calificacionesService/calificaciones-service.service';
 import { ComentariosService } from '../../services/comentariosServices/comentarios.service';
-import { LoginService } from '../../services/loginSeguro/login.service';
 
 
 @Component({
@@ -19,6 +18,7 @@ import { LoginService } from '../../services/loginSeguro/login.service';
   templateUrl: './sitio-seguido.component.html',
   styleUrls: ['./sitio-seguido.component.css']
 })
+
 export class SitioSeguidoComponent implements OnInit {
   sitios:any[] = [];
   sitioId:string;
@@ -50,8 +50,7 @@ export class SitioSeguidoComponent implements OnInit {
               private sitioSeguidoServiceService:SitioSeguidoServiceService,
               private sitioServiceService:SitioServiceService,
               private calificacionesServiceService:CalificacionesServiceService,
-              private comentariosService:ComentariosService,
-              private loginService:LoginService) { 
+              private comentariosService:ComentariosService) { 
 
     this.sitioId = this.activatedRoute.snapshot.params['id'];
   
@@ -79,8 +78,7 @@ this.sitioServiceService.getAllSitios().subscribe(data => {
     this.iniciarComentario();
   }
 
-  calificar(btn:number){   
-      console.log(btn);
+calificar(btn:number){   
             if(btn == 1){
                   this.botonesCal = {
                     btn1: true,
@@ -137,7 +135,6 @@ this.sitioServiceService.getAllSitios().subscribe(data => {
             } 
 }
 
-
 iniciarComentario = () => {
   this.formGroupComentario = this.formBuilder.group({
     Sentimiento: ['', [Validators.required]],
@@ -146,11 +143,9 @@ iniciarComentario = () => {
 }
 
 calificacion(){
-     
      if(this.calificacionSitio == 0){
         swal("No se ha hecho la evaluación", "Intente de nuevo", "error");
      }else{
-        
           this.calificacionSitioSeguido = {
           id : '',
           idUsuario :this.userNow, 
@@ -179,8 +174,6 @@ this.comentariosService.saveComentario(this.comentario);
 
   swal("Se creo comentario", "Exito", "info");
 }
-
-
 
 seguirSitio(){
   this.sitioSeguido = {

@@ -18,13 +18,8 @@ export class BuscarSitiosComponent implements OnInit {
   ngOnInit() {
   	this.activateRoute.params.subscribe(params => {
       this.termino = params['id'];
-      console.log(this.termino);
    });
-
-
-
    this.sitios$ = this.data.searchSitio(this.termino);
-   console.log(this.sitios$);
   }
 
 }

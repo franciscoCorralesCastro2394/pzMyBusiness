@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { DataStorageService } from '../../services/data-storage.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
@@ -16,8 +15,7 @@ import { Sitio } from '../../interfaces/sitio.interface';
 export class SitiosListComponent implements OnInit {
   sitios:any[] = [];
   sitios$:Observable<any>;
-  constructor(private dataStorageService:DataStorageService, 
-              private router:Router,
+  constructor(private router:Router,
               private loginService:LoginService,
               private sitioServiceService:SitioServiceService ) {
    }
@@ -26,13 +24,11 @@ export class SitiosListComponent implements OnInit {
 
     this.sitios$ =  this.sitioServiceService.getAllSitios();
     this.sitios$.subscribe((UserData:Sitio[]) => {
-      debugger
       this.sitios = UserData;
           });
   }
   
   buscarSitio(termino:string){
-    console.log(termino); 
     this.router.navigate(['/buscar',termino]);
   }
 
@@ -42,12 +38,10 @@ export class SitiosListComponent implements OnInit {
   }
 
   editarSitio(sitio:any){
-     console.log(sitio);
      this.router.navigate(['/edit-sitio',sitio.id]);
   }
 
   seguirSitio(sitio:any){
-
     if(this.loginService.isLogged()){    
       this.router.navigate(['/sitio-seguido/' + sitio.id]);
   }else{

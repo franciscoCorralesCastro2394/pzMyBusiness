@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSeguro/login.service';
 import { DataStorageService } from '../../services/data-storage.service';
-import swal from 'sweetalert';
 
 
 @Component({
