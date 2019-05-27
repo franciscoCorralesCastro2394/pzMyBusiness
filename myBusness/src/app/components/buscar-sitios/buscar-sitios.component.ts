@@ -13,13 +13,18 @@ export class BuscarSitiosComponent implements OnInit {
 
   constructor(private data:SitioServiceService, private activateRoute: ActivatedRoute) { }
   sitios$:Observable<any>;
-
   termino:string;
+  
   ngOnInit() {
   	this.activateRoute.params.subscribe(params => {
       this.termino = params['id'];
    });
    this.sitios$ = this.data.searchSitio(this.termino);
   }
+  
+  buscarSitio(value:string){
+    this.sitios$ = this.data.searchSitio(value);
+  }
+
 
 }

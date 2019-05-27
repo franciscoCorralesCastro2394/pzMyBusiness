@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../usuarios.service';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Usuario }  from '../../interfaces/heroes.interfaces';
 import swal from 'sweetalert';
+import { DataStorageService } from '../../services/data-storage.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,13 +17,15 @@ export class LoginService {
   userSuscription: Subscription;
   constructor(private angularFireAuth:AngularFireAuth,
               private router: Router,
-              private usuariosService:UsuariosService)
+              private usuariosService:UsuariosService,
+              private dataStorageService:DataStorageService,)
      { }
 
 
   login(email: string, password: string) {
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password).then((value) => {
       this.setCurrentUser(email);
+      this.dataStorageService.setObjectValue("UserNow",email);
       this.router.navigate(['/user-info/' + email]);
     }).catch((error) => {
       swal("Error al hacer login", "Error", "error");
@@ -57,8 +61,6 @@ export class LoginService {
     swal("Cierre de sesion", "exito", "success");     
     this.router.navigateByUrl('home');
   }
-
-
 }
 
 

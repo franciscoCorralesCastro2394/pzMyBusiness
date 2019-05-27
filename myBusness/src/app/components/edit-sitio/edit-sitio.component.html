@@ -2,11 +2,38 @@
 <br>
 <div class="container">
     <h2 class="section-title">Editar Sitio</h2>
-    <form [formGroup]="formGroupSitioEdit" id="formGroupSitioEdit" class="row">
+    <form [formGroup]="formGroupSitioEdit" id="formGroupSitioEdit" class="row" *ngIf="!createdSitioId">
         <div class="form-group col-6">
             <label for="id">Id de la Noticia</label>
             <input class="form-control" formControlName="id" id="id" type="text" readonly>
-
+        </div>
+        <div class="form-group col-12" formArrayName="imagenes" *ngIf="sitioId">
+            <label for="titulo">Imagenes</label>
+            <div class="input-group mb-3" *ngFor="let imagen of formGroupSitioEdit.controls['imagenes'].controls; let i = index">
+                <input readonly type="text" [formControlName]="i" class="form-control " id="imagen" placeholder="Escriba la url de la imagen">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-danger" (click)="borrarImagen($event,i)" type="button" id="button-addon2"><i
+                class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div *ngIf="formGroupSitioEdit.controls['imagenes'].dirty">
+                <div class="form-control-feedback text-danger" *ngIf="formGroupSitioEdit.controls['imagenes'].errors?.required">
+                    Debe completar la url de cada imagen
+                </div>
+            </div>
+            <div class="form-group col-12" *ngIf="currentUpload">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                </div>
+                {{currentUpload?.name}} Progreso: | {{currentUpload?.progress | number:'2.2-2'}}% avance
+            </div>
+            <div class="form-group col-12 custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" (change)="detectFiles($event)">
+                <label class="custom-file-label" for="customFile">Seleccionar imagen</label>
+            </div>
+            <button class="btn btn-outline-primary mb-3  btn-sm" [disabled]="!selectedFiles" (click)="uploadSingle()">
+          Agregar archivo
+        </button>
         </div>
         <div class="form-group col-12">
             <label for="nombre">Nombre</label>
@@ -14,15 +41,6 @@
             <div *ngIf="formGroupSitioEdit.controls['nombre'].dirty">
                 <div class="form-control-feedback text-danger" *ngIf="formGroupSitioEdit.controls['nombre'].errors?.required">
                     El Nombre es requerido
-                </div>
-            </div>
-        </div>
-        <div class="form-group col-12">
-            <label for="img">Imagen</label>
-            <input type="text" class="form-control" formControlName="img" id="img" placeholder="Escriba la url de la Imagen">
-            <div *ngIf="formGroupSitioEdit.controls['img'].dirty">
-                <div class="form-control-feedback text-danger" *ngIf="formGroupSitioEdit.controls['img'].errors?.required">
-                    La url de la Imagen es requerida
                 </div>
             </div>
         </div>
@@ -62,10 +80,8 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group col-12">
             <label for="Editor">Editor</label>
-            <!-- <input type="text" class="form-control" formControlName="Editor" id="Editor" placeholder="Escriba la Editor"> -->
             <select class="form-control" formControlName="Editor" id="Editor" id="" *ngIf="editores$">
                 <option value="">Seleccione un Editor</option>
                 <option *ngFor = "let editor of (editores$ | async)" [value]="editor.Email"> {{editor.Email}}</option>
@@ -80,5 +96,28 @@
             </div>
         </div>
         <button type="submit" class="btn green float-right m-b-5" [ngClass]="{'disabled':!formGroupSitioEdit.valid}" (click)="guardarData()">Guardar</button>
+    </form>
+    <form [formGroup]="formGroupSitioEditImagenes" id="formGroupSitioEditImagenes" class="row" *ngIf="createdSitioId">
+        <div class="form-group  col-12" formArrayName="imagenes">
+            <label for="titulo">Imagenes</label>
+            <div *ngIf="formGroupSitioEditImagenes.controls['imagenes'].dirty">
+                <div class="form-control-feedback text-danger" *ngIf="formGroupSitioEditImagenes.controls['imagenes'].errors?.required">
+                    Debe completar la url de cada imagen
+                </div>
+            </div>
+            <div class="form-group col-12" *ngIf="currentUpload">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                </div>
+                {{currentUpload?.name}} Progreso: | {{currentUpload?.progress | number:'2.2-2'}}% avance
+            </div>
+            <div class="form-group col-12 custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" (change)="detectFiles($event)">
+                <label class="custom-file-label" for="customFile">Seleccionar imagen</label>
+            </div>
+            <button class="btn btn-outline-primary mb-3  btn-sm" [disabled]="!selectedFiles" (click)="uploadSingle()">
+      Agregar archivo
+    </button>
+        </div>
     </form>
 </div>

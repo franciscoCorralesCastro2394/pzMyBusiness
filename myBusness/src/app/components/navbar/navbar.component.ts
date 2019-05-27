@@ -15,10 +15,8 @@ export class NavbarComponent implements OnInit {
               private router:Router,
               private login:LoginService,
               private dataStorageService:DataStorageService) { }
-
   ngOnInit() {
   }
-
 
   LoginOff(){
       this.login.logout();
@@ -26,14 +24,11 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/noticias-list']);
   }
 
-
    Ingresar(selector:number){
      if(selector == 0){
       this.router.navigate(['/loginIngresar/0']);
      }else{
       this.router.navigate(['/login/1']);
      }
-    
    } 
-
 }

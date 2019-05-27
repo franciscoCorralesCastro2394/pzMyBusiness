@@ -51,13 +51,7 @@ export class InfoUsuarioComponent implements OnInit {
     this.getResenas();
 
     this.getCalificacones();
-    
- 
-    console.log(this.calificaciones);
-
-
-
-
+  
    }
   ngOnInit() {
   }
@@ -81,11 +75,9 @@ cargarUsuario(){
     this.comentariosService.getAllComentarios().subscribe(data => {
       this.resenas = data;
       this.resenas = this.resenas.filter(x => x.idUsuario == this.userId);
-    
       for(let i=0; i < this.resenas.length; i++){
         this.resenas[i].nombreSitio = this.nombreSitio(this.resenas[i].idSitio);
       }
-  
               this.respuestasServiceService.getAllRespuestas().subscribe(dataResp => {
                       this.resenas.forEach(res => {
                         let respRes:Respuesta[] = [];
@@ -146,7 +138,7 @@ cargarUsuario(){
     let img:string = "assets/img/adventure-clouds-environment-672358.jpg";
     this.sitios.forEach( sit => {
         if(sit.id == id){
-          img = sit.img;
+          img = sit.imgs[0];
         }
     });
 

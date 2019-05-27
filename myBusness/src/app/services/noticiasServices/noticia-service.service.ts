@@ -18,14 +18,14 @@ export class NoticiaServiceService {
   }
 
 
-   saveNoticia(noticia: Noticia){
+   saveNoticia(noticia: Noticia):string{
      if( noticia.Id && noticia.Id != '' ){
        this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).doc(noticia.Id).set(noticia);
      }else{
       noticia.Id = this.angularFirestore.createId(); 
       this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).add(noticia);
      }
-    
+    return noticia.Id;
   }
 
 }

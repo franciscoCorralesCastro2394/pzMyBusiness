@@ -9,7 +9,7 @@
                     <p><strong>Horario: </strong>{{sitio.horario}}</p>
                 </div>
                 <div class="col-md-8">
-                    <img class="img-fluid" [src]="sitio.img" alt="card image">
+                    <img class="img-fluid" [src]="sitio.imgs[0]" alt="card image">
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let imgsitio of imgsSitio">
                     <div class="clear"><br><br><img class="img-fluid" [src]="imgsitio" alt="card image"></div>
@@ -30,10 +30,6 @@
             <div class="clear"><br><br></div>
         </div>
     </div>
-
-    <!-- Reseñas -->
-
-
     <section class="pb-5 team">
         <div class="container" *ngIf="resenas && respuestas">
             <h5 class="section-title h1"> Reseñas </h5>
@@ -52,9 +48,7 @@
                             </div>
                             <p class="text-justify">{{resena.comentario}}</p>
                             <ins class="ab zmin sprite block"></ins>
-
                             <div class="container">
-
                                 <br>
                                 <div class="panel-body" *ngIf="respuestas">
 
@@ -78,10 +72,7 @@
                                         </li>
                                     </ul>
                                 </div>
-
-
                             </div>
-
                         </div>
                         <div class="person-text rel">
                             <p> from {{resena.idUsuario | uppercase}}</p>
@@ -100,9 +91,6 @@
             </div>
         </div>
     </section>
-
-
-    <!-- Modal responder comentario -->
     <div class="modal fade" id="ResponderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -133,8 +121,6 @@
             </div>
         </div>
     </div>
-
-    <!-- valoraciones -->
     <section class="pb-5 team" *ngIf="sitiosValoraciones">
         <div class="container">
             <h5 class="section-title h1"> Valoraciones </h5>

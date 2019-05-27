@@ -149,7 +149,7 @@ export class SitioComponent implements OnInit {
     let img:string = "assets/img/adventure-clouds-environment-672358.jpg";
     this.sitios.forEach( sit => {
         if(sit.id == id){
-          img = sit.img;
+          img = sit.imgs[0];
         }
     });
     return img;

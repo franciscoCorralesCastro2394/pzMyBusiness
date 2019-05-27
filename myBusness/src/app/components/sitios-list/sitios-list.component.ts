@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DataStorageService } from '../../services/data-storage.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
-import { LoginService } from '../../services/login.service';
 import { Observable } from 'rxjs';
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 import { Sitio } from '../../interfaces/sitio.interface'; 
+
 
 @Component({
   selector: 'app-sitios-list',
@@ -16,8 +16,8 @@ export class SitiosListComponent implements OnInit {
   sitios:any[] = [];
   sitios$:Observable<any>;
   constructor(private router:Router,
-              private loginService:LoginService,
-              private sitioServiceService:SitioServiceService ) {
+              private sitioServiceService:SitioServiceService,
+              private dataStorageService:DataStorageService ) {
    }
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class SitiosListComponent implements OnInit {
   }
 
   seguirSitio(sitio:any){
-    if(this.loginService.isLogged()){    
+    if(this.dataStorageService.getObjectValue("UserNow") != ''){    
       this.router.navigate(['/sitio-seguido/' + sitio.id]);
   }else{
     swal("Error", "Debe ingresar con un usuario valido", "error");        

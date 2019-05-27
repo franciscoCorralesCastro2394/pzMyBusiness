@@ -36,7 +36,7 @@ export class SitioSeguidoComponent implements OnInit {
   calId:number;
   comId:number;
   userNow:string;
-  botonesCal:object = {
+  botonesCal:any = {
     btn1: false,
     btn2: false,
     btn3: false,

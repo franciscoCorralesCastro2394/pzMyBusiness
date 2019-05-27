@@ -18,14 +18,14 @@ export class SitioServiceService {
     return this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).valueChanges();
   }
 
-   savSitios(sitio: Sitio){
+   savSitios(sitio: Sitio):string{
     if(sitio.id && sitio.id != ''){
       this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).doc(sitio.id).set(sitio);      
     }else {
       sitio.id = this.angularFirestore.createId(); 
       this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).add(sitio);
     }
-
+    return sitio.id;
   }
 
   
@@ -36,5 +36,9 @@ export class SitioServiceService {
   saveSitiosSeguisdos(sSeguido: sitioSeguido){
     this.angularFirestore.collection<sitioSeguido>('sitiosSeguidos').add(sSeguido);
   }
+
+  getSitiosById(term: string): Observable<Sitio[]> { 
+    return  this.angularFirestore.collection<Sitio>(this.sitiosCollectionName, ref => ref.where('id', '==', term)).valueChanges();
+}
 
 }

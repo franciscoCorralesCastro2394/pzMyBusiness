@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
-import {LoginService} from '../services/login.service';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import {Router,CanActivate} from '@angular/router';
 import swal from 'sweetalert';
+import {DataStorageService} from '../services/data-storage.service';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +13,12 @@ import swal from 'sweetalert';
 export class AuthGuard implements CanActivate {
   path: ActivatedRouteSnapshot[];
   route: ActivatedRouteSnapshot;
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router,
+              private dataStorageService:DataStorageService
+    ) { }
  
   canActivate() {
-    if (this.loginService.isLogged()) {
+    if (this.dataStorageService.getObjectValue("UserNow")) {
       return true;    
     }else{
       swal("Usuario no existe", "Intente de nuevo", "error");

@@ -13,20 +13,11 @@ export class LoginService {
   constructor(private dataStorageService:DataStorageService,
               private router:Router) { }
 
-  isLogged(){
-  this.userLogin = this.dataStorageService.getObjectValue("userLogin");
-  console.log(this.userLogin);
-  if(this.userLogin.ative){
-    return true;
-  }else{
-    return false;
-  }
-  }
-
+  
   isAdmin(){
-    this.userLogin = this.dataStorageService.getObjectValue("userLogin");
-    console.log(this.userLogin);
-    if(this.userLogin.userL.Admin && this.userLogin.ative){
+    // this.userLogin = this.dataStorageService.getObjectValue("userLogin");
+    // console.log(this.userLogin);
+    if(this.dataStorageService.getObjectValue("UserNow")){
       return true;
     }else{
       return false;
@@ -34,30 +25,12 @@ export class LoginService {
     }
 
     isEditor(){
-      this.userLogin = this.dataStorageService.getObjectValue("userLogin");
-      console.log(this.userLogin);
-      if(this.userLogin.userL.Editor && this.userLogin.ative){
+      // this.userLogin = this.dataStorageService.getObjectValue("userLogin");
+      // console.log(this.userLogin);
+      if(this.dataStorageService.getObjectValue("UserNow")){
         return true;
       }else{
         return false;
       }
       }
-
-    Loginoff(){
-      this.userLogin = this.dataStorageService.getObjectValue("userLogin");
-      console.log(this.userLogin);
-      if(this.userLogin.ative){
-        this.userLogin.ative = false;
-        this.dataStorageService.setObjectValue("userLogin",this.userLogin);
-        swal("Sesión Terminada", "Gracias por visita", "info");
-      }else{
-        swal("Error", "No existe una sesión activa", "error");
-        
-      }
-      
-      }
-
-  
-
-
       }

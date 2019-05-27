@@ -8,9 +8,7 @@
                 <button (click)="buscarSitio(buscarTexto.value)" class="btn green my-2 my-sm-0" type="button">Buscar</button>
             </div>
         </div>
-
         <div class="row">
-            <!-- Team member -->
             <div *ngIf="sitios$">
                 <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of (sitios$ | async)">
                     <br>
@@ -19,7 +17,7 @@
                             <div class="frontside">
                                 <div class="card">
                                     <div class="card-body text-center">
-                                        <p><img class="img-fluid" [src]="sitio.img" alt="card image"></p>
+                                        <p><img class="img-fluid" [src]="sitio.imgs[0]" alt="card image"></p>
                                         <h4 class="card-title">{{sitio.nombre}}</h4>
                                         <p class="card-text">{{sitio.descripcion.substr(0,100)}}...</p>
                                         <a href="sitio/{{sitio.id}}" class="btn green btn-sm"><i class="fa fa-plus"> Leer mas</i></a>
@@ -30,7 +28,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="alert alert-warning" role="alert" *ngIf="!sitios$">
                 <h4 class="alert-heading">No existen sitios con ese nombre</h4>
                 <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>

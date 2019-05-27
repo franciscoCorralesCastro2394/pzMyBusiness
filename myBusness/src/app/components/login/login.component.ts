@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { DataStorageService } from '../../services/data-storage.service';
 import { UsuariosService } from '../../services/usuarios.service';
 import { LoginService } from '../../services/loginSeguro/login.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
-import { DocumentReference } from '@angular/fire/firestore';
 import swal from 'sweetalert';
 import { Observable } from 'rxjs';
 
@@ -27,13 +24,11 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,  
               private router:Router,
               private activatedRoute:ActivatedRoute,
-              private dataStorageService:DataStorageService,
               private usuariosService:LoginService,
               private userS:UsuariosService,
    ) { 
 
     this.selector = this.activatedRoute.snapshot.params['selector'];
-    console.log(this.selector);
     this.iniciarLogin();
     this.iniciarRegister();
   }
@@ -48,10 +43,8 @@ export class LoginComponent implements OnInit {
 
 
   loginSeguro(){
-    debugger
     if(this.formGroupLogin.valid){
       this.usuariosService.login(this.formGroupLogin.value.Identificacion,this.formGroupLogin.value.Pass);
-      this.dataStorageService.setObjectValue("UserNow",this.formGroupLogin.value.Identificacion);
     }else{
       swal("Usuario no existe", "Intente de nuevo", "error");
     }
@@ -101,6 +94,8 @@ if(this.formGroupRegister.valid){
       pass : this.formGroupRegister.value.pass
     }
     this.usuariosService.register(usuarioNuevo);
+    swal("Usuario Registrado", "Exito", "success");
+
     }
   }
 

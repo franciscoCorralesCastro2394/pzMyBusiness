@@ -8,35 +8,36 @@
                 <p><strong>Horario: </strong>{{sitio.horario}}</p>
             </div>
             <div class="col-md-8">
-                <img class="img-fluid" [src]="sitio.img" alt="card image">
+                <img class="img-fluid" [src]="sitio.imgs[0]" alt="card image">
             </div>
         </div>
+        <br>
+        <br>
         <div class="row">
-            <div class="col-md-6">
-                <!-- Button trigger modal -->
+            <div class="col-md-2">
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#calificacionModal">
                     Calificar Sitio
                     <i class="fa fa-calendar-check-o"></i>
                   </button>
-
+            </div>
+            <div class="col-md-2">
                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#ComentarioModal">
                         Agregar Comentario 
                         <i class="far fa-keyboard"></i>
                       </button>
-
+            </div>
+            <div class="col-md-2">
                 <button type="button" class="btn btn-outline-info" (click)="seguirSitio()">
-                        Seguir Sitio
-                        <i class="fa fa-heart"></i>
-                      </button>
+                                Seguir Sitio
+                                <i class="fa fa-heart"></i>
+                              </button>
             </div>
             <div class="col-md-6">
-
             </div>
+
         </div>
     </div>
 </div>
-
-<!-- Modal -->
 <div class="modal fade" id="calificacionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -50,31 +51,31 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-2 col-xs-12">
-                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn1, btn : !botonesCal.btn1  , btn : botonesCal.btn1 }" class="btn green" (click)="calificar(1)">
+                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn1, btn : !botonesCal.btn1  , btn2 : botonesCal.btn1 }" class=" btn green" (click)="calificar(1)">
                                                         <img class="imgIcon" src="../../../assets/cal/enojado.png" alt="">
                                                         <span class="badge badge-light">Enojo</span>
                                     </button>
                         </div>
                         <div class="col-md-2 col-xs-12">
-                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn2 , btn : !botonesCal.btn2 , btn : botonesCal.btn2 }" class="btn green" (click)="calificar(2)">
+                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn2 , btn : !botonesCal.btn2 , btn2 : botonesCal.btn2 }" class="btn green" (click)="calificar(2)">
                                                         <img class="imgIcon" src="../../../assets/cal/infeliz.png" alt="">
                                                         <span class="badge badge-light">Infeliz</span>
                                     </button>
                         </div>
                         <div class="col-md-2 col-xs-12">
-                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn3 , btn : !botonesCal.btn3 , btn : botonesCal.btn3 }" class="btn green" (click)="calificar(3)">
+                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn3 , btn : !botonesCal.btn3 , btn2 : botonesCal.btn3 }" class="btn green" (click)="calificar(3)">
                                                         <img class="imgIcon" src="../../../assets/cal/confundido.png" alt="">
                                                         <span class="badge badge-light">Regular</span>
                                     </button>
                         </div>
                         <div class="col-md-2 col-xs-12">
-                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn4 , btn : !botonesCal.btn4 , btn : botonesCal.btn4 }" class="btn green" (click)="calificar(4)">
+                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn4 , btn : !botonesCal.btn4 , btn2 : botonesCal.btn4 }" class="btn green" (click)="calificar(4)">
                                                 <img class="imgIcon" src="../../../assets/cal/feliz.png" alt="">
                                                 <span class="badge badge-light">Feliz</span>
                                     </button>
                         </div>
                         <div class="col-md-2 col-xs-12">
-                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn5 , btn : !botonesCal.btn5 , btn : botonesCal.btn5 }" class="btn green" (click)="calificar(5)">
+                            <button type="button" [ngClass]="{ btnSelec : botonesCal.btn5 , btn : !botonesCal.btn5 , btn2 : botonesCal.btn5 }" class="btn green" (click)="calificar(5)">
                                                         <img class="imgIcon" src="../../../assets/cal/sonriente.png" alt="">
                                                         <span class="badge badge-light">Muy Feliz</span>
                                     </button>
@@ -92,9 +93,6 @@
         </div>
     </div>
 </div>
-
-
-<!-- Modal comentario -->
 <div class="modal fade" id="ComentarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

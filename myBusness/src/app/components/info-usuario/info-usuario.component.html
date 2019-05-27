@@ -1,10 +1,6 @@
 <br>
 <br>
 <br>
-
-
-
-
 <div class="container" *ngIf="userLogin">
     <div class="d-flex justify-content-center h-100">
         <div class="image_outer_container">
@@ -15,9 +11,6 @@
         </div>
     </div>
 </div>
-
-
-
 <section id="team" class="pb-5">
     <div class="container">
         <h5 class="section-title h1" *ngIf="nombre"> {{nombre}} </h5>
@@ -33,20 +26,17 @@
         </div>
     </div>
 </section>
-
-
 <section id="team" class="pb-5" *ngIf="sitiosS">
     <div class="container">
         <h5 class="section-title h1"> Sitios Seguidos </h5>
         <div class="row">
-            <!-- Team member -->
             <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let sitio of sitiosS">
                 <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                     <div class="mainflip">
                         <div class="frontside">
                             <div class="card">
                                 <div class="card-body text-center">
-                                    <p><img class="img-fluid" [src]="sitio.img" alt="card image"></p>
+                                    <p><img class="img-fluid" [src]="sitio.imgs[0]" alt="card image"></p>
                                     <h4 class="card-title">{{sitio.nombre}}</h4>
                                     <p class="card-text">{{sitio.descripcion}}</p>
                                     <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
@@ -89,8 +79,6 @@
         </div>
     </div>
 </section>
-
-<!-- Reseñas -->
 <section id="team" class="pb-5" *ngIf="resenas">
     <div class="container">
         <h5 class="section-title h1"> Reseñas </h5>
@@ -142,8 +130,6 @@
         </div>
     </div>
 </section>
-
-<!-- valoraciones -->
 <section id="team" class="pb-5" *ngIf="calificaciones">
     <div class="container">
         <h5 class="section-title h1"> Valoraciones </h5>
