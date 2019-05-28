@@ -17,7 +17,6 @@ import { NoticiasUpsertComponent } from './components/noticias-upsert/noticias-u
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
-import { AuthGuard} from '../app/guards/auth.guard';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ContactenosComponent } from './components/contactenos/contactenos.component';
 import { DomSecurityPipe } from './pipes/dom-security/dom-security.pipe';
@@ -66,7 +65,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [ DatePipe,DataStorageService,AuthGuard],
+  providers: [ DatePipe,DataStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

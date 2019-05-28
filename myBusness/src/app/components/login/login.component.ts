@@ -71,33 +71,37 @@ export class LoginComponent implements OnInit {
       Editor:[]
     });
   }
-
   registrar = () => {
-
-if(this.formGroupRegister.valid){
-
-   if(!this.formGroupRegister.value.Admin){
-      this.formGroupRegister.value.Admin = false;
-    }
-    if(!this.formGroupRegister.value.Editor){
-      this.formGroupRegister.value.Editor = false;
-    }
-    let usuarioNuevo:Usuario = { 
-      Admin : this.formGroupRegister.value.Admin,
-      ConfirmPassword: this.formGroupRegister.value.ConfirmPassword,
-      Editor : this.formGroupRegister.value.Editor,
-      Email : this.formGroupRegister.value.Email,
-      FirstName : this.formGroupRegister.value.FirstName,
-      Imagen : this.formGroupRegister.value.Imagen,
-      LastName : this.formGroupRegister.value.LastName,
-      Phone : this.formGroupRegister.value.Phone,
-      pass : this.formGroupRegister.value.pass
-    }
-    this.usuariosService.register(usuarioNuevo);
-    swal("Usuario Registrado", "Exito", "success");
-
-    }
-  }
+    if(this.formGroupRegister.valid){
+       let roles:string = ''; 
+       if(!this.formGroupRegister.value.Admin){
+          this.formGroupRegister.value.Admin = false;
+        }else{
+         roles = roles + 'Admin,'; 
+        }
+        if(!this.formGroupRegister.value.Editor){
+          this.formGroupRegister.value.Editor = false;
+        }else{
+          roles = roles + 'Editor'; 
+        }
+        let usuarioNuevo:Usuario = { 
+          Admin : this.formGroupRegister.value.Admin,
+          ConfirmPassword: this.formGroupRegister.value.ConfirmPassword,
+          Editor : this.formGroupRegister.value.Editor,
+          Email : this.formGroupRegister.value.Email,
+          FirstName : this.formGroupRegister.value.FirstName,
+          Imagen : this.formGroupRegister.value.Imagen,
+          LastName : this.formGroupRegister.value.LastName,
+          Phone : this.formGroupRegister.value.Phone,
+          pass : this.formGroupRegister.value.pass,
+          roles : roles
+        }
+        this.usuariosService.register(usuarioNuevo);
+        swal("Usuario Registrado", "Exito", "success");
+        }else{
+        swal("Error al registrar", "Formulario con errores", "error");
+        }
+      }
 
   
 

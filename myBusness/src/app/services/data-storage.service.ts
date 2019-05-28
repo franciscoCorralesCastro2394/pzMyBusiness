@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Noticia} from '../clases/noticia';
-import { UsuariosService} from '../services/usuarios.service';
 import { Usuario } from '../interfaces/heroes.interfaces';
 
 
@@ -25,7 +23,7 @@ getObjectValue = (key:string)=>{
         if (DATA) {
           return DATA;
         }else{
-           throw new Error('No se encontró el valor ${key} en el localStorage');
+          return false;
         }
       }else{
         throw new Error('No se puede obtener la información, porque no está habilitado el localStorage');

@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   LoginOff(){
       this.login.logout();
       this.dataStorageService.deleteObjValue("UserNow");
+      this.dataStorageService.deleteObjValue("roles");
       this.router.navigate(['/noticias-list']);
   }
 

@@ -40,6 +40,7 @@ export class LoginService {
   setCurrentUser(email: string) {
     this.userSuscription = this.usuariosService.getUsuarioByEmail(email).subscribe((usuarios) => {
       this.currentUser = usuarios[0];
+      this.dataStorageService.setObjectValue("roles",usuarios[0].roles);
     });
   }
 

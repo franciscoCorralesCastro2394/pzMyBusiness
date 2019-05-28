@@ -108,26 +108,6 @@ export class EditSitioComponent implements OnInit {
       });
       }
     });
-
-// this.sitioSuscription =  this.sitioServiceService.getSitiosById(id).subscribe(data => {
-//     debugger
-//     if(data[0]){
-//       this.formGroupSitioEdit.patchValue({
-//         id : data[0].id,
-//         nombre : data[0].nombre,
-//         descripcion : data[0].descripcion,
-//         horario : data[0].horario,
-//         videoYB : data[0].videoYB,
-//         Editor : data[0].Editor
-//       });
-
-//       (<FormArray>this.formGroupSitioEdit.controls['imagenes']).removeAt(0);
-//       data[0].imgs.forEach((imagen: string) => {
-//         this.agregarImagen(imagen);
-//       });
-//     }
-
-//   });
   } 
 
   guardarData = () => {
