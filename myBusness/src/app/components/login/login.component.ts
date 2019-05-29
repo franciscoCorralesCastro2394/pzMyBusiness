@@ -106,7 +106,15 @@ export class LoginComponent implements OnInit {
   
 
 
+loginGoogle(){
+  this.usuariosService.loginGoogle()
+  .then((res) => {
+     this.router.navigate(['sitios-list']);
+  }).catch(err => {
+    swal("Error al ingresar", "Error", "error");
 
+  })
+}
 
 
 }

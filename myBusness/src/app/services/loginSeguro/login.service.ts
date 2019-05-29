@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Usuario }  from '../../interfaces/heroes.interfaces';
 import swal from 'sweetalert';
 import { DataStorageService } from '../../services/data-storage.service';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,10 @@ export class LoginService {
     this.angularFireAuth.auth.signOut();
     swal("Cierre de sesion", "exito", "success");     
     this.router.navigateByUrl('home');
+  }
+
+  loginGoogle(){
+    return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 }
 
