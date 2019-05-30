@@ -22,7 +22,7 @@
                                     <p><img class="img-fluid" [src]="sitio.imgs[0]" alt="card image"></p>
                                     <h4 class="card-title">{{sitio.nombre}}</h4>
                                     <p class="card-text">{{sitio.descripcion.substr(0,100)}}...</p>
-                                    <a href="sitio/{{sitio.id}}" class="btn green btn-sm"><i class="fa fa-plus"> Leer mas</i></a>
+                                    <a class="btn green btn-sm"><i class="fa fa-plus" (click)="vermas(sitio.id)"> Leer mas</i></a>
                                     <button (click)="editarSitio(sitio)" type="button" class="btn btn-outline-info">
                                             Editar Sitio
                                             <i class="fa fa-cut"></i>
