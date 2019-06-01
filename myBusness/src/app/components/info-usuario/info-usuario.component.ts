@@ -95,6 +95,7 @@ cargarUsuario(){
 
   getCalificacones(){
     this.calificacionesServiceService.getAllCalificaciones().subscribe(data => {
+      debugger
       this.calificaciones = data;
       this.calificaciones.filter(x => x.idUsuario == this.userId);
       for(let i=0; i < this.calificaciones.length; i++){

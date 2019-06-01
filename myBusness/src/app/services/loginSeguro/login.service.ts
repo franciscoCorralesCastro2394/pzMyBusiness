@@ -67,6 +67,10 @@ export class LoginService {
   loginGoogle(){
     return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
+
+  loginFaceBook(){
+    return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+  }
 }
 
 

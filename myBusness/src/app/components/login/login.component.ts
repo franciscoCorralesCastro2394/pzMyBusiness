@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios.service';
 import { LoginService } from '../../services/loginSeguro/login.service';
+import { DataStorageService } from '../../services/data-storage.service';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import swal from 'sweetalert';
 import { Observable } from 'rxjs';
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
               private activatedRoute:ActivatedRoute,
               private usuariosService:LoginService,
               private userS:UsuariosService,
+              private dataStorageService:DataStorageService
    ) { 
 
     this.selector = this.activatedRoute.snapshot.params['selector'];
@@ -103,17 +105,77 @@ export class LoginComponent implements OnInit {
         }
       }
 
-  
-
-
 loginGoogle(){
   this.usuariosService.loginGoogle()
   .then((res) => {
-     this.router.navigate(['sitios-list']);
+    
+    this.userS.getUsuarioByEmail(res.user.email).subscribe(data => {
+      if(data.length == 0){
+        let usuarioNuevo:Usuario = {
+          Email :  res.additionalUserInfo.profile['email'],
+          FirstName : res.additionalUserInfo.profile['given_name'],
+          LastName : res.additionalUserInfo.profile['family_name'],
+          Imagen : res.additionalUserInfo.profile['picture'],
+          ConfirmPassword : '',
+          Phone : +res.user.phoneNumber,
+          Admin : false,
+          Editor :false,
+          pass : '',
+          roles: '',
+          id : '',
+          key$:res.user.email 
+        }
+        this.dataStorageService.setObjectValue("UserNow",res.user.email);
+        this.userS.saveUsuario(usuarioNuevo);
+        this.dataStorageService.setObjectValue("roles",usuarioNuevo.roles);
+        this.router.navigate(['/user-info/' + res.user.email]);  
+      }else{
+        this.dataStorageService.setObjectValue("UserNow",res.user.email);
+        this.dataStorageService.setObjectValue("roles",data[0].roles);
+        this.router.navigate(['/user-info/' + res.user.email]);  
+      }
+
+    });
+       
   }).catch(err => {
     swal("Error al ingresar", "Error", "error");
-
   })
+}
+
+loginFaceBook(){
+ 
+  this.usuariosService.loginFaceBook()
+  .then((res) => {
+    this.userS.getUsuarioByEmail(res.user.email).subscribe(data => {
+      if(data.length == 0){
+        let usuarioNuevo:Usuario = {
+          Email :  res.additionalUserInfo.profile['email'],
+          FirstName : res.additionalUserInfo.profile['first_name'],
+          LastName : res.additionalUserInfo.profile['last_name'],
+          Imagen : res.additionalUserInfo.profile['picture'].data['url'],
+          ConfirmPassword : '',
+          Phone : +res.user.phoneNumber,
+          Admin : false,
+          Editor :false,
+          pass : '',
+          roles: '',
+          id : '',
+          key$:res.user.email 
+        }
+        this.dataStorageService.setObjectValue("UserNow",res.user.email);
+        this.userS.saveUsuario(usuarioNuevo);
+        this.dataStorageService.setObjectValue("roles",usuarioNuevo.roles);
+        this.router.navigate(['/user-info/' + res.user.email]);  
+      }else{
+        this.dataStorageService.setObjectValue("UserNow",res.user.email);
+        this.dataStorageService.setObjectValue("roles",data[0].roles);
+        this.router.navigate(['/user-info/' + res.user.email]);  
+      }
+
+    });
+  }).catch(err => {
+    swal("Error al ingresar", "Error", "error");
+  });
 }
 
 
