@@ -34,11 +34,11 @@ export class SitiosListComponent implements OnInit {
 
 
   nuevoSitio(){
-    this.router.navigate(['/sitio-insert']);
+    this.router.navigate(['/insertar-sitio/']);
   }
 
   editarSitio(sitio:any){
-     this.router.navigate(['/edit-sitio',sitio.id]);
+     this.router.navigate(['/editar-sitio',sitio.id]);
   }
 
   seguirSitio(sitio:any){
@@ -53,7 +53,6 @@ export class SitiosListComponent implements OnInit {
 
 
   vermas(id:string){
-    console.log(id);
     this.router.navigate(['/sitio/'+ id]);
   }
 

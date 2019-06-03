@@ -28,4 +28,10 @@ export class NoticiaServiceService {
     return noticia.Id;
   }
 
+  getNoticiasByID(idNoticia:string ): Observable<Noticia[]> {
+    return  this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName, ref => ref.where('Email', '==',idNoticia)).valueChanges();
+
+  }
+
+
 }

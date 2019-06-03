@@ -24,6 +24,7 @@ export class NoticiasUpsertComponent implements OnInit {
   formGroupNoticiasEditImagenes:FormGroup;
   currentUpload: Upload;
   selectedFiles: FileList;
+  noticias:any[] = [];
 
   constructor(private activatedRoute:ActivatedRoute, 
               private formBuilder:FormBuilder, 
@@ -34,7 +35,9 @@ export class NoticiasUpsertComponent implements OnInit {
               ) { 
 
     this.noticiaId = this.activatedRoute.snapshot.params['id'];
+  
     this.iniciarImagenes();
+    this.obtenerNotcias();
    if(this.noticiaId){
      this.cargarNoticia(this.noticiaId);
     }else{
@@ -43,6 +46,15 @@ export class NoticiasUpsertComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  obtenerNotcias(){
+    if(this.noticiaId){
+      this.NoticiaService.getAllNoticias().subscribe(data => {
+        this.noticias = data;
+        this.cargarNoticia(this.noticiaId);
+      });
+    }
   }
 
   iniciarImagenes = () => {
@@ -62,8 +74,8 @@ export class NoticiasUpsertComponent implements OnInit {
   }
 
   cargarNoticia = (id: number) => {
-    const listaNoticias = this.dataStorageService.getObjectValue("noticias");
-    console.log(listaNoticias);
+    const listaNoticias = this.noticias;
+    debugger
     listaNoticias.forEach(noticia => {
       if (noticia.Id == id) {
         this.formGroup = this.formBuilder.group({
@@ -111,7 +123,6 @@ detectFiles(event: any) {
 uploadSingle() {
   let file = this.selectedFiles.item(0);
   this.currentUpload = new Upload(file);
-   debugger
    this.upLoadServiceService.pushUpload(this.currentUpload, this.NoticiaCreatedId,'noticias');
 }
 

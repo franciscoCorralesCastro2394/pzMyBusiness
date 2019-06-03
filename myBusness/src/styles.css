@@ -14,7 +14,7 @@ body {
     width: 643px;
 }
 
-.green {
+.texto_secundario {
     color: #1f6617;
     border: 2px #1f6617 solid;
 }
@@ -47,7 +47,7 @@ body {
     display: inline-block;
 }
 
-.green:hover {
+.texto_secundario:hover {
     color: #fff;
     background-color: #1f6617;
 }

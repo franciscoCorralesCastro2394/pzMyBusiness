@@ -3,5 +3,6 @@ respuesta:string,
 idSitio:string,
 idUsuario:string,
 key$?:string,
-idResena:string
+idResena:string,
+id?:string
 } 

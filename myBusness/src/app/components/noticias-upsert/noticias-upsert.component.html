@@ -47,7 +47,7 @@
             <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker formControlName="UltimaModificacion" id="UltimaModificacion">
         </div>
 
-        <button type="submit" class="btn green float-right m-b-5" [ngClass]="{'disabled':!formGroup.valid}" (click)="guardarData()">Guardar</button>
+        <button type="submit" class="btn texto_secundario float-right m-b-5" [ngClass]="{'disabled':!formGroup.valid}" (click)="guardarData()">Guardar</button>
     </form>
 
     <form [formGroup]="formGroupNoticiasEditImagenes" *ngIf="NoticiaCreatedId" id="formGroupNoticiasEditImagenes" class="row">

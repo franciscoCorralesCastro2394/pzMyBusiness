@@ -69,7 +69,7 @@ export class UpLoadServiceService {
       .then(() => {
         this.deleteFileStorage(upload.name)
       })
-      .catch(error => console.log(error))
+      .catch(error => console.error(error))
   }
 
   private deleteFileFirestore(id: string) {

@@ -23,7 +23,7 @@ export class AuthenticationGuard implements  CanActivate{
           }
           else {
             swal("No cuenta con la credenciales de Autrntificación", "Intente de nuevo", "error");
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/inicio/');
               observer.next(false);
           }
       })

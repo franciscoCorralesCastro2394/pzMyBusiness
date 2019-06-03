@@ -77,7 +77,6 @@ export class SitioComponent implements OnInit {
   
 
    getResenas(){
-
     this.comentariosService.getAllComentarios().subscribe(data =>{
       this.resenas = data;
       this.resenas = this.resenas.filter(x => x.idSitio == this.sitioId);
@@ -158,13 +157,15 @@ export class SitioComponent implements OnInit {
  
   saveRespueta(){
     let res:Respuesta = {
+      id : '',
       idResena : this.idResena,
       idSitio :   this.sitioId,
       idUsuario : this.userId,
       respuesta : this.formGroupComentario.value.Respuesta,
       key$ : ""      
     };
-   this.respuestasServiceService.saveRespuetas(res);
+     this.iniciarResponder();
+    this.respuestasServiceService.saveRespuetas(res);
     swal("Comentario Guardado", "Exito", "success");
   }
    

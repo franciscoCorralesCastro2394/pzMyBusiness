@@ -27,7 +27,7 @@ export class LoginService {
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password).then((value) => {
       this.setCurrentUser(email);
       this.dataStorageService.setObjectValue("UserNow",email);
-      this.router.navigate(['/user-info/' + email]);
+      this.router.navigate(['/informacion-usuario/' + email]);
     }).catch((error) => {
       swal("Error al hacer login", "Error", "error");
     });
@@ -61,7 +61,7 @@ export class LoginService {
     this.currentUser = null;
     this.angularFireAuth.auth.signOut();
     swal("Cierre de sesion", "exito", "success");     
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('/inicio/');
   }
 
   loginGoogle(){

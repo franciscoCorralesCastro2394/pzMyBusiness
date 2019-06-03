@@ -171,7 +171,7 @@ agregarComentario(){
   sensuardo:false
   };
 this.comentariosService.saveComentario(this.comentario);
-
+this.iniciarComentario();
   swal("Se creo comentario", "Exito", "info");
 }
 

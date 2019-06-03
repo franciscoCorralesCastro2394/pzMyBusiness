@@ -31,6 +31,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { SitioSeguidoComponent } from './components/sitio-seguido/sitio-seguido.component'; 
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PrivateComponent } from './components/private/private.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     SitioComponent,
     BuscarSitiosComponent,
     EditSitioComponent,
-    SitioSeguidoComponent, 
+    SitioSeguidoComponent,
+    PrivateComponent, 
   ],
   imports: [
     BrowserModule,

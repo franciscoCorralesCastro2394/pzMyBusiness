@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn green float-right m-b-5" [ngClass]="{'disabled':!formGroupSitioEdit.valid}" (click)="guardarData()">Guardar</button>
+        <button type="submit" class="btn texto_secundario float-right m-b-5" [ngClass]="{'disabled':!formGroupSitioEdit.valid}" (click)="guardarData()">Guardar</button>
     </form>
     <form [formGroup]="formGroupSitioEditImagenes" id="formGroupSitioEditImagenes" class="row" *ngIf="createdSitioId">
         <div class="form-group  col-12" formArrayName="imagenes">

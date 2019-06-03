@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
       this.login.logout();
       this.dataStorageService.deleteObjValue("UserNow");
       this.dataStorageService.deleteObjValue("roles");
-      this.router.navigate(['/noticias-list']);
+      this.router.navigate(['lista-noticias']);
   }
 
    Ingresar(selector:number){
