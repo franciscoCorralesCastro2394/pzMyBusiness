@@ -1,0 +1,28 @@
+<br>
+<br>
+<div class="container">
+    <table id="customers">
+        <tr>
+            <th>#</th>
+            <th>Nombre Usuario</th>
+            <th>Correo</th>
+            <th>Roles</th>
+            <th>Guardar</th>
+        </tr>
+        <tr *ngFor="let user of (users$ | async); let i=index">
+            <td>{{i + 1}}</td>
+            <td>{{user.FirstName + user.LastName}}</td>
+            <td>{{user.Email}}</td>
+            <td>
+                <input type="text" #rol value="{{user.roles}}">
+            </td>
+            <td>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary btn-xs" (click)="guardarCambios(user,rol.value)">
+                    <span class="fa fa-save"></span>
+                </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

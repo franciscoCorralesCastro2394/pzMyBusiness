@@ -6,7 +6,7 @@ ConfirmPassword:string;
 Phone:number;
 pass:string;
 Admin:boolean;
-Imagen:string;
+Imagen?:string;
 Editor:boolean;
 key$?:string;
 id?:string;

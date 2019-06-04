@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NoticiasListComponent } from './components/noticias-list/noticias-list.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { NoticiasUpsertComponent } from './components/noticias-upsert/noticias-upsert.component';
 import { LoginComponent } from './components/login/login.component';
 import { AcercaDeComponent }  from './components/acerca-de/acerca-de.component';
@@ -59,6 +60,8 @@ const routes: Routes = [
   { path: 'inicio', component: NoticiasListComponent },
   { path: 'login/:selector', component: LoginComponent},
   { path: 'loginIngresar/:selector', component: LoginComponent},
+  { path: 'usuarios', component: UsuariosComponent,
+  canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
 
 
   { path: 'editar-noticia/:id', component: NoticiasUpsertComponent},

@@ -12,7 +12,7 @@ import { ComentariosService } from '../../services/comentariosServices/comentari
 import { RespuestasServiceService } from '../../services/respuestasService/respuestas-service.service';
 import { Respuesta } from '../../interfaces/respuesta.interface';
 import swal from 'sweetalert';
-import { Usuario } from 'src/app/clases/Usuario';
+import { Usuario } from 'src/app/interfaces/heroes.interfaces';
 
 
 

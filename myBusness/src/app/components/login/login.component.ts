@@ -68,35 +68,24 @@ export class LoginComponent implements OnInit {
       pass: ['', [Validators.required]],
       ConfirmPassword: ['', [Validators.required]],
       Imagen: ['', [Validators.required]],
-      Descripcion: ['', [Validators.required]],
-      Admin:[],
-      Editor:[]
+      Descripcion: ['', [Validators.required]]
     });
   }
   registrar = () => {
     if(this.formGroupRegister.valid){
        let roles:string = ''; 
-       if(!this.formGroupRegister.value.Admin){
-          this.formGroupRegister.value.Admin = false;
-        }else{
-         roles = roles + 'Admin,'; 
-        }
-        if(!this.formGroupRegister.value.Editor){
-          this.formGroupRegister.value.Editor = false;
-        }else{
-          roles = roles + 'Editor'; 
-        }
         let usuarioNuevo:Usuario = { 
-          Admin : this.formGroupRegister.value.Admin,
           ConfirmPassword: this.formGroupRegister.value.ConfirmPassword,
-          Editor : this.formGroupRegister.value.Editor,
           Email : this.formGroupRegister.value.Email,
           FirstName : this.formGroupRegister.value.FirstName,
           Imagen : this.formGroupRegister.value.Imagen,
           LastName : this.formGroupRegister.value.LastName,
           Phone : this.formGroupRegister.value.Phone,
           pass : this.formGroupRegister.value.pass,
-          roles : roles
+          roles : roles,
+          Admin : false,
+          Editor : false,
+          id : '' 
         }
         this.usuariosService.register(usuarioNuevo);
         swal("Usuario Registrado", "Exito", "success");
@@ -108,7 +97,6 @@ export class LoginComponent implements OnInit {
 loginGoogle(){
   this.usuariosService.loginGoogle()
   .then((res) => {
-    
     this.userS.getUsuarioByEmail(res.user.email).subscribe(data => {
       if(data.length == 0){
         let usuarioNuevo:Usuario = {
@@ -143,7 +131,6 @@ loginGoogle(){
 }
 
 loginFaceBook(){
- 
   this.usuariosService.loginFaceBook()
   .then((res) => {
     this.userS.getUsuarioByEmail(res.user.email).subscribe(data => {
