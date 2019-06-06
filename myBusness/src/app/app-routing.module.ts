@@ -18,39 +18,6 @@ import { AuthenticationGuard } from '../app/guards/authentication/authentication
 import { AuthorizationGuard } from '../app/guards/authorization/authorization.guard'; 
 
 
-// const routes: Routes = [
-  
-//   { path: 'acerca-de', component: AcercaDeComponent },
-//   { path: 'contactenos', component: ContactenosComponent },
-//   { path: 'servicios', component: ServiciosComponent },
-//   { path: 'lista-noticias', component: NoticiasListComponent },
-//   { path: 'inicio', component: NoticiasListComponent },
-//   { path: 'login/:selector', component: LoginComponent},
-//   { path: 'loginIngresar/:selector', component: LoginComponent},
-//   { path: 'lista-sitios', component: SitiosListComponent},
-//   { path: 'buscar/:id', component: BuscarSitiosComponent},
-
-
- 
-//   { path: 'private', component:PrivateComponent,canActivate:[AuthenticationGuard], children:[
-//     { path: 'informacion-usuario/:user', component: InfoUsuarioComponent},
-//     { path: 'sitio/:id', component: SitioComponent},
-//     { path: 'sitio-seguido/:id', component:SitioSeguidoComponent},
-//     { path: 'insertar-sitio', component:EditSitioComponent},
-//     { path: 'noticias-edit/:id', component: NoticiasUpsertComponent,
-//       canActivate: [AuthorizationGuard], data: {role: 'Editor'}},
-
-//     { path: 'noticias-insert', component: NoticiasUpsertComponent,
-//       canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
-
-//     { path: 'editar-sitio/:id', component: EditSitioComponent,
-//     canActivate: [AuthorizationGuard], data: {role: 'Editor'}},
-//   ]},
-
-//   { path: '**', pathMatch: 'full', redirectTo: 'inicio'}
-// ];
-
-
 const routes: Routes = [
   
   { path: 'acerca-de', component: AcercaDeComponent },
@@ -60,26 +27,60 @@ const routes: Routes = [
   { path: 'inicio', component: NoticiasListComponent },
   { path: 'login/:selector', component: LoginComponent},
   { path: 'loginIngresar/:selector', component: LoginComponent},
-  { path: 'usuarios', component: UsuariosComponent,
-  canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
+  { path: 'lista-sitios', component: SitiosListComponent},
+  { path: 'buscar/:id', component: BuscarSitiosComponent},
+  { path: 'usuarios', component: UsuariosComponent},
+  //   canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
 
+ //canActivate:[AuthenticationGuard],
+  { path: 'private', component:PrivateComponent, canActivate:[AuthenticationGuard],children:[
+    { path: 'informacion-usuario/:user', component: InfoUsuarioComponent},
+    { path: 'sitio/:id', component: SitioComponent},
+    { path: 'sitio-seguido/:id', component:SitioSeguidoComponent},
+    { path: 'insertar-sitio', component:EditSitioComponent},
+    { path: 'noticias-edit/:id', component: NoticiasUpsertComponent,
+      canActivate: [AuthorizationGuard], data: {role: 'Editor'}},
 
-  { path: 'editar-noticia/:id', component: NoticiasUpsertComponent},
-  { path: 'insertar-noticias', component: NoticiasUpsertComponent,
-    canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
-  { path: 'editar-sitio/:id', component: EditSitioComponent,
-  canActivate: [AuthorizationGuard], data: {role: 'Editor'}},
- 
- 
+    { path: 'noticias-insert', component: NoticiasUpsertComponent,
+      canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
 
-  { path: 'informacion-usuario/:user', component: InfoUsuarioComponent,canActivate:[AuthenticationGuard]},
-  { path: 'lista-sitios', component: SitiosListComponent,canActivate:[AuthenticationGuard]},
-  { path: 'sitio/:id', component: SitioComponent,canActivate:[AuthenticationGuard]},
-  { path: 'buscar/:id', component: BuscarSitiosComponent,canActivate:[AuthenticationGuard]},
-  { path: 'sitio-seguido/:id', component:SitioSeguidoComponent,canActivate:[AuthenticationGuard]},
-  { path: 'insertar-sitio', component:EditSitioComponent,canActivate:[AuthenticationGuard]},
+    { path: 'editar-sitio/:id', component: EditSitioComponent}
+    //canActivate: [AuthorizationGuard], data: {role: 'Editor'}},
+  ]},
+
   { path: '**', pathMatch: 'full', redirectTo: 'inicio'}
 ];
+
+
+// const routes: Routes = [
+  
+//   { path: 'acerca-de', component: AcercaDeComponent },
+//   { path: 'contactenos', component: ContactenosComponent },
+//   { path: 'servicios', component: ServiciosComponent },
+//   { path: 'lista-noticias', component: NoticiasListComponent },
+//   { path: 'inicio', component: NoticiasListComponent },
+//   { path: 'login/:selector', component: LoginComponent},
+//   { path: 'loginIngresar/:selector', component: LoginComponent},
+//   { path: 'usuarios', component: UsuariosComponent,
+//   canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
+
+
+//   { path: 'editar-noticia/:id', component: NoticiasUpsertComponent},
+//   { path: 'insertar-noticias', component: NoticiasUpsertComponent,
+//     canActivate: [AuthorizationGuard], data: {role: 'Admin'}},
+//   { path: 'editar-sitio/:id', component: EditSitioComponent,
+//   canActivate: [AuthorizationGuard], data: {role: 'Editor'}},
+ 
+ 
+
+//   { path: 'informacion-usuario/:user', component: InfoUsuarioComponent,canActivate:[AuthenticationGuard]},
+//   { path: 'lista-sitios', component: SitiosListComponent,canActivate:[AuthenticationGuard]},
+//   { path: 'sitio/:id', component: SitioComponent,canActivate:[AuthenticationGuard]},
+//   { path: 'buscar/:id', component: BuscarSitiosComponent,canActivate:[AuthenticationGuard]},
+//   { path: 'sitio-seguido/:id', component:SitioSeguidoComponent,canActivate:[AuthenticationGuard]},
+//   { path: 'insertar-sitio', component:EditSitioComponent,canActivate:[AuthenticationGuard]},
+//   { path: '**', pathMatch: 'full', redirectTo: 'inicio'}
+// ];
 
 
 @NgModule({

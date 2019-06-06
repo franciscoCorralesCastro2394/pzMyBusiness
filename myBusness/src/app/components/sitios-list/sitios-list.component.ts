@@ -38,7 +38,7 @@ export class SitiosListComponent implements OnInit {
   }
 
   editarSitio(sitio:any){
-     this.router.navigate(['/editar-sitio',sitio.id]);
+     this.router.navigate(['/private/editar-sitio',sitio.id]);
   }
 
   seguirSitio(sitio:any){

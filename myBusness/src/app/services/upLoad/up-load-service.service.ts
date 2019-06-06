@@ -43,7 +43,6 @@ export class UpLoadServiceService {
   }
 
   private saveFileData(upload: Upload, elementoNombre: string) {
-
     this.angularFirestore.collection<Sitio>('sitios').ref.where('nombre', '==', elementoNombre).get()
      .then(  (querySnapshot) => {
        
@@ -69,7 +68,7 @@ export class UpLoadServiceService {
       .then(() => {
         this.deleteFileStorage(upload.name)
       })
-      .catch(error => console.error(error))
+      .catch(error => console.log(error))
   }
 
   private deleteFileFirestore(id: string) {
