@@ -52,11 +52,12 @@ export class EditSitioComponent implements OnInit {
    
   
    ngOnInit() {
-
+ 
   
   }
 
  obtenerSitiosUsuarios(){
+   debugger
   if(this.sitioId){
     this.sitioServiceService.getAllSitios().subscribe(data => {
       this.sitios = data;
@@ -72,6 +73,7 @@ export class EditSitioComponent implements OnInit {
 
 
   iniciarSitio = () => {
+    debugger
     this.formGroupSitioEdit = this.formBuilder.group({
       id: ['', [],],
       nombre: ['', [Validators.required]],
@@ -90,21 +92,22 @@ export class EditSitioComponent implements OnInit {
   }
 
   cargarSitio = (id: string) => {
+    debugger
     const listaSitios = this.sitios;
     listaSitios.forEach(sitio => {
       if (sitio.id == id) {
-        this.formGroupSitioEdit =  this.formBuilder.group({
-          id: [sitio.id, [Validators.required],],
-          nombre: [sitio.nombre, [Validators.required]],
-          img: [sitio.img, [Validators.required]],
-          descripcion: [sitio.descripcion, [Validators.required, Validators.minLength(15)]],
-          horario: [sitio.horario],
-          videoYB: [sitio.videoYB],
-          Editor: [sitio.Editor],
+          this.formGroupSitioEdit.patchValue({
+          id: sitio.id,
+          nombre: sitio.nombre,
+          img: sitio.img,
+          descripcion: sitio.descripcion,
+          horario: sitio.horario,
+          videoYB: sitio.videoYB,
+          Editor: sitio.Editor,
         });
-           (<FormArray>this.formGroupSitioEdit.controls['imagenes']).removeAt(0);
+        (<FormArray>this.formGroupSitioEdit.controls['imagenes']).removeAt(0);
            sitio.imgs.forEach((imagen: string) => {
-        this.agregarImagen(imagen);
+            this.agregarImagen(imagen);
       });
       }
     });

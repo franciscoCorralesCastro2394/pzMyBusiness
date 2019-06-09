@@ -21,7 +21,7 @@ export class CalificacionesServiceService {
     if(cali.id && cali.id != ''){
        this.angularFirestore.collection<calificacion>(this.calificacionesCollectionName).doc(cali.id).set(cali);
     }else{
-      cali.id = this.angularFirestore.createId()
+      cali.id = this.angularFirestore.createId();
       this.angularFirestore.collection<calificacion>(this.calificacionesCollectionName).add(cali);
     }
   }

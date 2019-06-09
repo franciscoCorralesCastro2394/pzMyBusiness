@@ -34,7 +34,7 @@ export class SitiosListComponent implements OnInit {
 
 
   nuevoSitio(){
-    this.router.navigate(['/insertar-sitio/']);
+    this.router.navigate(['/private/insertar-sitio/']);
   }
 
   editarSitio(sitio:any){
@@ -43,7 +43,7 @@ export class SitiosListComponent implements OnInit {
 
   seguirSitio(sitio:any){
     if(this.dataStorageService.getObjectValue("UserNow") != ''){    
-      this.router.navigate(['/sitio-seguido/' + sitio.id]);
+      this.router.navigate(['/private/sitio-seguido/' + sitio.id]);
   }else{
     swal("Error", "Debe ingresar con un usuario valido", "error");        
     this.router.navigate(['/loginIngresar/0']);
@@ -53,7 +53,7 @@ export class SitiosListComponent implements OnInit {
 
 
   vermas(id:string){
-    this.router.navigate(['/sitio/'+ id]);
+    this.router.navigate(['/private/sitio/'+ id]);
   }
 
 }

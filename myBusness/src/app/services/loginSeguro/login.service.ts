@@ -27,7 +27,7 @@ export class LoginService {
     this.angularFireAuth.auth.signInWithEmailAndPassword(email, password).then((value) => {
       this.setCurrentUser(email);
       this.dataStorageService.setObjectValue("UserNow",email);
-      this.router.navigate(['/informacion-usuario/' + email]);
+      this.router.navigate(['/private/informacion-usuario/' + email]);
     }).catch((error) => {
       swal("Error al hacer login", "Error", "error");
     });

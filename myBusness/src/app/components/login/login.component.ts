@@ -116,11 +116,11 @@ loginGoogle(){
         this.dataStorageService.setObjectValue("UserNow",res.user.email);
         this.userS.saveUsuario(usuarioNuevo);
         this.dataStorageService.setObjectValue("roles",usuarioNuevo.roles);
-        this.router.navigate(['/informacion-usuario/' + res.user.email]);  
+        this.router.navigate(['/private/informacion-usuario/' + res.user.email]);  
       }else{
         this.dataStorageService.setObjectValue("UserNow",res.user.email);
         this.dataStorageService.setObjectValue("roles",data[0].roles);
-        this.router.navigate(['/informacion-usuario/' + res.user.email]);  
+        this.router.navigate(['/private/informacion-usuario/' + res.user.email]);  
       }
 
     });
@@ -152,13 +152,12 @@ loginFaceBook(){
         this.dataStorageService.setObjectValue("UserNow",res.user.email);
         this.userS.saveUsuario(usuarioNuevo);
         this.dataStorageService.setObjectValue("roles",usuarioNuevo.roles);
-        this.router.navigate(['/informacion-usuario/' + res.user.email]);  
+        this.router.navigate(['/private/informacion-usuario/' + res.user.email]);  
       }else{
         this.dataStorageService.setObjectValue("UserNow",res.user.email);
         this.dataStorageService.setObjectValue("roles",data[0].roles);
-        this.router.navigate(['/informacion-usuario/' + res.user.email]);  
+        this.router.navigate(['/private/informacion-usuario/' + res.user.email]);  
       }
-
     });
   }).catch(err => {
     swal("Error al ingresar", "Error", "error");

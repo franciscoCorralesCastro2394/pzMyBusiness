@@ -71,21 +71,27 @@ export class SitioComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       let user:Usuario =  this.loginService.getUsuario();
-      this.userAdmin = user.Admin;
+      if(user.roles.includes('Admin')){
+        this.userAdmin = true;
+      }else{
+        this.userAdmin = false;
+      }
+      
     }, 2000);
   }
   
 
    getResenas(){
+     debugger
     this.comentariosService.getAllComentarios().subscribe(data =>{
       this.resenas = data;
-      this.resenas = this.resenas.filter(x => x.idSitio == this.sitioId);
+      this.resenas = this.resenas.filter(x => x.idSitio == this.sitioId && x.sensuardo != true);
 
       for(let i = 0; i < this.resenas.length; i++)
       {
         this.resenas[i].nombreSitio = this.nombreSitio(this.resenas[i].idSitio);
       }
-       
+      
       this.respuestasServiceService.getAllRespuestas().subscribe(dataRes => {
                 this.respuestas = dataRes;
                 this.resenas.forEach(res => {
@@ -94,8 +100,9 @@ export class SitioComponent implements OnInit {
                     if(resp.idResena == res.id && resp.idSitio == this.sitioId){
                       respRes.push(resp);
                     }
-                  }); 
-               res.respuestas = respRes;
+                  });    
+               res.respuestas = Array.of(respRes);
+               
              });
       });
     });
@@ -174,6 +181,7 @@ export class SitioComponent implements OnInit {
    this.resenas.forEach( res => {
       if(res.id == id){
         res.sensuardo = true;
+        debugger
         this.comentariosService.saveComentario(res);
         swal("Comentario sensurado", "Exito", "success");
       }
