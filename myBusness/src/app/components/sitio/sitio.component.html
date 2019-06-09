@@ -38,13 +38,7 @@
                     <div *ngIf="!resena.sensuardo">
                         <div class="block-text rel zmin">
                             <a title="" href="#">{{resena.nombreSitio}}</a>
-                            <div class="mark">My rating: {{resena.sentimineto}}
-                                <span class="rating-input">
-            			    <span class=""><i class="fa fa-star-o"></i></span>
-                                <span class=""><i class="fa fa-star-o"></i></span>
-                                <span class=""><i class="fa fa-star-o"></i></span>
-                                <span class=""><i class="fa fa-star-o"></i></span>
-                                </span>
+                            <div class="mark">My rating: {{resena.sentimeinto}}
                             </div>
                             <p class="text-justify">{{resena.comentario}}</p>
                             <ins class="ab zmin sprite block"></ins>
@@ -81,7 +75,8 @@
                             Responder
                             <i class="far fa-comments"></i>
                     </button>
-                        <button (click)="sensurarcomentario(resena.id)" *ngIf="userAdmin" type="button" class="btn btn-outline-warning">
+                        <!-- sensurarcomentario(resena.id) -->
+                        <button (click)="resena.sensuardo = !resena.sensuardo" *ngIf="userAdmin" type="button" class="btn btn-outline-warning">
                         Sensurar
                         <i class="fas fa-comment-slash"></i>
                     </button>

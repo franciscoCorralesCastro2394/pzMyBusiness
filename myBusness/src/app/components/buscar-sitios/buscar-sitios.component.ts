@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,10 @@ import { Observable } from 'rxjs';
 })
 export class BuscarSitiosComponent implements OnInit {
 
-  constructor(private data:SitioServiceService, private activateRoute: ActivatedRoute) { }
+  constructor(private data:SitioServiceService, 
+    private activateRoute: ActivatedRoute,
+    private router: Router) { }
+
   sitios$:Observable<any>;
   termino:string;
   
@@ -25,6 +29,16 @@ export class BuscarSitiosComponent implements OnInit {
   buscarSitio(value:string){
     this.sitios$ = this.data.searchSitio(value);
   }
+
+  verMas(route: string){
+    debugger
+    this.router.navigateByUrl('/private/sitio/' + route);
+  }
+
+
+
+
+
 
 
 }

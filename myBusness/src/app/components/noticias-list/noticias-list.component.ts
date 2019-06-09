@@ -16,7 +16,7 @@ export class NoticiasListComponent implements OnInit {
   }
    
    editarNoticia(noti:any){
-     this.router.navigate(['/editar-noticia/',noti.Id]);
+     this.router.navigate(['/private/editar-noticia/',noti.Id]);
    }
 
   ngOnInit() {
