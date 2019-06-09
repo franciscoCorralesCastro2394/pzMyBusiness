@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSeguro/login.service';
 import { DataStorageService } from '../../services/data-storage.service';
+import { UsuariosService } from '../../services/usuarios.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,12 +12,23 @@ import { DataStorageService } from '../../services/data-storage.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  users$:Observable<any>;
+  usuario_actual$:Observable<any>;
+  usuario$:Observable<any>;
+  
   constructor(
+              private usuariosService:UsuariosService,
               private router:Router,
               private login:LoginService,
-              private dataStorageService:DataStorageService) { }
+              private dataStorageService:DataStorageService) { 
+                this.getUsuario();
+  }
   ngOnInit() {
+  }
+
+  getUsuario = () => {
+    this.users$ = this.usuariosService.getAllUaurios();
+    this.usuario_actual$ = this.dataStorageService.getObjectValue("UserNow");
   }
 
   LoginOff(){
@@ -23,6 +36,7 @@ export class NavbarComponent implements OnInit {
       this.dataStorageService.deleteObjValue("UserNow");
       this.dataStorageService.deleteObjValue("roles");
       this.router.navigate(['lista-noticias']);
+      this.getUsuario();
   }
 
    Ingresar(selector:number){
@@ -32,4 +46,9 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/login/1']);
      }
    } 
+
+   logueado(email:String){
+    this.router.navigate(['/private/informacion-usuario/'+email]);
+  } 
+
 }
