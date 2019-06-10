@@ -3,7 +3,5 @@ export interface Noticia {
     Titulo:String;
     Imagen:String;
     Descripcion:String;
-    fechaCreacion:Date;
-    ultimaModificacion:Date; 
     }
     

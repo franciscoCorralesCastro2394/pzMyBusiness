@@ -68,14 +68,11 @@ export class NoticiasUpsertComponent implements OnInit {
       Id: ['',],
       Titulo: ['', [Validators.required]],
       Descripcion: ['', [Validators.required, Validators.minLength(15)]],
-      FechaCreacion: ['',Validators.required],
-      UltimaModificacion: ['',Validators.required],
     });
   }
 
   cargarNoticia = (id: number) => {
     const listaNoticias = this.noticias;
-    debugger
     listaNoticias.forEach(noticia => {
       if (noticia.Id == id) {
         this.formGroup = this.formBuilder.group({
@@ -83,8 +80,6 @@ export class NoticiasUpsertComponent implements OnInit {
           Titulo: [noticia.Titulo, [Validators.required]],
           Imagen: [noticia.Imagen, [Validators.required]],
           Descripcion: [noticia.Descripcion, [Validators.required, Validators.minLength(15)]],
-          FechaCreacion: [noticia.FechaCreacion],
-          UltimaModificacion: [noticia.UltimaModificacion],
         });
       }
     });
@@ -96,8 +91,6 @@ export class NoticiasUpsertComponent implements OnInit {
        Descripcion : this.formGroup.value.Descripcion,
        Imagen : '',
        Titulo : this.formGroup.value.Titulo,
-       fechaCreacion : new Date,
-       ultimaModificacion : new Date,
        Id : ''
      } 
       this.NoticiaCreatedId = this.NoticiaService.saveNoticia(noticia);

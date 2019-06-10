@@ -43,4 +43,9 @@ export class UsuariosService {
     return  this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName, ref => ref.where('Email', '==', email)).valueChanges();
   }
 
+  deleteUsuario(user:Usuario){
+  this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).doc(user.id).delete();
+
+  }
+
 }

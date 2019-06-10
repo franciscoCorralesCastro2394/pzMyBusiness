@@ -8,6 +8,7 @@
             <th>Correo</th>
             <th>Roles</th>
             <th>Guardar</th>
+            <th>Eliminar</th>
         </tr>
         <tr *ngFor="let user of (users$ | async); let i=index">
             <td>{{i + 1}}</td>
@@ -18,7 +19,14 @@
             </td>
             <td>
                 <div class="pull-right">
-                    <button type="button" class="btn btn-primary btn-xs" (click)="guardarCambios(user,rol.value)">
+                    <button type="button" class="btn btn-outline-info btn-xs" (click)="guardarCambios(user,rol.value)">
+                    <span class="fa fa-save"></span>
+                </button>
+                </div>
+            </td>
+            <td>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-outline-danger btn-xs" (click)="EliminarCambios(user)">
                     <span class="fa fa-save"></span>
                 </button>
                 </div>

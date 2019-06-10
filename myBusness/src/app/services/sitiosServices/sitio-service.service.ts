@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Sitio } from '../../interfaces/sitio.interface';
 import { sitioSeguido } from '../../interfaces/sitiosSeguidos.interfaces';
 import 'rxjs/Rx';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -39,6 +38,10 @@ export class SitioServiceService {
 
   getSitiosById(term: string): Observable<Sitio[]> { 
     return  this.angularFirestore.collection<Sitio>(this.sitiosCollectionName, ref => ref.where('id', '==', term)).valueChanges();
+}
+
+deleteSitio(sitio: Sitio) { 
+  this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).doc(sitio.id).delete();
 }
 
 }

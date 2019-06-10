@@ -5,7 +5,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import swal from 'sweetalert';
 import { Sitio } from '../../interfaces/sitio.interface';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -51,7 +50,6 @@ export class UpLoadServiceService {
       
         let nuevoArregloDeImagenes= doc.get('imgs');
         nuevoArregloDeImagenes.push(upload.url);
-       
         return elementRef.update({ 
           imgs: nuevoArregloDeImagenes
         }).then(()=>{
@@ -89,8 +87,8 @@ export class UpLoadServiceService {
       querySnapshot.docs.forEach(doc => {
         var elementRef = this.angularFirestore.collection('noticias').doc(doc.id);
       
-        // let nuevoArregloDeImagenes= doc.get('imgs');
-        // nuevoArregloDeImagenes.push(upload.url);
+        //  let nuevoArregloDeImagenes= doc.get('imgs');
+         //nuevoArregloDeImagenes.push(upload.url);
        
         return elementRef.update({ 
           Imagen: upload.url

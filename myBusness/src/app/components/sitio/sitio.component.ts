@@ -11,7 +11,7 @@ import { CalificacionesServiceService } from '../../services/calificacionesServi
 import { ComentariosService } from '../../services/comentariosServices/comentarios.service';
 import { RespuestasServiceService } from '../../services/respuestasService/respuestas-service.service';
 import { Respuesta } from '../../interfaces/respuesta.interface';
-import swal from 'sweetalert';
+import swal from 'sweetalert'; 
 import { Usuario } from 'src/app/interfaces/heroes.interfaces';
 
 
@@ -82,7 +82,6 @@ export class SitioComponent implements OnInit {
   
 
    getResenas(){
-     debugger
     this.comentariosService.getAllComentarios().subscribe(data =>{
       this.resenas = data;
       this.resenas = this.resenas.filter(x => x.idSitio == this.sitioId && x.sensuardo != true);
@@ -101,7 +100,7 @@ export class SitioComponent implements OnInit {
                       respRes.push(resp);
                     }
                   });    
-               res.respuestas = Array.of(respRes);
+               res.respuestas = respRes;
                
              });
       });
@@ -181,7 +180,6 @@ export class SitioComponent implements OnInit {
    this.resenas.forEach( res => {
       if(res.id == id){
         res.sensuardo = true;
-        debugger
         this.comentariosService.saveComentario(res);
         swal("Comentario sensurado", "Exito", "success");
       }

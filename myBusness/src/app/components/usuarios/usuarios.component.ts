@@ -26,9 +26,25 @@ export class UsuariosComponent implements OnInit {
 
   guardarCambios(user:Usuario,rol:string){
     user.roles = rol;
+    if(user.roles.includes('Editor')){
+      user.Editor = true;
+    }else{
+      user.Editor = false;
+    }
+    if(user.roles.includes('Admin')){
+      user.Admin = true;
+    }else{
+      user.Admin = false;
+    }
     this.usuariosService.saveUsuario(user);
     swal("Exito", "Se guardaron los datos", "success");        
     this.getUsuario();
   }
 
+
+  EliminarCambios(user:Usuario){
+    this.usuariosService.deleteUsuario(user);
+    swal("Exito", "Se eleminaron los datos", "success");  
+    this.getUsuario();
+  }
 }

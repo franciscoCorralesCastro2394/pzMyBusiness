@@ -33,6 +33,7 @@ import { SitioSeguidoComponent } from './components/sitio-seguido/sitio-seguido.
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { PrivateComponent } from './components/private/private.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { Router, RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     AngularFireModule.initializeApp(environment.fireBase),
     AngularFirestoreModule,
     AngularFireAuthModule
+    // RouterModule.forRoot(routes,{scrollPositionRestoration:'enabled'})
   ],
   providers: [ DatePipe,DataStorageService],
   bootstrap: [AppComponent]

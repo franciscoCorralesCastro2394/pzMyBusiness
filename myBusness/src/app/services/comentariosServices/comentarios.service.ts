@@ -18,7 +18,6 @@ export class ComentariosService {
 
 
    saveComentario(com: comentario){
-     debugger
      if(com.id && com.id != ''){
          this.angularFirestore.collection<comentario>(this.calificacionesCollectionName).doc(com.id).update(com);
      }else{

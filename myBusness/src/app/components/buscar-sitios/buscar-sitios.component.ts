@@ -31,7 +31,6 @@ export class BuscarSitiosComponent implements OnInit {
   }
 
   verMas(route: string){
-    debugger
     this.router.navigateByUrl('/private/sitio/' + route);
   }
 

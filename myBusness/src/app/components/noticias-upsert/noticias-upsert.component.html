@@ -17,15 +17,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="form-group col-12">
-            <label for="titulo">Imagen</label>
-            <input type="text" class="form-control" formControlName="Imagen" id="Imagen" placeholder="Escriba la url de la imagen">
-            <div *ngIf="formGroup.controls['Imagen'].dirty">
-                <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['Imagen'].errors?.required">
-                    La url de la imagen es requerida
-                </div>
-            </div>
-        </div> -->
         <div class="form-group col-12">
             <label for="titulo">Descripción</label>
             <input type="text" class="form-control" formControlName="Descripcion" id="Descripcion" placeholder="Escriba la descripción">
@@ -37,14 +28,6 @@
                     La descripción debe ser de almenos 15 caracteres
                 </div>
             </div>
-        </div>
-        <div class="form-group col-6">
-            <label for="titulo">Fecha Creación</label>
-            <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker formControlName="FechaCreacion" id="FechaCreacion">
-        </div>
-        <div class="form-group col-6">
-            <label for="titulo">Fecha Creación</label>
-            <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker formControlName="UltimaModificacion" id="UltimaModificacion">
         </div>
 
         <button type="submit" class="btn texto_secundario float-right m-b-5" [ngClass]="{'disabled':!formGroup.valid}" (click)="guardarData()">Guardar</button>

@@ -6,11 +6,11 @@ import { Sitio } from '../../interfaces/sitio.interface';
 import { Observable, Subscription, from } from 'rxjs';
 import { SitioServiceService } from '../../services/sitiosServices/sitio-service.service';
 import { UsuariosService } from '../../services/usuarios.service';
-import { Usuario } from 'src/app/clases/Usuario';
+import { Usuario } from 'src/app/interfaces/heroes.interfaces';
 import * as _ from "lodash";
 import { Upload } from 'src/app/clases/upload.class';
 import { UpLoadServiceService } from 'src/app/services/upLoad/up-load-service.service'
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -33,13 +33,16 @@ export class EditSitioComponent implements OnInit {
   currentUpload: Upload;
   selectedFiles: FileList;
   createdSitioId: string;
+  editedSitioId: string;
   sitioSuscription: Subscription;
   
   constructor(private activatedRoute:ActivatedRoute, 
+              private router:Router,          
               private formBuilder:FormBuilder, 
               private sitioServiceService:SitioServiceService,
               private usuariosService:UsuariosService,
               private upLoadServiceService:UpLoadServiceService
+              
       ) {
     this.sitioId = this.activatedRoute.snapshot.params['id'];
     this.iniciarSitio();
@@ -57,7 +60,6 @@ export class EditSitioComponent implements OnInit {
   }
 
  obtenerSitiosUsuarios(){
-   debugger
   if(this.sitioId){
     this.sitioServiceService.getAllSitios().subscribe(data => {
       this.sitios = data;
@@ -67,13 +69,16 @@ export class EditSitioComponent implements OnInit {
  
     this.editores$ =  this.usuariosService.getAllEditores();
     this.editores$.subscribe((usersData:Usuario[]) =>{
-      this.users = usersData;
+      usersData.forEach(user => {
+         if(user.roles.includes('Editor')){
+           this.users.push(user);
+         }
+      }) ;
     });
   }
 
 
   iniciarSitio = () => {
-    debugger
     this.formGroupSitioEdit = this.formBuilder.group({
       id: ['', [],],
       nombre: ['', [Validators.required]],
@@ -92,10 +97,10 @@ export class EditSitioComponent implements OnInit {
   }
 
   cargarSitio = (id: string) => {
-    debugger
     const listaSitios = this.sitios;
     listaSitios.forEach(sitio => {
       if (sitio.id == id) {
+        this.editedSitioId = sitio.nombre;
           this.formGroupSitioEdit.patchValue({
           id: sitio.id,
           nombre: sitio.nombre,
@@ -114,8 +119,8 @@ export class EditSitioComponent implements OnInit {
   } 
 
   guardarData = () => {
+    
     if (this.formGroupSitioEdit.valid) {
-      let imgs:string[] = []; 
       let sitio:Sitio = {
         descripcion: this.formGroupSitioEdit.value.descripcion,
         horario:  this.formGroupSitioEdit.value.horario,
@@ -123,10 +128,20 @@ export class EditSitioComponent implements OnInit {
         nombre: this.formGroupSitioEdit.value.nombre,
         videoYB: this.formGroupSitioEdit.value.videoYB, 
         Editor:  this.formGroupSitioEdit.value.Editor,
-        imgs : imgs 
+        imgs : this.formGroupSitioEdit.value.imagenes
       }
-     this.createdSitioId = this.sitioServiceService.savSitios(sitio);   
-     this.createdSitioId = this.formGroupSitioEdit.value.nombre;
+      
+      if(!this.editedSitioId){
+        let imgs:string[] = []; 
+        sitio.imgs = imgs;
+        this.createdSitioId = this.sitioServiceService.savSitios(sitio);   
+        this.createdSitioId = this.formGroupSitioEdit.value.nombre;
+        
+      }else{
+        this.sitioServiceService.savSitios(sitio);
+        swal("Exito", "Debe ingresar la imagenes del Sitio", "info");
+         this.router.navigate(['lista-sitios']); 
+      }
       swal("Exito", "Debe ingresar la imagenes del Sitio", "info");
     } else {
       swal("Debe completar la información correctamente", "Intente de nuevo", "error");
@@ -148,10 +163,20 @@ detectFiles(event: any) {
   this.selectedFiles = event.target.files;
 }
 
+listo(){
+  this.router.navigate(['lista-sitios']); 
+}
+
+
 uploadSingle() {
+  
   let file = this.selectedFiles.item(0);
   this.currentUpload = new Upload(file);
-   this.upLoadServiceService.pushUpload(this.currentUpload, this.createdSitioId);
+  if(!this.editedSitioId){
+   this.upLoadServiceService.pushUpload(this.currentUpload, this.createdSitioId);    
+  }else{
+    this.upLoadServiceService.pushUpload(this.currentUpload, this.editedSitioId);    
+  }
 }
 
 }
