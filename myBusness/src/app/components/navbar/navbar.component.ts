@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
   users$:Observable<any>;
+  users:Observable<any>;
   usuario_actual$:Observable<any>;
   usuario$:Observable<any>;
   
@@ -22,12 +23,19 @@ export class NavbarComponent implements OnInit {
               private login:LoginService,
               private dataStorageService:DataStorageService) { 
                 this.getUsuario();
+                
   }
   ngOnInit() {
+    setInterval(this.setUsuarios,1000);
+   
   }
 
   getUsuario = () => {
     this.users$ = this.usuariosService.getAllUaurios();
+    this.usuario_actual$ = this.dataStorageService.getObjectValue("UserNow");
+  }
+
+  setUsuarios = () => {
     this.usuario_actual$ = this.dataStorageService.getObjectValue("UserNow");
   }
 
