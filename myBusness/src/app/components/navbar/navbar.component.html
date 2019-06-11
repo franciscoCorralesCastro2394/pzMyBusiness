@@ -26,6 +26,14 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['lista-sitios']">Sitios</a>
             </li>
+            <li class="img-perfil">
+                <div *ngFor="let user of (users$ | async); let i=index;">
+                    <ng-container *ngIf="(user.Email === (usuario_actual$)) ">
+                        <a class="nav-link" (click)="logueado(user.Email)"><img src="{{ user.Imagen }}" alt="{{ user.FirstName }}"></a>
+                    </ng-container>
+                </div>
+            </li>
+
         </ul>
         <button class="btn texto_secundario my-2 my-sm-0" (click)="Ingresar(0)" type="button">Ingresar</button>
         <button class="btn texto_secundario my-2 my-sm-0" (click)="Ingresar(1)" type="button">Registro</button>
