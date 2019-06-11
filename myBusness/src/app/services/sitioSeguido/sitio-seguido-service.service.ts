@@ -20,10 +20,10 @@ export class SitioSeguidoServiceService {
 
    saveSitiosSeguisdos(sSeguido: sitioSeguido){
      if(sSeguido.id && sSeguido.id != ''){
-       this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).doc(sSeguido.id).set(sSeguido); 
+        this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).doc(sSeguido.id).set(sSeguido); 
      }else{
       sSeguido.id = this.angularFirestore.createId(); 
-      this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).add(sSeguido);
+      this.angularFirestore.collection<sitioSeguido>(this.sitioColletionName).doc(sSeguido.id).set(sSeguido); 
      }
   }
 }

@@ -23,7 +23,7 @@ export class NoticiaServiceService {
        this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).doc(noticia.Id).set(noticia);
      }else{
       noticia.Id = this.angularFirestore.createId(); 
-      this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).add(noticia);
+      this.angularFirestore.collection<Noticia>(this.NoticiaCollectionName).doc(noticia.Id).set(noticia);      
      }
     return noticia.Id;
   }

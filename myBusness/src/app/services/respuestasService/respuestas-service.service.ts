@@ -22,7 +22,7 @@ export class RespuestasServiceService {
         this.angularFirestore.collection<Respuesta>(this.respColletionName).doc(resp.idResena).set(resp);
      }else{
       resp.id = this.angularFirestore.createId(); 
-      this.angularFirestore.collection<Respuesta>(this.respColletionName).add(resp);
+      this.angularFirestore.collection<Respuesta>(this.respColletionName).doc(resp.idResena).set(resp);      
      }
     
   }

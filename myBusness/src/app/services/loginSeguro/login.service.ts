@@ -71,6 +71,7 @@ export class LoginService {
   loginFaceBook(){
     return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
   }
+
 }
 
 

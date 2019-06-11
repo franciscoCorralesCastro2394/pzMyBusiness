@@ -21,8 +21,8 @@ export class ComentariosService {
      if(com.id && com.id != ''){
          this.angularFirestore.collection<comentario>(this.calificacionesCollectionName).doc(com.id).update(com);
      }else{
-         com.id = this.angularFirestore.createId(); 
-         this.angularFirestore.collection<comentario>(this.calificacionesCollectionName).add(com);
+        com.id = this.angularFirestore.createId(); 
+      this.angularFirestore.collection<comentario>(this.calificacionesCollectionName).doc(com.id).set(com);      
      }
     
   }

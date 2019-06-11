@@ -3,6 +3,8 @@ import { UsuariosService } from '../../services/usuarios.service';
 import { Observable } from 'rxjs';
 import { Usuario } from '../../interfaces/heroes.interfaces';
 import swal from 'sweetalert';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-usuarios',
@@ -12,7 +14,7 @@ import swal from 'sweetalert';
 export class UsuariosComponent implements OnInit {
   users$:Observable<any>;
 
-  constructor( private usuariosService:UsuariosService) {
+  constructor( private usuariosService:UsuariosService,private router:Router ) {
 
     this.getUsuario();
    }
@@ -37,14 +39,14 @@ export class UsuariosComponent implements OnInit {
       user.Admin = false;
     }
     this.usuariosService.saveUsuario(user);
-    swal("Exito", "Se guardaron los datos", "success");        
-    this.getUsuario();
+    swal("Exito", "Se guardaron los datos", "success");      
+    this.router.navigateByUrl('private/usuarios');
   }
 
 
   EliminarCambios(user:Usuario){
     this.usuariosService.deleteUsuario(user);
     swal("Exito", "Se eleminaron los datos", "success");  
-    this.getUsuario();
+    this.router.navigateByUrl('private/usuarios');
   }
 }

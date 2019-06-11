@@ -22,7 +22,7 @@ export class SitioServiceService {
       this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).doc(sitio.id).set(sitio);      
     }else {
       sitio.id = this.angularFirestore.createId(); 
-      this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).add(sitio);
+      this.angularFirestore.collection<Sitio>(this.sitiosCollectionName).doc(sitio.id).set(sitio);      
     }
     return sitio.id;
   }

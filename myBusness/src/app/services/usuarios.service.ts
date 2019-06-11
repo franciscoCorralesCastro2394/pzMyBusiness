@@ -27,7 +27,7 @@ export class UsuariosService {
         this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).doc(user.id).set(user);   
     }else{
       user.id = this.angularFirestore.createId();
-      this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).add(user);
+      this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).doc(user.id).set(user);         
     }
 
   }
@@ -45,7 +45,6 @@ export class UsuariosService {
 
   deleteUsuario(user:Usuario){
   this.angularFirestore.collection<Usuario>(this.UsuarioCollectionName).doc(user.id).delete();
-
   }
 
 }
