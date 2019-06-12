@@ -13,7 +13,7 @@
                 <input readonly type="text" [formControlName]="i" class="form-control " id="imagen" placeholder="Escriba la url de la imagen">
                 <div class="input-group-append">
                     <button class="btn btn-outline-danger" (click)="borrarImagen($event,i)" type="button" id="button-addon2"><i
-                class="fa fa-times"></i></button>
+                    class="fa fa-times"></i></button>
                 </div>
             </div>
             <div *ngIf="formGroupSitioEdit.controls['imagenes'].dirty">
@@ -32,8 +32,8 @@
                 <label class="custom-file-label" for="customFile">Seleccionar imagen</label>
             </div>
             <button class="btn btn-outline-primary mb-3  btn-sm" [disabled]="!selectedFiles" (click)="uploadSingle()">
-          Agregar archivo
-        </button>
+            Agregar archivo
+            </button>
         </div>
         <div class="form-group col-12">
             <label for="nombre">Nombre</label>

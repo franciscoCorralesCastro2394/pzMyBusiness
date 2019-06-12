@@ -24,7 +24,7 @@ export class EditSitioComponent implements OnInit {
   formGroupSitioEdit:FormGroup;
   formGroupSitioEditImagenes:FormGroup;
   IdSitio:number;
-  sitios:any[] = [];;
+  sitios:Sitio[] = [];;
   sitios$:Observable<any>;
   idSit:number = 0; 
   users:any[] = [];
@@ -50,6 +50,8 @@ export class EditSitioComponent implements OnInit {
     this.iniciarImagenes();
     if(!this.sitioId){
       this.iniciarSitio();
+    }else{
+      this.cargarSitio(this.sitioId);
     }
    }
    
@@ -59,14 +61,7 @@ export class EditSitioComponent implements OnInit {
   
   }
 
- obtenerSitiosUsuarios(){
-  if(this.sitioId){
-    this.sitioServiceService.getAllSitios().subscribe(data => {
-      this.sitios = data;
-      this.cargarSitio(this.sitioId);
-    });
-  }
- 
+ obtenerSitiosUsuarios(){ 
     this.editores$ =  this.usuariosService.getAllEditores();
     this.editores$.subscribe((usersData:Usuario[]) =>{
       usersData.forEach(user => {
@@ -97,25 +92,29 @@ export class EditSitioComponent implements OnInit {
   }
 
   cargarSitio = (id: string) => {
-    const listaSitios = this.sitios;
-    listaSitios.forEach(sitio => {
-      if (sitio.id == id) {
-        this.editedSitioId = sitio.nombre;
-          this.formGroupSitioEdit.patchValue({
-          id: sitio.id,
-          nombre: sitio.nombre,
-          img: sitio.img,
-          descripcion: sitio.descripcion,
-          horario: sitio.horario,
-          videoYB: sitio.videoYB,
-          Editor: sitio.Editor,
+    this.sitioServiceService.getAllSitios().subscribe(data => {
+      this.sitios = data ;
+      this.sitios.forEach(sitio => {
+        if (sitio.id == id) {
+          this.editedSitioId = sitio.nombre;
+            this.formGroupSitioEdit.patchValue({
+            id: sitio.id,
+            nombre: sitio.nombre,  
+            img: sitio.img,
+            descripcion: sitio.descripcion,
+            horario: sitio.horario,
+            videoYB: sitio.videoYB,
+            Editor: sitio.Editor,
+          });
+          (<FormArray>this.formGroupSitioEdit.controls['imagenes']).removeAt(0);
+             sitio.imgs.forEach((imagen: string) => {
+              this.agregarImagen(imagen);
         });
-        (<FormArray>this.formGroupSitioEdit.controls['imagenes']).removeAt(0);
-           sitio.imgs.forEach((imagen: string) => {
-            this.agregarImagen(imagen);
+        }
       });
-      }
+
     });
+
   } 
 
   guardarData = () => {
@@ -138,6 +137,7 @@ export class EditSitioComponent implements OnInit {
         this.createdSitioId = this.formGroupSitioEdit.value.nombre;
         
       }else{
+        debugger
         this.sitioServiceService.savSitios(sitio);
         swal("Exito", "Debe ingresar la imagenes del Sitio", "info");
          this.router.navigate(['lista-sitios']); 
@@ -169,12 +169,12 @@ listo(){
 
 
 uploadSingle() {
-  
   let file = this.selectedFiles.item(0);
   this.currentUpload = new Upload(file);
   if(!this.editedSitioId){
    this.upLoadServiceService.pushUpload(this.currentUpload, this.createdSitioId);    
   }else{
+   
     this.upLoadServiceService.pushUpload(this.currentUpload, this.editedSitioId);    
   }
 }

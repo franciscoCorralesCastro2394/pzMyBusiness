@@ -5,7 +5,7 @@
     <form [formGroup]="formGroup" id="formGroup" class="row" *ngIf="!NoticiaCreatedId">
         <div class="form-group col-6">
             <label for="titulo">Id de la Noticia</label>
-            <input class="form-control" formControlName="Id" id="Id" readonly type="number">
+            <input class="form-control" formControlName="Id" id="Id" readonly type="text">
 
         </div>
         <div class="form-group col-12">
@@ -17,6 +17,39 @@
                 </div>
             </div>
         </div>
+
+        <!-- 
+
+         -->
+        <div class="form-group col-12" formArrayName="imagenes" *ngIf="noticiaId">
+            <label for="titulo">Imagenes</label>
+            <div class="input-group mb-3" *ngFor="let imagen of formGroup.controls['imagenes'].controls; let i = index">
+                <input readonly type="text" [formControlName]="i" class="form-control " id="imagen" placeholder="Escriba la url de la imagen">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-danger" (click)="borrarImagenEdit($event,i)" type="button" id="button-addon2"><i
+                    class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <div *ngIf="formGroup.controls['imagenes'].dirty">
+                <div class="form-control-feedback text-danger" *ngIf="formGroup.controls['imagenes'].errors?.required">
+                    Debe completar la url de cada imagen
+                </div>
+            </div>
+            <div class="form-group col-12" *ngIf="currentUpload">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
+                </div>
+                {{currentUpload?.name}} Progreso: | {{currentUpload?.progress | number:'2.2-2'}}% avance
+            </div>
+            <div class="form-group col-12 custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" (change)="detectFiles($event)">
+                <label class="custom-file-label" for="customFile">Seleccionar imagen</label>
+            </div>
+            <button class="btn btn-outline-primary mb-3  btn-sm" [disabled]="!selectedFiles" (click)="uploadSingle()">
+            Agregar archivo
+            </button>
+        </div>
+        <!--  -->
         <div class="form-group col-12">
             <label for="titulo">Descripción</label>
             <input type="text" class="form-control" formControlName="Descripcion" id="Descripcion" placeholder="Escriba la descripción">

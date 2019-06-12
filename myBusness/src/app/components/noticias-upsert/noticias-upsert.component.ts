@@ -17,14 +17,14 @@ import { UpLoadServiceService } from 'src/app/services/upLoad/up-load-service.se
   styleUrls: ['./noticias-upsert.component.css']
 })
 export class NoticiasUpsertComponent implements OnInit {
-  noticiaId:number = 0;
+  noticiaId:string = '';
   formGroup: FormGroup;
   IdNot: number = 0; 
   NoticiaCreatedId: string;
   formGroupNoticiasEditImagenes:FormGroup;
   currentUpload: Upload;
   selectedFiles: FileList;
-  noticias:any[] = [];
+  noticias:Noticia[] = [];
 
   constructor(private activatedRoute:ActivatedRoute, 
               private formBuilder:FormBuilder, 
@@ -36,8 +36,13 @@ export class NoticiasUpsertComponent implements OnInit {
 
     this.noticiaId = this.activatedRoute.snapshot.params['id'];
   
+
+  }
+
+  ngOnInit() {
+
     this.iniciarImagenes();
-    this.obtenerNotcias();
+    this.iniciarNoticia();
    if(this.noticiaId){
      this.cargarNoticia(this.noticiaId);
     }else{
@@ -45,14 +50,10 @@ export class NoticiasUpsertComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
-
   obtenerNotcias(){
     if(this.noticiaId){
       this.NoticiaService.getAllNoticias().subscribe(data => {
         this.noticias = data;
-        this.cargarNoticia(this.noticiaId);
       });
     }
   }
@@ -65,46 +66,75 @@ export class NoticiasUpsertComponent implements OnInit {
 
   iniciarNoticia = () => {
     this.formGroup = this.formBuilder.group({
-      Id: ['',],
+      Id: ['',[]],
       Titulo: ['', [Validators.required]],
       Descripcion: ['', [Validators.required, Validators.minLength(15)]],
+      imagenes: this.formBuilder.array([Validators.required]),
     });
   }
 
-  cargarNoticia = (id: number) => {
-    const listaNoticias = this.noticias;
-    listaNoticias.forEach(noticia => {
-      if (noticia.Id == id) {
-        this.formGroup = this.formBuilder.group({
-          Id: [id, [Validators.required],],
-          Titulo: [noticia.Titulo, [Validators.required]],
-          Imagen: [noticia.Imagen, [Validators.required]],
-          Descripcion: [noticia.Descripcion, [Validators.required, Validators.minLength(15)]],
-        });
-      }
+  cargarNoticia = (id: string) => {
+    this.NoticiaService.getAllNoticias().subscribe(data => {
+      debugger
+      this.noticias = data;
+      this.noticias.forEach(noticia => {
+        if (noticia.Id == id) {
+          this.formGroup.patchValue({
+            Id: id,
+            Titulo: noticia.Titulo,
+            Descripcion: noticia.Descripcion
+          });
+
+          (<FormArray>this.formGroup.controls['imagenes']).removeAt(0);
+           this.agregarImagenEdit(noticia.Imagen);
+     
+        }
+      });
     });
+  
+  
   } 
 
   guardarData() {
    if (this.formGroup.valid){
      let noticia:Noticia = {
        Descripcion : this.formGroup.value.Descripcion,
-       Imagen : '',
+       Imagen : this.formGroup.value.imagenes[0],
        Titulo : this.formGroup.value.Titulo,
        Id : ''
      } 
+
+     if(!this.noticiaId){
+      noticia.Imagen = '';
       this.NoticiaCreatedId = this.NoticiaService.saveNoticia(noticia);
       swal("Noticia Creada", "Exito", "success");
+     }else{
+      noticia.Id = this.noticiaId;
+      this.NoticiaService.saveNoticia(noticia);
+      swal("Noticia Modificada", "Exito", "success");
+      this.router.navigateByUrl('inicio');
+     }
+      
    }
   }
 
 
-  borrarImagen = ($event, index) => { 
+borrarImagen = ($event, index) => { 
     (<FormArray>this.formGroupNoticiasEditImagenes.controls['imagenes']).removeAt(index); 
 }
 
-   agregarImagen = (imagen?: string, ) => {
+borrarImagenEdit = ($event, index) => { 
+  (<FormArray>this.formGroup.controls['imagenes']).removeAt(index); 
+}
+
+agregarImagen = (imagen?: string, ) => {
   (<FormArray>this.formGroupNoticiasEditImagenes.controls['imagenes']).push(
+    new FormControl(imagen, Validators.required)
+  );
+}
+
+agregarImagenEdit = (imagen?: string, ) => {
+  (<FormArray>this.formGroup.controls['imagenes']).push(
     new FormControl(imagen, Validators.required)
   );
 }
@@ -116,7 +146,12 @@ detectFiles(event: any) {
 uploadSingle() {
   let file = this.selectedFiles.item(0);
   this.currentUpload = new Upload(file);
-   this.upLoadServiceService.pushUpload(this.currentUpload, this.NoticiaCreatedId,'noticias');
+  if(this.NoticiaCreatedId){
+    this.upLoadServiceService.pushUpload(this.currentUpload, this.NoticiaCreatedId,'noticias');
+  }
+  if(this.noticiaId){
+    this.upLoadServiceService.pushUpload(this.currentUpload, this.noticiaId,'noticias');     
+  }
 }
 
 
