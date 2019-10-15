@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-principal sticky-top">
     <a class="navbar-brand" [routerLink]="['lista-noticias']">
-        <img src="../../../assets/img/favicon.png" width="40" height="40" alt="">
+        <img src="../../../assets/img/iconovoluntarios.png" width="60" height="60" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -23,9 +23,9 @@
             <li class="nav-item">
                 <a class="nav-link" [routerLink]="['private/usuarios']">Usuarios</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" [routerLink]="['lista-sitios']">Sitios</a>
-            </li>
+            </li> -->
             <li class="img-perfil">
                 <div *ngFor="let user of (users$ | async); let i=index;">
                     <ng-container *ngIf="(user.Email === (usuario_actual$)) ">
