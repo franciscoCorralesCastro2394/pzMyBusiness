@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
       }
 
 loginGoogle(){
+  debugger
   this.usuariosService.loginGoogle()
   .then((res) => {
     this.userS.getUsuarioByEmail(res.user.email).subscribe(data => {
@@ -131,6 +132,7 @@ loginGoogle(){
 }
 
 loginFaceBook(){
+  debugger
   this.usuariosService.loginFaceBook()
   .then((res) => {
     this.userS.getUsuarioByEmail(res.user.email).subscribe(data => {

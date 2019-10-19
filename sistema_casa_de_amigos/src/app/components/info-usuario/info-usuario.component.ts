@@ -44,13 +44,13 @@ export class InfoUsuarioComponent implements OnInit {
     this.userId = this.activatedRoute.snapshot.params['user'];
     
  
-    this.cargarUsuario();
+     this.cargarUsuario();
 
-    this.getSitios(); 
+    // this.getSitios(); 
    
-    this.getResenas();
+    // this.getResenas();
 
-    this.getCalificacones();
+    // this.getCalificacones();
   
    }
   ngOnInit() {
